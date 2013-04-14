@@ -46,10 +46,7 @@ class Joueur_model extends CI_Model {
                 ->from('joueur')
                 ->where('id', $id)
                 ->limit(1);
-        $query = $this->db->get();
-        if($query->num_rows()==1)
-            return $query->result();
-        else
-            return false;
+        return $this->db->get();
+   
     }
 }

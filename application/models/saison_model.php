@@ -31,11 +31,7 @@ class Saison_model extends CI_Model {
                 ->from('saison')
                 ->where('id', $id)
                 ->limit(1);
-        $query = $this->db->get();
-        if($query->num_rows()==1)
-            return $query->result();
-        else
-            return false;
+        return $this->db->get();
     }
     
     function get_saison_courante(){
@@ -43,10 +39,6 @@ class Saison_model extends CI_Model {
                 ->from('saison')
                 ->where('saison_courante', 1)
                 ->limit(1);
-        $query = $this->db->get();
-        if($query->num_rows()==1)
-            return $query->result();
-        else
-            return false;
+        return $this->db->get();
     }
 }
