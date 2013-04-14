@@ -31,7 +31,7 @@ class Equipe extends CI_Controller {
             if ($this->form_validation->run() == FALSE) {
                 $this->twig->render('equipe/ajoutequipe');
             } else {
-                $this->equipe_model->save_equipe();
+                $this->equipe_model->add_equipe();
                 redirect('/equipe');
             }
         }
@@ -48,7 +48,7 @@ class Equipe extends CI_Controller {
             if ($this->form_validation->run() == FALSE) {
                 $this->twig->render('modifierequipe', $this->equipe_model->get_equipe($id)->row());
             } else {
-                $this->equipe_model->save_equipe();
+                $this->equipe_model->update_equipe();
                 redirect('/equipe');
             }
         }

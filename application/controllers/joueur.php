@@ -32,7 +32,7 @@ class Joueur extends CI_Controller {
                 $data['equipes'] = $this->equipe_model->get_all();
                 $this->twig->render('joueur/ajoutjoueur', $data);
             } else {
-                $this->equipe_model->save_equipe();
+                $this->joueur_model->add_joueur();
                 redirect('/joueur');
             }
         }
@@ -43,13 +43,14 @@ class Joueur extends CI_Controller {
             redirect('/');
         else {
             $this->form_validation->set_rules('Nom', 'Nom', 'trim|required');
-            $this->form_validation->set_rules('Directeur', 'directeur', 'trim|required');
-            $this->form_validation->set_rules('Entreneur', 'entreneur', 'trim|required');
+            $this->form_validation->set_rules('Equipe', 'Equipe', 'trim|required');
 
             if ($this->form_validation->run() == FALSE) {
-                $this->twig->render('modifierequipe', $this->equipe_model->get_equipe($id)->row());
+                $data['equipes'] = $this->equipe_model->get_all();
+                $data['joueur'] = $this->equipe_model->get_joueur($id)->row();
+                $this->twig->render('modifierequipe', $data);
             } else {
-                $this->equipe_model->save_equipe();
+                $this->joueur_model->update_joueur();
                 redirect('/joueur');
             }
         }
@@ -59,7 +60,7 @@ class Joueur extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
-            $this->twig->render('equipe/voirequipe', $this->equipe_model->get_equipe($id)->row());
+            $this->twig->render('joueur/voirjoueur', $this->joueur_model->get_joueur($id)->row());
         }
     }
 

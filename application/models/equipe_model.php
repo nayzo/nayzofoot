@@ -11,7 +11,7 @@ class Equipe_model extends CI_Model {
             return $query->result();
     }
     
-    function save_equipe(){
+    function add_equipe(){
             $data = array(
             'nom' => $this->input->post('nom'),
             'entreneur'    => $this->input->post('entreneur'),
@@ -22,6 +22,19 @@ class Equipe_model extends CI_Model {
         );
 
         $this->db->insert('equipe', $data);
+    }
+    
+    function update_equipe(){
+            $data = array(
+            'nom' => $this->input->post('nom'),
+            'entreneur'    => $this->input->post('entreneur'),
+            'directeur'      => $this->input->post('directeur'),            
+            'date_creation' => $this->input->post('date_creation'),
+            'description' => $this->input->post('description'),
+            'lieu_origin' => $this->input->post('lieu_origin')
+        );
+
+        $this->db->update('equipe', $data);
     }
     
     

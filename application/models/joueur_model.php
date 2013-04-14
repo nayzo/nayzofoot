@@ -14,7 +14,7 @@ class Joueur_model extends CI_Model {
         return $query->result;
     }
     
-    function save_joueur(){
+    function add_joueur(){
             $data = array(
             'nom' => $this->input->post('nom'),
             'equipe'    => $this->input->post('equipe'),
@@ -27,10 +27,23 @@ class Joueur_model extends CI_Model {
         $this->db->insert('joueur', $data);
     }
     
+    function update_joueur(){
+            $data = array(
+            'nom' => $this->input->post('nom'),
+            'equipe'    => $this->input->post('equipe'),
+            'date_naissance'      => $this->input->post('date_naissance'),            
+            'ville' => $this->input->post('ville'),
+            'date_affectation' => $this->input->post('date_affectation'),
+            'post' => $this->input->post('post')
+        );
+
+        $this->db->update('joueur', $data);
+    }
     
-    function get_equipe($id){
+    
+    function get_joueur($id){
         $this->db->select('*')
-                ->from('equipe')
+                ->from('joueur')
                 ->where('id', $id)
                 ->limit(1);
         $query = $this->db->get();
