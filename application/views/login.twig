@@ -1,23 +1,18 @@
-<! DOCTYPE html>
-<html>
-<body>
-page Login :
-<br>
+{% extends "layout.twig" %}
 
-{{ validation_errors() }}
-<br/>
+{% block title %} {{parent()}} - Login{% endblock title %}
 
-<form action="/" method="POST" >
-    <label>Login:</label> 
-    <input type="text" name="login" required="required"/>
-    <br/>
-    <label>Mot de Passe:</label> 
-    <input type="password" name="password" required="required"/>
-    
-    <br/><br/><br/> 
-    <input type="submit" value="Login"/>
-
-</form>
-
-</body>
-</html>
+ {% block nav%} {% endblock nav%}
+{% block container%}
+    <div class="span4 offset4 well">
+        <form method="POST" action="/">
+            <fieldset>
+                <legend>Connectez Vous </legend>
+                <div class="error">{{ validation_errors() }}</div>
+                <input type="text" class="span4" name="login" placeholder="Votre login" required="required"/>
+                <input type="password" class="span4" name="password" placeholder="Votre Mote de passe" required="required"/>
+                <button type="submit" class="btn btn-info btn-block">Login</button>
+            </fieldset>
+        </form>    
+    </div>
+{% endblock container%}
