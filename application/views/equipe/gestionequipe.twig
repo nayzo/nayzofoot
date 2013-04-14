@@ -7,10 +7,10 @@
 
 <a href="/">Home</a> <br/>
 <br> 
-<a href="/equipe/add">Ajouter Equipe</a>
+<a href="/equipe/ajout">Ajouter Equipe</a>
 liste equipes:
 {% for equipe in equipes %}
-nom: {{equipe.nom}} | entreneur: {{equipe.entreneur}} | date creation: {{equipe.date_creation}} | directeur: {{equipe.directeur}} | lieu d'origin: {{equipe.lieu_origin}} | <a href="/equipe/voir/{{equipe.id}}">voir</a> | <a href="/equipe/modifier/{{equipe.id}}">modifier</a> | <a href="/equipe/supprimer/{{equipe.id}}">supprimer</a>
+nom: {{equipe.nom}} | entreneur: {{equipe.entreneur}} | date creation: {{equipe.date_creation}} | directeur: {{equipe.directeur}} | lieu d'origin: {{equipe.lieu_origin}} | <a href="/equipe/voir/{{equipe.id}}">voir</a> | <a href="/equipe/modifier/{{equipe.id}}">modifier</a> | <a href="/equipe/supprimer/{{equipe.id}}">supprimer</a> 
 {% endfor %}
 </body>
 </html>

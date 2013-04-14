@@ -1,5 +1,5 @@
 <?php
-class Equipe_model extends CI_Model {
+class Joueur_model extends CI_Model {
 
     function __construct()
     {
@@ -7,21 +7,21 @@ class Equipe_model extends CI_Model {
     }
     
     function get_all(){
-        $query = $this->db->get('equipe');
+        $query = $this->db->get('joueur');
             return $query->result();
     }
     
-    function save_equipe(){
+    function save_joueur(){
             $data = array(
             'nom' => $this->input->post('nom'),
-            'entreneur'    => $this->input->post('entreneur'),
-            'directeur'      => $this->input->post('directeur'),            
-            'date_creation' => $this->input->post('date_creation'),
-            'description' => $this->input->post('description'),
-            'lieu_origin' => $this->input->post('lieu_origin')
+            'equipe'    => $this->input->post('equipe'),
+            'date_naissance'      => $this->input->post('date_naissance'),            
+            'ville' => $this->input->post('ville'),
+            'date_affectation' => $this->input->post('date_affectation'),
+            'post' => $this->input->post('post')
         );
 
-        $this->db->insert('equipe', $data);
+        $this->db->insert('joueur', $data);
     }
     
     
