@@ -25,7 +25,7 @@ class Saison extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
-            $this->form_validation->set_rules('Saison', 'Saison', 'trim|required');
+            $this->form_validation->set_rules('saison', 'Saison', 'trim|required');
 
             if ($this->form_validation->run() == FALSE) {
                 $this->twig->render('saison/ajoutsaison');
@@ -41,7 +41,7 @@ class Saison extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
-            $this->form_validation->set_rules('Saison', 'Saison', 'trim|required');
+            $this->form_validation->set_rules('saison', 'Saison', 'trim|required');
 
             if ($this->form_validation->run() == FALSE) {
                 $data['saison'] = $this->saison_model->get_saison($id)->row();

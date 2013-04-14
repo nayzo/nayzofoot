@@ -25,8 +25,8 @@ class Joueur extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
-            $this->form_validation->set_rules('Nom', 'Nom', 'trim|required');
-            $this->form_validation->set_rules('Equipe', 'Equipe', 'trim|required');
+            $this->form_validation->set_rules('nom', 'Nom', 'trim|required');
+            $this->form_validation->set_rules('equipe', 'Equipe', 'trim|required');
 
             if ($this->form_validation->run() == FALSE) {
                 $data['equipes'] = $this->equipe_model->get_all();
@@ -42,8 +42,8 @@ class Joueur extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
-            $this->form_validation->set_rules('Nom', 'Nom', 'trim|required');
-            $this->form_validation->set_rules('Equipe', 'Equipe', 'trim|required');
+            $this->form_validation->set_rules('nom', 'Nom', 'trim|required');
+            $this->form_validation->set_rules('equipe', 'Equipe', 'trim|required');
 
             if ($this->form_validation->run() == FALSE) {
                 $data['equipes'] = $this->equipe_model->get_all();
