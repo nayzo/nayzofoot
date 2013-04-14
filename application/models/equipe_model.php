@@ -25,7 +25,7 @@ class Equipe_model extends CI_Model {
     }
     
     
-    function get_equipe($id){
+    public function get_equipe($id){
         $this->db->select('*')
                 ->from('equipe')
                 ->where('id', $id)

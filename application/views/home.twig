@@ -1,21 +1,9 @@
-<html>
-    
- <head>
-  
-</head>
-<body>
-       
-page home : 
-{{ getsessionhelper()['login'] }}
-| <a href="/backend/logout" id='logoutsmart'> logout </a> 
-| <a href="/backend/changepass" id='logoutsmart'> changer mot de passe  </a> 
-| <a href="/equipe" id='logoutsmart'> Gestion Equipes  </a> 
-| <a href="/joueur" id='logoutsmart'> Gestion Joueurs  </a> 
+{% extends "layout.twig" %}
 
-<br>
-<a href="/">Home</a> <br/>
+{% block title %} {{parent()}} - Home{% endblock title %}
 
-{# <script src="/assets/js/jquery-1.7.1.min.js"></script> #}
-</body>
-</html>
-
+{% block container%}
+    <div class="span12 well"> 
+        <h3 class="text-center">Bienvenue sur notre site </h3>
+    </div>
+{% endblock container%}

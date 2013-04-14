@@ -7,8 +7,11 @@ class Joueur_model extends CI_Model {
     }
     
     function get_all(){
-        $query = $this->db->get('joueur');
-            return $query->result();
+        $this->db->select('*');
+        $this->db->from('joueur');
+        $this->db->join('equipe', 'joueur.id = equipe.id');
+        $query = $this->db->get();
+        return $query->result;
     }
     
     function save_joueur(){

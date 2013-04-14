@@ -30,7 +30,7 @@ class Joueur extends CI_Controller {
 
             if ($this->form_validation->run() == FALSE) {
                 $data['equipes'] = $this->equipe_model->get_all();
-                $this->twig->render('equipe/ajoutjoueur', $data);
+                $this->twig->render('joueur/ajoutjoueur', $data);
             } else {
                 $this->equipe_model->save_equipe();
                 redirect('/joueur');
@@ -50,7 +50,7 @@ class Joueur extends CI_Controller {
                 $this->twig->render('modifierequipe', $this->equipe_model->get_equipe($id)->row());
             } else {
                 $this->equipe_model->save_equipe();
-                redirect('/equipe');
+                redirect('/joueur');
             }
         }
     }
