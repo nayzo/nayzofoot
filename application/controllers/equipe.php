@@ -18,5 +18,24 @@ class Equipe extends CI_Controller {
         }
             
     }
+    
+    public function add() {
+        if (!$this->session->userdata('login_in'))
+            redirect('/');
+        else
+        {
+            $this->form_validation->set_rules('Nom','Nom','trim|required');
+            $this->form_validation->set_rules('Directeur','directeur','trim|required');
+            $this->form_validation->set_rules('Entreneur','entreneur','trim|required');
+
+            if ($this->form_validation->run() == FALSE) {
+                $this->twig->render('ajoutequipe');
+            } else {
+                $this->login_model->save_equipe();
+                redirect('/');
+            }
+        }
+            
+    }
 
 }
