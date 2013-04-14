@@ -1,26 +1,42 @@
-<! DOCTYPE html>
-<html>
-<body>
-page change password : mmmmmmmmmmmmmmmmm  llllll kkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
-<br>
+{% extends "layout.twig" %}
 
-{{ validation_errors() }}
-<br/>
+{% block title %} {{parent()}} - Changer mot de passe{% endblock title %}
 
-<form action="/backend/changepass" method="POST" >
-    <label>mot de passe courant:</label> 
-    <input type="password" name="password" required="required"/>
-    <br/>
-    <label>Nouveau mot de Passe:</label> 
-    <input type="password" name="password1" required="required"/>
-    <br/>
-    <label>Confirmer mot de Passe:</label> 
-    <input type="password" name="password2" required="required"/>
-    
-    <br/><br/><br/> 
-    <input type="submit" value="Enregistrer"/>
+{% block container%}
+    <div class="span5 offset3 well">
+        <form action='/backend/changepass' method="POST" class="form-horizontal" >
+            <fieldset>
+                <div id="legend">
+                    <legend class="text-center">Changer Mot de passe</legend>
+                </div>
+                <div class="error">{{ validation_errors() }}</div>
+                <div class="control-group">
+                    <label class="control-label" for="password">Mot de passe courant</label>
+                    <div class="controls">
+                        <input type="password" name="password" placeholder="" class="span3" required="required"/>
+                    </div>
+                </div>
 
-</form>
+                <div class="control-group">
+                    <label class="control-label" for="password2">Nouveau mot de Passe</label>
+                    <div class="controls">
+                        <input type="password" name="password2" placeholder="" class="span3" required="required"/>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label" for="password3">Confirmer mot de Passe</label>
+                    <div class="controls">
+                        <input type="password" name="password3" placeholder="" class="span3" required="required"/>
+                    </div>
+                </div>
 
-</body>
-</html>
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" class="btn btn-info">Enregistrer</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>   
+    </div>
+{% endblock container%}
