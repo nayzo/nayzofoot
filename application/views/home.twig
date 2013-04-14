@@ -6,13 +6,11 @@
 <body>
        
 page home : 
-{% if getsessionhelper() %} 
 {{ getsessionhelper()['login'] }}
 | <a href="/backend/logout" id='logoutsmart'> logout </a> 
 | <a href="/backend/changepass" id='logoutsmart'> changer mot de passe  </a> 
 | <a href="/equipe" id='logoutsmart'> Gestion Equipes  </a> 
 | <a href="/joueur" id='logoutsmart'> Gestion Joueurs  </a> 
-{% endif %}
 
 <br>
 <a href="/">Home</a> <br/>
