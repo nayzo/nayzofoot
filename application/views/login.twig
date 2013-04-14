@@ -1,0 +1,23 @@
+<! DOCTYPE html>
+<html>
+<body>
+page Login :
+<br>
+
+{{ validation_errors() }}
+<br/>
+
+<form action="/" method="POST" >
+    <label>Login:</label> 
+    <input type="text" name="login" required="required"/>
+    <br/>
+    <label>Mot de Passe:</label> 
+    <input type="password" name="password" required="required"/>
+    
+    <br/><br/><br/> 
+    <input type="submit" value="Login"/>
+
+</form>
+
+</body>
+</html>

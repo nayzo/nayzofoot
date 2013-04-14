@@ -1,0 +1,26 @@
+<! DOCTYPE html>
+<html>
+<body>
+page change password :
+<br>
+
+{{ validation_errors() }}
+<br/>
+
+<form action="/backend/changepass" method="POST" >
+    <label>mot de passe courant:</label> 
+    <input type="password" name="password" required="required"/>
+    <br/>
+    <label>Nouveau mot de Passe:</label> 
+    <input type="password" name="password1" required="required"/>
+    <br/>
+    <label>Confirmer mot de Passe:</label> 
+    <input type="password" name="password2" required="required"/>
+    
+    <br/><br/><br/> 
+    <input type="submit" value="Enregistrer"/>
+
+</form>
+
+</body>
+</html>

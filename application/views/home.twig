@@ -1,0 +1,21 @@
+<html>
+    
+ <head>
+  
+</head>
+<body>
+       
+page home : {% if getsessionhelper() %} {{ getsessionhelper()['login'] }}
+| <a href="/backend/logout" id='logoutsmart'> logout </a> 
+| <a href="/backend/changepass" id='logoutsmart'> changer mot de passe  </a> 
+| <a href="/equipe" id='logoutsmart'> Gestion Equipes  </a> 
+
+{% else %} <a id="loginsmart" href="/backend/login"> Login </a> {% endif %}
+
+<br>
+<a href="/">Home</a> <br/>
+
+{# <script src="/assets/js/jquery-1.7.1.min.js"></script> #}
+</body>
+</html>
+
