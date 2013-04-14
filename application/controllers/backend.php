@@ -12,12 +12,14 @@ class Backend extends CI_Controller {
         if ($this->session->userdata('login_in'))
             $this->twig->render('home');  
         else
+        {
             $this->form_validation->set_rules('login', 'Login', 'trim|required|min_length[4]|xss_clean');
             $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|max_length[32]|xss_clean|callback_check_login');
             if ($this->form_validation->run() == FALSE)
                 $this->twig->render('login');
             else
                 $this->twig->render('home');        
+        }
     }
 
     public function check_login() {
@@ -39,6 +41,7 @@ class Backend extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else
+        {
             $this->form_validation->set_rules('password','Ancien mot de passe','trim|required|min_length[4]|max_length[32]');
             $this->form_validation->set_rules('password1','mot de passe','trim|required|min_length[4]|max_length[32]');
             $this->form_validation->set_rules('password2','Confirmer mot de passe','trim|required|min_length[4]|max_length[32]|matches[password1]|callback_check_pass');
@@ -49,6 +52,7 @@ class Backend extends CI_Controller {
                 $this->login_model->save_pass();
                 redirect('/');
             }
+        }
     }
     
     public function check_pass() {
