@@ -48,7 +48,7 @@ class Joueur extends CI_Controller {
             if ($this->form_validation->run() == FALSE) {
                 $data['equipes'] = $this->equipe_model->get_all();
                 $data['joueur'] = $this->joueur_model->get_joueur($id)->row();
-                $this->twig->render('modifierequipe', $data);
+                $this->twig->render('joueur/modifierjoueur', $data);
             } else {
                 $this->joueur_model->update_joueur();
                 redirect('/joueur');

@@ -45,7 +45,7 @@ class Saison extends CI_Controller {
 
             if ($this->form_validation->run() == FALSE) {
                 $data['saison'] = $this->saison_model->get_saison($id)->row();
-                $this->twig->render('modifiersaison', $data);
+                $this->twig->render('saison/modifiersaison', $data);
             } else {
                 $this->saison_model->update_saison();
                 redirect('/saison');

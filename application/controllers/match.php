@@ -8,6 +8,7 @@ class Match extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('equipe_model');
+        $this->load->model('match_model');
         $this->twig->addFunction('getsessionhelper');
     }
 
@@ -15,8 +16,8 @@ class Match extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
-            $data['equipes'] = $this->equipe_model->get_all();
-            $this->twig->render('equipe/gestionequipe', $data);
+            $data['matches'] = $this->match_model->get_all();
+            $this->twig->render('match/gestionmatch', $data);
         }
     }
 
