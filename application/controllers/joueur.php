@@ -64,5 +64,12 @@ class Joueur extends CI_Controller {
         }
     }
 
-    
+    public function supprimer($id) {
+        if (!$this->session->userdata('login_in'))
+            redirect('/');
+        else {
+            $this->joueur_model->delete_joueur($id);
+                redirect('/joueur');
+        }
+    }
 }

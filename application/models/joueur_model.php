@@ -11,7 +11,7 @@ class Joueur_model extends CI_Model {
         $this->db->from('equipe');
         $this->db->join('joueur', 'joueur.equipe = equipe.id');
         $query = $this->db->get();
-        return $query->result;
+        return $query->result();
     }
     
     function add_joueur(){
@@ -39,14 +39,17 @@ class Joueur_model extends CI_Model {
 
         $this->db->update('joueur', $data);
     }
-    
-    
+       
     function get_joueur($id){
         $this->db->select('*')
                 ->from('joueur')
                 ->where('id', $id)
                 ->limit(1);
-        return $this->db->get();
-   
+        return $this->db->get();   
+    }
+    
+    function delete_joueur($id){
+        $this->db->where('id', $id);     
+        $this->db->delete('joueur');
     }
 }
