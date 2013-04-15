@@ -28,15 +28,15 @@
                 <div class="control-group">
                     <label class="control-label" for="post">Poste</label>
                     <div class="controls">
-                         <select name="post" class="span3">
-                                <option value="gardien">gardien</option>
-                                <option value="arrière latéral">arrière latéral</option>
-                                <option value="libéro">libéro</option>
-                                <option value="milieu défensif">milieu défensif</option>
-                                <option value="milieu offensif">milieu offensif</option>
-                                <option value="deuxème attaquant">deuxème attaquant</option>
-                                <option value="avant-centre">avant-centre</option>
-                                <option value="remplaçant">remplaçant</option>                               
+                         <select name="post" class="span3" selected="{{ set_value('post', joueur.post) }}">
+                                <option value="gardien" {%if joueur.post=='gardien'%} selected="selected" {%endif%}>gardien</option>
+                                <option value="arrière latéral" {%if joueur.post=='arrière latéral'%} selected="selected" {%endif%}>arrière latéral</option>
+                                <option value="libéro" {%if joueur.post=='libéro'%} selected="selected" {%endif%}>libéro</option>
+                                <option value="milieu défensif" {%if joueur.post=='milieu défensif'%} selected="selected" {%endif%}>milieu défensif</option>
+                                <option value="milieu offensif" {%if joueur.post=='milieu offensif'%} selected="selected" {%endif%}>milieu offensif</option>
+                                <option value="deuxème attaquant" {%if joueur.post=='deuxème attaquant'%} selected="selected" {%endif%}>deuxème attaquant</option>
+                                <option value="avant-centre" {%if joueur.post=='avant-centre'%} selected="selected" {%endif%}>avant-centre</option>
+                                <option value="remplaçant" {%if joueur.post=='remplaçant'%} selected="selected" {%endif%}>remplaçant</option>                               
                         </select>
                     </div>
                 </div>
@@ -44,39 +44,30 @@
                 <div class="control-group">
                     <label class="control-label" for="ville">Ville</label>
                     <div class="controls">
-                        <select name="ville" class="span3">
-                            <option value="Ain Draham">Ain Draham</option>
-                            <option value="Bizerte">Bizerte</option>
-                            <option value="Carthage">Carthage</option>
-                            <option value="Djerba">Djerba</option>
-                            <option value="Douz">Douz</option>
-                            <option value="El kef">El kef</option>
-                            <option value="Gabes">Gabes</option>
-                            <option value="Gafsa">Gafsa</option>
-                            <option value="Gasrine">Gasrine</option>
-                            <option value="Hammamet">Hammamet</option>
-                            <option value="Jandouba">Jandouba</option>
-                            <option value="Kairouan">Kairouan</option>
-                            <option value="Kebili">Kebili</option>
-                            <option value="Kelibia">Kelibia</option>
-                            <option value="Korba">Korba</option>
-                            <option value="Korbous">Korbous</option>
-                            <option value="Ksar Ghilane">Ksar Ghilane</option>
-                            <option value="Mahdia">Mahdia</option>
-                            <option value="Matmata">Matmata</option>
-                            <option value="Mednine">Mednine</option>
-                            <option value="Monastir">Monastir</option>
-                            <option value="Nabeul">Nabeul</option>
-                            <option value="Nefta">Nefta</option>
-                            <option value="Sfax">Sfax</option>
-                            <option value="Sidi bouzid">Sidi bouzid</option>
-                            <option value="Sousse">Sousse</option>
-                            <option value="Tabarka">Tabarka</option>
-                            <option value="Tamerza">Tamerza</option>
-                            <option value="Tataouine">Tataouine</option>
-                            <option value="Tozeur">Tozeur</option>
-                            <option value="Tunis">Tunis</option>
-                            <option value="Zarzis">Zarzis</option>
+                        <select name="ville" class="span3" selected="{{ set_value('ville', joueur.ville) }}">          
+                            <option value="Ariana" {%if joueur.ville=='Ariana'%} selected="selected" {%endif%}>Ariana</option>
+                            <option value="Béja" {%if joueur.ville=='Béja'%} selected="selected" {%endif%}>Béja</option>
+                            <option value="Ben arous" {%if joueur.ville=='Ben arous'%} selected="selected" {%endif%}>Ben Arous</option>
+                            <option value="Bizerte" {%if joueur.ville=='Bizerte'%} selected="selected" {%endif%}>Bizerte</option>
+                            <option value="Gafsa" {%if joueur.ville=='Gafsa'%} selected="selected" {%endif%}>Gafsa</option>
+                            <option value="Jendouba" {%if joueur.ville=='Jendouba'%} selected="selected" {%endif%}>Jendouba</option>
+                            <option value="Kairouan" {%if joueur.ville=='Kairouan'%} selected="selected" {%endif%}>Kairouan</option>
+                            <option value="Kasserine" {%if joueur.villen=='Kasserine'%} selected="selected" {%endif%}>Kasserine</option>
+                            <option value="Kébili" {%if joueur.ville=='Kébili'%} selected="selected" {%endif%}>Kébili</option>
+                            <option value="Le Kef" {%if joueur.ville=='le Kef'%} selected="selected" {%endif%}>Le Kef</option>
+                            <option value="Mahdia" {%if joueur.ville=='Mahdia'%} selected="selected" {%endif%}>Mahdia</option>
+                            <option value="La Manouba" {%if joueur.ville=='la Manouba'%} selected="selected" {%endif%}>La Manouba</option>
+                            <option value="Médenine" {%if joueur.ville=='Médenine'%} selected="selected" {%endif%}>Médenine</option>
+                            <option value="Monastir" {%if joueur.ville=='Monastir'%} selected="selected" {%endif%}>Monastir</option>
+                            <option value="Nabeul" {%if joueur.ville=='Ain Draham'%} selected="selected" {%endif%}>Nabeul</option>
+                            <option value="Sfax" {%if joueur.ville=='Sfax'%} selected="selected" {%endif%}>Sfax</option>
+                            <option value="Sidi Bouzid" {%if joueur.ville=='Sidi Bouzid'%} selected="selected" {%endif%}>Sidi Bouzid</option>
+                            <option value="Siliana" {%if joueur.ville=='Siliana'%} selected="selected" {%endif%}>Siliana</option>
+                            <option value="Sousse" {%if joueur.ville=='Sousse'%} selected="selected" {%endif%}>Sousse</option>
+                            <option value="Tataouine" {%if joueur.ville=='Tataouine'%} selected="selected" {%endif%}>Tataouine</option>
+                            <option value="Tozeur" {%if joueur.ville=='Tozeur'%} selected="selected" {%endif%}>Tozeur</option>
+                            <option value="Tunis" {%if joueur.ville=='Tunis'%} selected="selected" {%endif%}>Tunis</option>
+                            <option value="Zaghouan" {%if joueur.ville=='Zaghouan'%} selected="selected" {%endif%}>Zaghouan</option>
                         </select>
                     </div>
                 </div>
