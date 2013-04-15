@@ -24,7 +24,7 @@ class Equipe_model extends CI_Model {
         $this->db->insert('equipe', $data);
     }
     
-    function update_equipe(){
+    function update_equipe($id){
             $data = array(
             'nom' => $this->input->post('nom'),
             'entreneur'    => $this->input->post('entreneur'),
@@ -33,7 +33,7 @@ class Equipe_model extends CI_Model {
             'description' => $this->input->post('description'),
             'lieu_origin' => $this->input->post('lieu_origin')
         );
-
+        $this->db->where('id', $id);     
         $this->db->update('equipe', $data);
     }
     
