@@ -1,0 +1,20 @@
+{% extends "layout.twig" %}
+
+{% block title %} {{parent()}} - Voir Equipe{% endblock title %}
+
+{% block container%}
+    <div class="span12 well"> 
+        <h4>Gestion des Equipes </h4>
+        <hr>
+        <p><strong>Nom : </strong>{{equipe.nom}}</p>
+        <p><strong>Entreneur : </strong>{{equipe.entreneur}}</p>
+        <p><strong>Date de Création : </strong>{{equipe.date_creation}}</p>
+        <p><strong>Directeur : </strong>{{equipe.directeur}}</p>
+        <p><strong>lieu d'origin : </strong>{{equipe.lieu_origin}}</p>
+    </div>
+{% endblock container%}
+
+
+
+
+

@@ -50,7 +50,7 @@ class Joueur extends CI_Controller {
                 $data['joueur'] = $this->joueur_model->get_joueur($id)->row();
                 $this->twig->render('joueur/modifierjoueur', $data);
             } else {
-                $this->joueur_model->update_joueur();
+                $this->joueur_model->update_joueur($id);
                 redirect('/joueur');
             }
         }
@@ -60,9 +60,17 @@ class Joueur extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
-            $this->twig->render('joueur/voirjoueur', $this->joueur_model->get_joueur($id)->row());
+            $data['joueur'] = $this->joueur_model->get_joueur($id)->row();
+            $this->twig->render('joueur/voirjoueur', $data);
         }
     }
 
-    
+    public function supprimer($id) {
+        if (!$this->session->userdata('login_in'))
+            redirect('/');
+        else {
+            $this->joueur_model->delete_joueur($id);
+                redirect('/joueur');
+        }
+    }
 }

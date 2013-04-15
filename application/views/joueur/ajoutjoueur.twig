@@ -28,7 +28,16 @@
                 <div class="control-group">
                     <label class="control-label" for="post">Poste</label>
                     <div class="controls">
-                        <input type="text" name="post" class="span3" required="required"/>
+                         <select name="post" class="span3">
+                                <option value="gardien">gardien</option>
+                                <option value="arrière latéral">arrière latéral</option>
+                                <option value="libéro">libéro</option>
+                                <option value="milieu défensif">milieu défensif</option>
+                                <option value="milieu offensif">milieu offensif</option>
+                                <option value="deuxème attaquant">deuxème attaquant</option>
+                                <option value="avant-centre">avant-centre</option>
+                                <option value="remplaçant">remplaçant</option>                               
+                        </select>
                     </div>
                 </div>
                 
@@ -83,9 +92,9 @@
                     <label class="control-label" for="equipe">Equipe</label>
                     <div class="controls">
                         <select name="equipe" class="span3">
-                            <option value="Tozeur">Tozeur</option>
-                            <option value="Tunis">Tunis</option>
-                            <option value="Zarzis">Zarzis</option>
+                            {% for equipe in equipes %}
+                                <option value="{{equipe.id}}">{{equipe.nom}}</option>
+                            {% endfor %}
                         </select>
                     </div>
                 </div>
