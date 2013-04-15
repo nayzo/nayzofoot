@@ -46,7 +46,10 @@ class Equipe extends CI_Controller {
             $this->form_validation->set_rules('entreneur', 'Entreneur', 'trim|required');
 
             if ($this->form_validation->run() == FALSE) {
-                $this->twig->render('equipe/modifierequipe', $this->equipe_model->get_equipe($id)->row());
+//                echo print_r($this->equipe_model->get_equipe($id)->row()->id);
+//                return;
+                $data['equipe'] = $this->equipe_model->get_equipe($id)->row();
+                $this->twig->render('equipe/modifierequipe', $data);
             } else {
                 $this->equipe_model->update_equipe();
                 redirect('/equipe');

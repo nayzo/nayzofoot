@@ -4,9 +4,9 @@
 
 {% block container%}
     <div class="span12 well"> 
-        <h4 class="text-center">Ajouter une Equipe </h4>
+        <h4 class="text-center">Modifier une Equipe </h4>
         <hr>
-         <form action='/equipe/modifier/{{id}}' method="POST" class="form-horizontal offset3" >
+         <form action='/equipe/modifier/{{equipe.id}}' method="POST" class="form-horizontal offset3" >
             <fieldset>
                 <div class="control-group">
                     <div class="error span5">{{ validation_errors() }}</div>
@@ -14,37 +14,37 @@
                 <div class="control-group">
                     <label class="control-label" for="nom">Nom</label>
                     <div class="controls">
-                        <input type="text" name="nom" class="span3" required="required" value="{{ nom }}"/>
+                        <input type="text" name="nom" class="span3" required="required" value="{{ set_value('nom', equipe.nom) }}"/>
                     </div>
                 </div>
 
                 <div class="control-group">
                     <label class="control-label" for="entreneur">Entreneur</label>
                     <div class="controls">
-                        <input type="text" name="entreneur" class="span3" required="required" value="{{ entreneur }}"/>
+                        <input type="text" name="entreneur" class="span3" required="required" value="{{ set_value('entreneur', equipe.entreneur) }}"/>
                     </div>
                 </div>
                 
                 <div class="control-group">
                     <label class="control-label" for="date_creation">Date de Création</label>
                     <div class="controls">
-                        <input type="date" name="date_creation" class="span3" required="required" value="{{ date_creation }}"/>
+                        <input type="date" name="date_creation" class="span3" required="required" value="{{ set_value('date_creation', equipe.date_creation) }}"/>
                     </div>
                 </div>
                 
                 <div class="control-group">
                     <label class="control-label" for="directeur">Directeur</label>
                     <div class="controls">
-                        <input type="text" name="directeur" class="span3" required="required" value="{{ directeur }}"/>
+                        <input type="text" name="directeur" class="span3" required="required" value="{{ set_value('directeur', equipe.directeur) }}"/>
                     </div>
                 </div>
                 
                 <div class="control-group">
                     <label class="control-label" for="lieu_origin">Lieu d'origine</label>
                     <div class="controls">
-                        <select name="lieu_origin" class="span3">
+                        <select name="lieu_origin" class="span3" selected="{{ set_value('lieu_origin', equipe.lieu_origin) }}">
                             <option value="Toutes">Toutes</option>
-                            <option value="Ain Draham">Ain Draham</option>
+                            <option value="Ain Draham" {%if equipe.lieu_origin=='Ain Draham'%} selected="selected" {%endif%}>Ain Draham</option>
                             <option value="Bizerte">Bizerte</option>
                             <option value="Carthage">Carthage</option>
                             <option value="Djerba">Djerba</option>
@@ -81,15 +81,15 @@
                 </div>
                 
                 <div class="control-group">
-                    <label class="control-label" for="description" value="{{ description }}">Description</label>
+                    <label class="control-label" for="description">Description</label>
                     <div class="controls">
-                        <textarea name="description" class="span3" rows="3"></textarea>
+                        <textarea name="description" class="span3" rows="3">{{ set_value('description', equipe.description) }}</textarea>
                     </div>
                 </div>
 
                 <div class="control-group">
                     <div class="controls">
-                        <button type="submit" class="btn btn-info">Ajouter</button>
+                        <button type="submit" class="btn btn-info">Modifier</button>
                     </div>
                 </div>
             </fieldset>
