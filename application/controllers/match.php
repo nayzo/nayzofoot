@@ -16,8 +16,9 @@ class Match extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
-            $data['matches'] = $this->match_model->get_all();
-            $this->twig->render('match/gestionmatch', $data);
+//            $data['matches'] = $this->match_model->get_all();
+//            $this->twig->render('match/gestionmatch', $data);
+             $this->twig->render('match/gestionmatch');
         }
     }
 
