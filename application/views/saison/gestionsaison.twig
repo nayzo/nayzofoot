@@ -1,17 +1,31 @@
-<html>
-    
- <head>
-  
-</head>
-<body>
+{% extends "layout.twig" %}
 
-<a href="/">Home</a> <br/>
-<br> 
-<a href="/equipe/ajout">Ajouter Equipe</a>
-liste equipes:
-{% for joueur in joueurs %}
-nom: {{joueur.nom}}  | <a href="/joueur/voir/{{joueur.id}}">voir</a> | <a href="/joueur/modifier/{{joueur.id}}">modifier</a> | <a href="/joueur/supprimer/{{joueur.id}}">supprimer</a> 
-{% endfor %}
-</body>
-</html>
+{% block title %} {{parent()}} - Gestion des Saisons{% endblock title %}
+
+{% block container%}
+    <div class="span12 well"> 
+        <h4>Gestion des Saisons</h4>
+        <hr>
+       <div class="btn-toolbar">
+            <a href="/saison/ajout" class="btn pull-right"><i class="icon-plus-sign"></i> <strong>Ajouter une saison</strong></a>
+       </div>
+        
+        <table class="table table-bordered table-hover">
+                <tr>
+                  <th>Saison</th>
+                  <th>Action</th>
+                </tr>
+                 {% for saison in saisons %}
+                <tr>
+                  <td>{{saison.saison}}</td>
+                  <td>
+                      <a href="/saison/voir/{{saison.id}}" title="voir" class="btn"><i class="icon-eye-open"></i></a>
+                      <a href="/saison/modifier/{{saison.id}}" title="Modifier" class="btn"><i class="icon-edit"></i></a> 
+                      <a href="/saison/supprimer/{{saison.id}}" title="Supprimer" class="btn"><i class="icon-trash"></i></a>
+                  </td>
+                </tr>
+         
+              {% endfor %}
+            </table>
+{% endblock container%}
 

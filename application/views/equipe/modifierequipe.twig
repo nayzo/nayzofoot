@@ -42,8 +42,7 @@
                 <div class="control-group">
                     <label class="control-label" for="lieu_origin">Lieu d'origine</label>
                     <div class="controls">
-                        <select name="lieu_origin" class="span3" selected="{{ set_value('lieu_origin', equipe.lieu_origin) }}">
-                            <option value="Toutes">Toutes</option>
+                        <select name="lieu_origin" class="span3" selected="{{ set_value('lieu_origin', equipe.lieu_origin) }}">                            
                             <option value="Ain Draham" {%if equipe.lieu_origin=='Ain Draham'%} selected="selected" {%endif%}>Ain Draham</option>
                             <option value="Bizerte">Bizerte</option>
                             <option value="Carthage">Carthage</option>
