@@ -63,6 +63,15 @@ class Equipe extends CI_Controller {
             $this->twig->render('equipe/voirequipe', $data);
         }
     }
+    
+    public function supprimer($id) {
+        if (!$this->session->userdata('login_in'))
+            redirect('/');
+        else {
+            $this->equipe_model->delete_equipe($id);
+                redirect('/equipe');
+        }
+    }
 
     
 }
