@@ -16,7 +16,7 @@ class Saison extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
-            $data['saison'] = $this->saison_model->get_all();
+            $data['saisons'] = $this->saison_model->get_all();
             $this->twig->render('saison/gestionsaison', $data);
         }
     }
@@ -57,7 +57,8 @@ class Saison extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
-            $this->twig->render('saison/voirsaison', $this->saison_model->get_saison($id)->row());
+             $data['saison'] = $this->saison_model->get_saison($id)->row();
+            $this->twig->render('saison/voirsaison', $data);
         }
     }
 

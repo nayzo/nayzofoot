@@ -1,0 +1,35 @@
+{% extends "layout.twig" %}
+
+{% block title %} {{parent()}} - Ajouter une Saison{% endblock title %}
+
+{% block container%}
+    <div class="span12 well"> 
+        <h4 class="text-center">Ajouter une Saison </h4>
+        <hr>
+         <form action='/saison/ajout' method="POST" class="form-horizontal offset3" >
+            <fieldset>
+                <div class="control-group">
+                <div class="error span5">{{ validation_errors() }}</div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="saison">Saison</label>
+                    <div class="controls">
+                        <input type="text" name="saison" class="span3" required="required"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="checkbox">
+                            <input name="saison_courante" type="checkbox"> saison courante
+                        </label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" class="btn btn-info">Ajouter</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>   
+    </div>
+{% endblock container%}
