@@ -63,4 +63,13 @@ class Saison_model extends CI_Model {
                 ->limit(1);
         return $this->db->get();
     }
+    
+    function delete_saison($id){
+        $this->db->where('id', $id);     
+        $this->db->delete('saison');
+  
+                 $this->db->where('saison', $id);     
+                 $this->db->delete('classement');
+  
+    }
 }

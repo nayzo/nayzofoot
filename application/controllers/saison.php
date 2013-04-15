@@ -70,8 +70,18 @@ class Saison extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
-            $this->saison_model->saison_equipe($id);
+            $this->saison_model->delete_saison($id);
                 redirect('/saison');
+        }
+    }
+    
+    public function courant($id) {
+        if (!$this->session->userdata('login_in'))
+            redirect('/');
+        else {
+                $this->saison_model->setsaison_courante($id);
+                redirect('/saison');
+
         }
     }
 }
