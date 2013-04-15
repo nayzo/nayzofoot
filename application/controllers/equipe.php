@@ -59,7 +59,8 @@ class Equipe extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
-            $this->twig->render('equipe/voirequipe', $this->equipe_model->get_equipe($id)->row());
+            $data['equipe'] = $this->equipe_model->get_equipe($id)->row();
+            $this->twig->render('equipe/voirequipe', $data);
         }
     }
 
