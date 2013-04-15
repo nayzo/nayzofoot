@@ -25,8 +25,8 @@ class Equipe extends CI_Controller {
             redirect('/');
         else {
             $this->form_validation->set_rules('nom', 'Nom', 'trim|required');
-            $this->form_validation->set_rules('directeur', 'directeur', 'trim|required');
-            $this->form_validation->set_rules('entreneur', 'entreneur', 'trim|required');
+            $this->form_validation->set_rules('directeur', 'Directeur', 'trim|required');
+            $this->form_validation->set_rules('entreneur', 'Entreneur', 'trim|required');
 
             if ($this->form_validation->run() == FALSE) {
                 $this->twig->render('equipe/ajoutequipe');
@@ -42,8 +42,8 @@ class Equipe extends CI_Controller {
             redirect('/');
         else {
             $this->form_validation->set_rules('nom', 'Nom', 'trim|required');
-            $this->form_validation->set_rules('directeur', 'directeur', 'trim|required');
-            $this->form_validation->set_rules('entreneur', 'entreneur', 'trim|required');
+            $this->form_validation->set_rules('directeur', 'Directeur', 'trim|required');
+            $this->form_validation->set_rules('entreneur', 'Entreneur', 'trim|required');
 
             if ($this->form_validation->run() == FALSE) {
                 $this->twig->render('equipe/modifierequipe', $this->equipe_model->get_equipe($id)->row());

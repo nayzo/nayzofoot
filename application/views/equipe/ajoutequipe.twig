@@ -1,0 +1,98 @@
+{% extends "layout.twig" %}
+
+{% block title %} {{parent()}} - Home{% endblock title %}
+
+{% block container%}
+    <div class="span12 well"> 
+        <h4 class="text-center">Ajouter une Equipe </h4>
+        <hr>
+         <form action='/equipe/ajout' method="POST" class="form-horizontal offset3" >
+            <fieldset>
+                <div class="control-group">
+                <div class="error span5">{{ validation_errors() }}</div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="nom">Nom</label>
+                    <div class="controls">
+                        <input type="text" name="nom" class="span3" required="required"/>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label" for="entreneur">Entreneur</label>
+                    <div class="controls">
+                        <input type="text" name="entreneur" class="span3" required="required"/>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label" for="date_creation">Date de Création</label>
+                    <div class="controls">
+                        <input type="date" name="date_creation" class="span3" required="required"/>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label" for="directeur">Directeur</label>
+                    <div class="controls">
+                        <input type="text" name="directeur" class="span3" required="required"/>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label" for="lieu_origin">Lieu d'origine</label>
+                    <div class="controls">
+                        <select name="lieu_origin" class="span3">
+                            <option value="Toutes">Toutes</option>
+                            <option value="Ain Draham">Ain Draham</option>
+                            <option value="Bizerte">Bizerte</option>
+                            <option value="Carthage">Carthage</option>
+                            <option value="Djerba">Djerba</option>
+                            <option value="Douz">Douz</option>
+                            <option value="El kef">El kef</option>
+                            <option value="Gabes">Gabes</option>
+                            <option value="Gafsa">Gafsa</option>
+                            <option value="Gasrine">Gasrine</option>
+                            <option value="Hammamet">Hammamet</option>
+                            <option value="Jandouba">Jandouba</option>
+                            <option value="Kairouan">Kairouan</option>
+                            <option value="Kebili">Kebili</option>
+                            <option value="Kelibia">Kelibia</option>
+                            <option value="Korba">Korba</option>
+                            <option value="Korbous">Korbous</option>
+                            <option value="Ksar Ghilane">Ksar Ghilane</option>
+                            <option value="Mahdia">Mahdia</option>
+                            <option value="Matmata">Matmata</option>
+                            <option value="Mednine">Mednine</option>
+                            <option value="Monastir">Monastir</option>
+                            <option value="Nabeul">Nabeul</option>
+                            <option value="Nefta">Nefta</option>
+                            <option value="Sfax">Sfax</option>
+                            <option value="Sidi bouzid">Sidi bouzid</option>
+                            <option value="Sousse">Sousse</option>
+                            <option value="Tabarka">Tabarka</option>
+                            <option value="Tamerza">Tamerza</option>
+                            <option value="Tataouine">Tataouine</option>
+                            <option value="Tozeur">Tozeur</option>
+                            <option value="Tunis">Tunis</option>
+                            <option value="Zarzis">Zarzis</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label" for="description">Description</label>
+                    <div class="controls">
+                        <textarea name="description" class="span3" rows="3"></textarea>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" class="btn btn-info">Ajouter</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>   
+    </div>
+{% endblock container%}

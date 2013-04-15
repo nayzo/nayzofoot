@@ -1,17 +1,43 @@
-<html>
-    
- <head>
-  
-</head>
-<body>
+{% extends "layout.twig" %}
 
-<a href="/">Home</a> <br/>
-<br> 
-<a href="/equipe/ajout">Ajouter Equipe</a>
-liste equipes:
-{% for equipe in equipes %}
-nom: {{equipe.nom}} | entreneur: {{equipe.entreneur}} | date creation: {{equipe.date_creation}} | directeur: {{equipe.directeur}} | lieu d'origin: {{equipe.lieu_origin}} | <a href="/equipe/voir/{{equipe.id}}">voir</a> | <a href="/equipe/modifier/{{equipe.id}}">modifier</a> | <a href="/equipe/supprimer/{{equipe.id}}">supprimer</a> 
-{% endfor %}
-</body>
-</html>
+{% block title %} {{parent()}} - Home{% endblock title %}
+
+{% block container%}
+    <div class="span12 well"> 
+        <h4>Gestion des Equipes </h4>
+        <hr>
+       <div class="btn-toolbar">
+            <a href="/equipe/ajout" class="btn pull-right"><i class="icon-plus-sign"></i> <strong>Ajouter une Equipe</strong></a>
+       </div>
+        
+        <table class="table table-bordered table-hover">
+                <tr>
+                  <th>Nom</th>
+                  <th>Entreneur</th>
+                  <th>date creation</th>
+                  <th>directeur</th>
+                  <th>lieu d'origin</th>
+                  <th>Action</th>
+                </tr>
+                 {% for equipe in equipes %}
+                <tr>
+                  <td>{{equipe.nom}}</td>
+                  <td>{{equipe.entreneur}}</td>
+                  <td>{{equipe.date_creation}}</td>
+                  <td>{{equipe.directeur}}</td>
+                  <td>{{equipe.lieu_origin}}</td>
+                  <td>
+                      <a href="/equipe/voir/{{equipe.id}}" title="voir" class="btn"><i class="icon-eye-open"></i></a>
+                      <a href="/equipe/modifier/{{equipe.id}}" title="Modifier" class="btn"><i class="icon-edit"></i></a> 
+                      <a href="/equipe/supprimer/{{equipe.id}}" title="Supprimer" class="btn"><i class="icon-trash"></i></a>
+                  </td>
+                </tr>
+         
+              {% endfor %}
+            </table>
+{% endblock container%}
+
+
+
+
 
