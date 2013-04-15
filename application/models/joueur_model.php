@@ -27,7 +27,7 @@ class Joueur_model extends CI_Model {
         $this->db->insert('joueur', $data);
     }
     
-    function update_joueur(){
+    function update_joueur($id){
             $data = array(
             'nom' => $this->input->post('nom'),
             'equipe'    => $this->input->post('equipe'),
@@ -36,7 +36,7 @@ class Joueur_model extends CI_Model {
             'date_affectation' => $this->input->post('date_affectation'),
             'post' => $this->input->post('post')
         );
-
+        $this->db->where('id', $id);     
         $this->db->update('joueur', $data);
     }
        

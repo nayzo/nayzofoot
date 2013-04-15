@@ -50,7 +50,7 @@ class Joueur extends CI_Controller {
                 $data['joueur'] = $this->joueur_model->get_joueur($id)->row();
                 $this->twig->render('joueur/modifierjoueur', $data);
             } else {
-                $this->joueur_model->update_joueur();
+                $this->joueur_model->update_joueur($id);
                 redirect('/joueur');
             }
         }
