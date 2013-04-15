@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>FOOTBALL</title>
+        <title>{% block title%}FOOTBALL {%endblock title%}</title>
         <!--stylesheet-->
        	<link href="{{base_url()}}assets/css/style.css" rel="stylesheet" type="text/css"  />
        	<link href="{{base_url()}}assets/css/bootstrap.css" rel="stylesheet" type="text/css"  />
@@ -20,6 +20,7 @@
                     </a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
+                            <li><a href="/backend"><i class="icon-home"></i> Home</a></li>
                             <li><a href="/saison">Gestion Saison</a></li>
                             <li><a href="/equipe">Gestion Equipe</a></li>
                             <li><a href="/joueur">Gestion Joueurs</a></li>
