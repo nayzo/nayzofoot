@@ -13,7 +13,7 @@ class Saison_model extends CI_Model {
     
     function add_saison(){
             $data = array(
-            'saison' => $this->input->post('saison')
+            'saison' => $this->input->post('saison'),
         );
         $this->db->insert('saison', $data);
         return  $this->db->insert_id()  ;

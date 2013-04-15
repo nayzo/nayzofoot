@@ -1,0 +1,23 @@
+{% extends "layout.twig" %}
+
+{% block title %} {{parent()}} - Gestion des Saisons{% endblock title %}
+
+{% block container%}
+    <div class="span12 well"> 
+        <h4>Voir Saison</h4>
+        <hr>
+   
+        <table class="table table-bordered table-hover">
+                <tr>
+                  <th>Saison</th>
+             
+                </tr>
+              
+                <tr>
+                  <td>{{saison.saison}}</td>
+              
+                </tr>
+        
+            </table>
+{% endblock container%}
+

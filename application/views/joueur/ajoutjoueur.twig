@@ -1,12 +1,12 @@
 {% extends "layout.twig" %}
 
-{% block title %} {{parent()}} - Home{% endblock title %}
+{% block title %} {{parent()}} - Ajouter un joueur{% endblock title %}
 
 {% block container%}
     <div class="span12 well"> 
-        <h4 class="text-center">Ajouter une Equipe </h4>
+        <h4 class="text-center">Ajouter un Joueur </h4>
         <hr>
-         <form action='/equipe/ajout' method="POST" class="form-horizontal offset3" >
+         <form action='/joueur/ajout' method="POST" class="form-horizontal offset3" >
             <fieldset>
                 <div class="control-group">
                 <div class="error span5">{{ validation_errors() }}</div>
@@ -17,32 +17,25 @@
                         <input type="text" name="nom" class="span3" required="required"/>
                     </div>
                 </div>
-
+                
                 <div class="control-group">
-                    <label class="control-label" for="entreneur">Entreneur</label>
+                    <label class="control-label" for="date_naissance">Date de Naissance</label>
                     <div class="controls">
-                        <input type="text" name="entreneur" class="span3" required="required"/>
+                        <input type="date" name="date_naissance" class="span3" required="required"/>
                     </div>
                 </div>
                 
                 <div class="control-group">
-                    <label class="control-label" for="date_creation">Date de Création</label>
+                    <label class="control-label" for="post">Poste</label>
                     <div class="controls">
-                        <input type="date" name="date_creation" class="span3" required="required"/>
+                        <input type="text" name="post" class="span3" required="required"/>
                     </div>
                 </div>
                 
                 <div class="control-group">
-                    <label class="control-label" for="directeur">Directeur</label>
+                    <label class="control-label" for="ville">Ville</label>
                     <div class="controls">
-                        <input type="text" name="directeur" class="span3" required="required"/>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label" for="lieu_origin">Lieu d'origine</label>
-                    <div class="controls">
-                        <select name="lieu_origin" class="span3">
+                        <select name="ville" class="span3">
                             <option value="Ain Draham">Ain Draham</option>
                             <option value="Bizerte">Bizerte</option>
                             <option value="Carthage">Carthage</option>
@@ -80,12 +73,22 @@
                 </div>
                 
                 <div class="control-group">
-                    <label class="control-label" for="description">Description</label>
+                    <label class="control-label" for="date_affectation">Date D'affectation</label>
                     <div class="controls">
-                        <textarea name="description" class="span3" rows="3"></textarea>
+                        <input type="date" name="date_affectation" class="span3" required="required"/>
                     </div>
                 </div>
-
+                
+                <div class="control-group">
+                    <label class="control-label" for="equipe">Equipe</label>
+                    <div class="controls">
+                        <select name="equipe" class="span3">
+                            <option value="Tozeur">Tozeur</option>
+                            <option value="Tunis">Tunis</option>
+                            <option value="Zarzis">Zarzis</option>
+                        </select>
+                    </div>
+                </div>
                 <div class="control-group">
                     <div class="controls">
                         <button type="submit" class="btn btn-info">Ajouter</button>
