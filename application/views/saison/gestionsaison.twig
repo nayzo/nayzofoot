@@ -13,13 +13,19 @@
         <table class="table table-bordered table-hover">
                 <tr>
                   <th>Saison</th>
+                  <th>Saison courante</th>
                   <th>Action</th>
                 </tr>
                  {% for saison in saisons %}
                 <tr>
                   <td>{{saison.saison}}</td>
                   <td>
-                      <a href="/saison/voir/{{saison.id}}" title="voir" class="btn"><i class="icon-eye-open"></i></a>
+                      {% if saison.saison_courante == 1 %}
+                      <img src="{{base_url()}}assets/img/active.png" alt="actives"/>
+                      {% endif %} 
+                      </td>
+                  <td>
+                      <a href="/saison/activer/{{saison.id}}" title="Activer saison courante" class="btn"><i class="icon-ok"></i></a>
                       <a href="/saison/modifier/{{saison.id}}" title="Modifier" class="btn"><i class="icon-edit"></i></a> 
                       <a href="/saison/supprimer/{{saison.id}}" title="Supprimer" class="btn deleteadmin"><i class="icon-trash"></i></a>
                   </td>
