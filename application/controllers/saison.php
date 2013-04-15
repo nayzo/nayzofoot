@@ -56,15 +56,15 @@ class Saison extends CI_Controller {
             }
         }
     }
-
-    public function voir($id) {
-        if (!$this->session->userdata('login_in'))
-            redirect('/');
-        else {
-             $data['saison'] = $this->saison_model->get_saison($id)->row();
-            $this->twig->render('saison/voirsaison', $data);
-        }
-    }
+//
+//    public function voir($id) {
+//        if (!$this->session->userdata('login_in'))
+//            redirect('/');
+//        else {
+//             $data['saison'] = $this->saison_model->get_saison($id)->row();
+//            $this->twig->render('saison/voirsaison', $data);
+//        }
+//    }
 
      public function supprimer($id) {
         if (!$this->session->userdata('login_in'))

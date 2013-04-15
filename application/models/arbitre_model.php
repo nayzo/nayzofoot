@@ -19,11 +19,12 @@ class Arbitre_model extends CI_Model {
         $this->db->insert('arbitre', $data);
     }
     
-    function update_arbitre(){
+    function update_arbitre($id){
            $data = array(
             'nom' => $this->input->post('nom'),
             'description'    => $this->input->post('description')
         );
+        $this->db->where('id', $id);     
         $this->db->update('arbitre', $data);
     }
     
@@ -34,5 +35,10 @@ class Arbitre_model extends CI_Model {
                 ->where('id', $id)
                 ->limit(1);
         return $this->db->get();
+    }
+    
+    function delete_arbitre($id){
+        $this->db->where('id', $id);     
+        $this->db->delete('arbitre');
     }
 }
