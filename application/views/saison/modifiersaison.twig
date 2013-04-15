@@ -1,10 +1,10 @@
 {% extends "layout.twig" %}
 
-{% block title %} {{parent()}} - Ajouter une Saison{% endblock title %}
+{% block title %} {{parent()}} - Modifier Saison{% endblock title %}
 
 {% block container%}
     <div class="span12 well"> 
-        <h4 class="text-center">Ajouter une Saison </h4>
+        <h4 class="text-center">Modifier une Saison </h4>
         <hr>
          <form action='/saison/modifier/{{saison.id}}' method="POST" class="form-horizontal offset3" >
             <fieldset>
@@ -20,13 +20,13 @@
                 <div class="control-group">
                     <div class="controls">
                         <label class="checkbox">
-                            <input name="saison_courante" type="checkbox"> saison courante
+                            <input name="saison_courante" type="checkbox" {%if saison.saison_courante==1%} checked="checked" {%endif%}> saison courante
                         </label>
                     </div>
                 </div>
                 <div class="control-group">
                     <div class="controls">
-                        <button type="submit" class="btn btn-info">Ajouter</button>
+                        <button type="submit" class="btn btn-info">Modifier</button>
                     </div>
                 </div>
             </fieldset>
