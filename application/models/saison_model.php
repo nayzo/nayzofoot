@@ -6,7 +6,7 @@ class Saison_model extends CI_Model {
         parent::__construct();
     }
     
-    function get_all(){
+    public function get_all(){
         $query = $this->db->get('saison');
             return $query->result();
     }
@@ -19,10 +19,32 @@ class Saison_model extends CI_Model {
         return  $this->db->insert_id()  ;
     }
     
-    function update_saison(){
+    function setsaison_courante($id){
+            $data = array(
+            'saison_courante' => 1,
+        );
+        $this->db->where('id', $id);     
+        $this->db->update('saison', $data);
+        
+        $all = $this->get_all();
+        foreach($all as $one)
+        {
+            if($one->id != $id)
+            {
+                $data = array(
+                'saison_courante' => 0,
+                );
+                $this->db->where('id', $one->id);     
+                $this->db->update('saison', $data);
+            }    
+        }
+    }    
+    
+    function update_saison($id){
             $data = array(
             'saison' => $this->input->post('saison'),
         );
+        $this->db->where('id', $id);     
         $this->db->update('saison', $data);
     }    
     

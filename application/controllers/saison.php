@@ -29,8 +29,10 @@ class Saison extends CI_Controller {
 
             if ($this->form_validation->run() == FALSE) {
                 $this->twig->render('saison/ajoutsaison');
-            } else {
+            } else {                
                 $id = $this->saison_model->add_saison();
+                if ($this->input->post('saison_courante'))
+                    $this->saison_model->setsaison_courante($id);
                 $this->classement_model->add_classement($id);
                 redirect('/saison');
             }
