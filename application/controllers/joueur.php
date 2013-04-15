@@ -60,7 +60,8 @@ class Joueur extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
-            $this->twig->render('joueur/voirjoueur', $this->joueur_model->get_joueur($id)->row());
+            $data['joueur'] = $this->joueur_model->get_joueur($id)->row();
+            $this->twig->render('joueur/voirjoueur', $data);
         }
     }
 

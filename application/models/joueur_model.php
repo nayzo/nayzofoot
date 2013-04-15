@@ -41,10 +41,10 @@ class Joueur_model extends CI_Model {
     }
        
     function get_joueur($id){
-        $this->db->select('*')
-                ->from('joueur')
-                ->where('id', $id)
-                ->limit(1);
+        
+        $this->db->select('*');
+        $this->db->from('equipe');
+        $this->db->join('joueur', 'joueur.equipe = equipe.id')->where('joueur.id', $id);
         return $this->db->get();   
     }
     
