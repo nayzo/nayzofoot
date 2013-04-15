@@ -8,7 +8,7 @@ class Saison_model extends CI_Model {
     
     public function get_all(){
         $query = $this->db->get('saison');
-            return $query->result();
+        return $query->result();
     }
     
     function add_saison(){

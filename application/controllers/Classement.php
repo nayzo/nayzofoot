@@ -16,9 +16,19 @@ class Classement extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
-            $saison = $this->saison_model->get_saison_courante()->row();
-            $data['classement'] = $this->classement_model->get_all_championnat($saison);
-            $this->twig->render('classement/championnat', $data);
+            if(!$this->classement_model->get_if_one_saison_courante())
+            {
+                $data['testcourantexist'] = false;
+                $this->twig->render('classement/championnat', $data);
+            }
+            else
+            {
+                $data['testcourantexist'] = true;
+                $saison = $this->saison_model->get_saison_courante()->row();
+                $data['classements'] = $this->classement_model->get_all_championnat($saison);
+                $this->twig->render('classement/championnat', $data);
+            }
+            
         }
     }
  
@@ -26,9 +36,18 @@ class Classement extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
-            $saison = $this->saison_model->get_saison_courante()->row();
-            $data['classement'] = $this->classement_model->get_all_coupe($saison);
-            $this->twig->render('classement/coupe', $data);
+            if(!$this->classement_model->get_if_one_saison_courante())
+            {
+                $data['testcourantexist'] = false;
+                $this->twig->render('classement/coupe', $data);
+            }
+            else
+            {
+                $data['testcourantexist'] = true;
+                $saison = $this->saison_model->get_saison_courante()->row();
+                $data['classements'] = $this->classement_model->get_all_coupe($saison);
+                $this->twig->render('classement/coupe', $data);
+            }            
         }
     }
 }
