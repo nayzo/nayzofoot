@@ -25,7 +25,7 @@ class Classement extends CI_Controller {
             {
                 $data['testcourantexist'] = true;
                 $saison = $this->saison_model->get_saison_courante()->row();
-                $data['classements'] = $this->classement_model->get_all_championnat($saison);
+                $data['classements'] = $this->classement_model->get_all_championnat($saison->id);
                 $this->twig->render('classement/championnat', $data);
             }
             
@@ -45,7 +45,7 @@ class Classement extends CI_Controller {
             {
                 $data['testcourantexist'] = true;
                 $saison = $this->saison_model->get_saison_courante()->row();
-                $data['classements'] = $this->classement_model->get_all_coupe($saison);
+                $data['classements'] = $this->classement_model->get_all_coupe($saison->id);
                 $this->twig->render('classement/coupe', $data);
             }            
         }
