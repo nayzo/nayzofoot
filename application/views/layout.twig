@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        {% block head%}
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>{% block title%}FOOTBALL {%endblock title%}</title>
         <!--stylesheet-->
        	<link href="{{base_url()}}assets/css/style.css" rel="stylesheet" type="text/css"  />
        	<link href="{{base_url()}}assets/css/bootstrap.css" rel="stylesheet" type="text/css"  />
         <link href="{{base_url()}}assets/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
+        {% endblock head%}
     </head>
     <body>
         {% block nav%}
@@ -66,8 +68,10 @@
             </div>
         </section>
         {#---SCRIPT---#} 
+            {% block script%}
        <script src="{{base_url()}}assets/js/jquery-1.9.1.min.js"></script>
        <script src="{{base_url()}}assets/js/bootstrap.js"></script>
        <script src="{{base_url()}}assets/js/foot.js"></script>
+       {% endblock script%}
     </body>
 </html>

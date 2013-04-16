@@ -8,17 +8,42 @@ class Match extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('equipe_model');
-        $this->load->model('match_model');
+        $this->load->model('match_model', 'matchManager');
         $this->load->model('saison_model');
         $this->twig->addFunction('getsessionhelper');
     }
 
-    public function index() {
+    public function index()
+    {
         if (!$this->session->userdata('login_in'))
             redirect('/');
-        else {
-                // affichage calendrier de liste des matches 
-             $this->twig->render('match/gestionmatch');
+        else
+        {
+            $data = array();
+            $str = '';
+            $res = $this->matchManager->get_all();
+            
+            foreach($res as $row)
+            {
+                $str .= '{title: ';
+                $str .= '\''. $row->categorie .'\'';
+                $str .= ', start: new Date(';
+                $str .= date('Y', strtotime($row->date_match));
+                $str .= ', ';
+                $str .= date('m', strtotime($row->date_match));
+                $str .= ', ';
+                $str .= date('d', strtotime($row->date_match));
+                $str .= '), url: ';
+                $str .= '\'http://localhost:8095/\'';
+                $str .= '}, ';
+            }
+            
+            //echo substr($str, 0, strlen($str) - 2);
+            //return;
+            $data['ddd'] = substr($str, 0, strlen($str) - 2);
+            
+            // affichage calendrier de liste des matches 
+            $this->twig->render('match/gestionmatch', $data);
         }
     }
 
