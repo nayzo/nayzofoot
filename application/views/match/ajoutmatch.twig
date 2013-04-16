@@ -1,0 +1,40 @@
+{% extends "layout.twig" %}
+
+{% block title %} {{parent()}} - Ajouter Match{% endblock title %}
+
+{% block container%}
+    <div class="span12 well"> 
+        <label> Type</label>
+        <select name="type">
+            <option value="semi-final">semi-final</option>
+            <option value="final">final</option>
+        </select>
+        <br>
+        <label> Saison</label>
+        <select name="saison">
+         {% for saison in saisons%}
+            <option value="{{saison.id}}">{{saison.saison}}</option>            
+         {% endfor %}
+        </select>
+        <br>
+        <label> Catégorie</label>
+        <select name="categorie">
+            <option value="championnat">championnat</option>
+            <option value="coupe">coupe</option>
+        </select>
+        <br>
+        <label> Date et temps match</label>
+        <input type="datetime" name="date_match">
+        <br>
+        <label> Stade</label>
+        <input type="text" name="stade">
+        <br>
+         <label> Arbitre</label>
+        <select name="arbitre">
+         {% for arbitre in arbitres %}
+            <option value="{{arbitre.id}}">{{arbitre.nom}}</option>            
+         {% endfor %}
+        </select>
+        <br>
+    </div>
+{% endblock container%}

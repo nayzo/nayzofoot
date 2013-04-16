@@ -9,6 +9,7 @@ class Match extends CI_Controller {
         parent::__construct();
         $this->load->model('equipe_model');
         $this->load->model('match_model');
+        $this->load->model('saison_model');
         $this->twig->addFunction('getsessionhelper');
     }
 
@@ -25,12 +26,11 @@ class Match extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
-            $this->form_validation->set_rules('nom', 'Nom', 'trim|required');
-            $this->form_validation->set_rules('directeur', 'directeur', 'trim|required');
-            $this->form_validation->set_rules('entreneur', 'entreneur', 'trim|required');
+            $this->form_validation->set_rules('arbitre', 'Arbitre', 'trim|required');
 
             if ($this->form_validation->run() == FALSE) {
-                $this->twig->render('equipe/ajoutequipe');
+                $data['saisons'] = $this->saison_model->get_all();
+                $this->twig->render('match/ajoutmatch', $data);
             } else {
                 $this->equipe_model->add_equipe();
                 redirect('/equipe');
