@@ -6,22 +6,31 @@
     <div class="span12 well"> 
         <h4 class="text-center">Modifier une Equipe </h4>
         <hr>
-         <form action='/equipe/modifier/{{equipe.id}}' method="POST" class="form-horizontal offset3" >
+         <form action='/equipe/modifier/{{equipe.id}}' method="POST" class="form-horizontal offset3" enctype="multipart/form-data">
             <fieldset>
-                <div class="control-group">
-                    <div class="error span5">{{ validation_errors() }}</div>
+                 <div class="control-group">
+                   <label class="control-label" for="photo" >Logo</label>
+                   <div class="controls">
+                       <img src="{{base_url()}}uploads/{{equipe.logo}}" class="img-polaroid span3" alt ="photo" style="margin-left: 0px; height: 220px;">                              
+                   </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="nom">Nom</label>
+                    <label class="control-label" for="nom_equipe">Nom <span class="required">*</span></label>
                     <div class="controls">
-                        <input type="text" name="nom" class="span3" required="required" value="{{ set_value('nom', equipe.nom) }}"/>
+                        <input type="text" name="nom_equipe" class="span3" required="required" value="{{ set_value('nom_equipe', equipe.nom_equipe) }}"/>
+                        <div class="erreur">
+                            {{ form_error('nom_equipe') }}         
+                        </div>
                     </div>
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label" for="entreneur">Entreneur</label>
+                    <label class="control-label" for="entreneur">Entreneur <span class="required">*</span></label>
                     <div class="controls">
                         <input type="text" name="entreneur" class="span3" required="required" value="{{ set_value('entreneur', equipe.entreneur) }}"/>
+                        <div class="erreur">
+                            {{ form_error('entreneur') }}         
+                        </div>
                     </div>
                 </div>
                 
@@ -29,13 +38,6 @@
                     <label class="control-label" for="date_creation">Date de Création</label>
                     <div class="controls">
                         <input type="date" name="date_creation" class="span3" required="required" value="{{ set_value('date_creation', equipe.date_creation) }}"/>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label" for="directeur">Directeur</label>
-                    <div class="controls">
-                        <input type="text" name="directeur" class="span3" required="required" value="{{ set_value('directeur', equipe.directeur) }}"/>
                     </div>
                 </div>
                 
@@ -70,11 +72,45 @@
                     </div>
                 </div>
                 
-                <div class="control-group">
-                    <label class="control-label" for="description">Description</label>
+               <div class="control-group">
+                    <label class="control-label" for="siteweb">Site Web</label>
                     <div class="controls">
-                        <textarea name="description" class="span3" rows="3">{{ set_value('description', equipe.description) }}</textarea>
+                        <input type="text" name="siteweb" class="span3" value="{{ set_value('siteweb', equipe.siteweb) }}"/>
                     </div>
+                </div>
+                    
+               <div class="control-group">
+                    <label class="control-label" for="stade">Stade</label>
+                    <div class="controls">
+                        <input type="text" name="stade" class="span3" value="{{ set_value('stade', equipe.stade) }}"/>
+                    </div>
+                </div>
+                    
+                 <div class="control-group">
+                    <label class="control-label" for="Ligue">Ligue Nationale <span class="required">*</span></label>
+                    <div class="controls">
+                        <select name="ligue" class="span3" selected="{{ set_value('ligue', equipe.ligue) }}" required="required">
+                            <option value="Football Pro ligue 1" {%if equipe.ligue=='Football Pro ligue 1'%} selected="selected" {%endif%}>Football Pro ligue 1</option>
+                            <option value="Football Pro ligue 2" {%if equipe.ligue=='Football Pro ligue 2'%} selected="selected" {%endif%}>Football Pro ligue 2</option>
+                            <option value="Football Amateur" {%if equipe.ligue=='Football Amateur'%} selected="selected" {%endif%}>Football Amateur</option>
+                            <option value="Football Féminin" {%if equipe.ligue=='Football Féminin'%} selected="selected" {%endif%}>Football Féminin</option>
+                            <option value="Futsal" {%if equipe.ligue=='Futsal'%} selected="selected" {%endif%}>Futsal</option>
+                        </select>
+                        <div class="erreur">
+                            {{ form_error('ligue') }}         
+                        </div>
+                    </div>
+                </div>
+                    
+               <div class="control-group">
+                    <label class="control-label" for="userfile">Logo</label>
+                    <div class="controls">
+                        <input type="file" name="userfile" class="span3"/>
+                        
+                    </div>
+                    <div class="erreur">
+                          {{error}}
+                        </div>
                 </div>
 
                 <div class="control-group">

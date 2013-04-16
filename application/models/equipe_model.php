@@ -11,14 +11,16 @@ class Equipe_model extends CI_Model {
             return $query->result();
     }
     
-    function add_equipe(){
+    function add_equipe($photo){
             $data = array(
-            'nom' => $this->input->post('nom'),
-            'entreneur'    => $this->input->post('entreneur'),
-            'directeur'      => $this->input->post('directeur'),            
+            'nom_equipe' => $this->input->post('nom_equipe'),
+            'entreneur'    => $this->input->post('entreneur'),           
             'date_creation' => $this->input->post('date_creation'),
-            'description' => $this->input->post('description'),
-            'lieu_origin' => $this->input->post('lieu_origin')
+            'lieu_origin' => $this->input->post('lieu_origin'),
+            'logo' => $photo,
+            'siteweb' => $this->input->post('siteweb'),   
+            'stade' =>  $this->input->post('stade'),   
+            'ligue' => $this->input->post('ligue')   
         );
 
         $this->db->insert('equipe', $data);
@@ -26,17 +28,32 @@ class Equipe_model extends CI_Model {
     
     function update_equipe($id){
             $data = array(
-            'nom' => $this->input->post('nom'),
-            'entreneur'    => $this->input->post('entreneur'),
-            'directeur'      => $this->input->post('directeur'),            
+            'nom_equipe' => $this->input->post('nom_equipe'),
+            'entreneur'    => $this->input->post('entreneur'),           
             'date_creation' => $this->input->post('date_creation'),
-            'description' => $this->input->post('description'),
-            'lieu_origin' => $this->input->post('lieu_origin')
+            'lieu_origin' => $this->input->post('lieu_origin'),
+            'siteweb' => $this->input->post('siteweb'),   
+            'stade' =>  $this->input->post('stade'),   
+            'ligue' => $this->input->post('ligue')   
         );
         $this->db->where('id', $id);     
         $this->db->update('equipe', $data);
     }
     
+    function update_equipephoto($tab){
+            $data = array(
+            'nom_equipe' => $this->input->post('nom_equipe'),
+            'entreneur'    => $this->input->post('entreneur'),           
+            'date_creation' => $this->input->post('date_creation'),
+            'lieu_origin' => $this->input->post('lieu_origin'),
+            'logo' => $tab['photo'],    
+            'siteweb' => $this->input->post('siteweb'),   
+            'stade' =>  $this->input->post('stade'),   
+            'ligue' => $this->input->post('ligue')   
+        );
+        $this->db->where('id', $tab['id']);     
+        $this->db->update('equipe', $data);
+    }
     
     public function get_equipe($id){
         $this->db->select('*')

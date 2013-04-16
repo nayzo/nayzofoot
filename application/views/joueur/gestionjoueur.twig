@@ -12,22 +12,18 @@
         
         <table class="table table-bordered table-hover">
                 <tr>
+                  <th>Photo</th>
                   <th>Nom</th>
-                  <th>Date de naissance</th>
                   <th>Poste</th>
-                  <th>Ville</th>
-                  <th>date d'affectation</th>
                   <th>Equipe</th>
                   <th>Action</th>
                 </tr>
                  {% for joueur in joueurs %}
                 <tr>
+                  <td> <img src="{{base_url()}}uploads/{{joueur.photo}}" alt="" class="img-polaroid span1" style="height: 60px;"></td>
                   <td>{{joueur.nom}}</td>
-                  <td>{{joueur.date_naissance}}</td>
                   <td>{{joueur.post}}</td>
-                  <td>{{joueur.ville}}</td>
-                  <td>{{joueur.date_affectation	}}</td>
-                  <td>{{joueur.equipe}}</td>
+                  <td>{{joueur.nom_equipe}}</td>
                   <td>
                       <a href="/joueur/voir/{{joueur.id}}" title="voir" class="btn"><i class="icon-eye-open"></i></a>
                       <a href="/joueur/modifier/{{joueur.id}}" title="Modifier" class="btn"><i class="icon-edit"></i></a> 

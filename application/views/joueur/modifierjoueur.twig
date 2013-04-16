@@ -1,20 +1,29 @@
 {% extends "layout.twig" %}
 
-{% block title %} {{parent()}} - Modifier Equipe{% endblock title %}
+{% block title %} {{parent()}} - Modifier Joueur{% endblock title %}
 
 {% block container%}
     <div class="span12 well"> 
-        <h4 class="text-center">Modifier une Equipe </h4>
+        <h4 class="text-center">Modifier un Joueur </h4>
         <hr>
-         <form action='/joueur/modifier/{{joueur.id}}' method="POST" class="form-horizontal offset3" >
+         <form action='/joueur/modifier/{{joueur.id}}' method="POST" class="form-horizontal offset3" enctype="multipart/form-data">
             <fieldset>
+                {#<div class="control-group">
+                    <div class="error span5">{{ validation_errors() }}</div>
+                </div>#}
                 <div class="control-group">
-                <div class="error span5">{{ validation_errors() }}</div>
+                   <label class="control-label" for="photo" >Photo</label>
+                   <div class="controls">
+                       <img src="{{base_url()}}uploads/{{joueur.photo}}" class="img-polaroid span3"  alt ="photo" style="margin-left: 0px; height: 220px;">                              
+                   </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label" for="nom">Nom</label>
+                    <label class="control-label" for="nom">Nom <span class="required">*</span></label>
                     <div class="controls">
                         <input type="text" name="nom" class="span3" required="required" value="{{ set_value('nom', joueur.nom) }}"/>
+                        <div class="erreur">
+                            {{ form_error('nom') }}         
+                        </div>
                     </div>
                 </div>
                 
@@ -72,6 +81,20 @@
                     </div>
                 </div>
                 
+               <div class="control-group">
+                    <label class="control-label" for="taille">Taille</label>
+                    <div class="controls">
+                        <input type="text" name="taille" class="span3" value="{{ set_value('taille', joueur.taille) }}"/>
+                    </div>
+                </div>
+                    
+                <div class="control-group">
+                    <label class="control-label" for="poids">Poid</label>
+                    <div class="controls">
+                        <input type="text" name="poids" class="span3" value="{{ set_value('poids', joueur.poids) }}"/>
+                    </div>
+                </div>
+                
                 <div class="control-group">
                     <label class="control-label" for="date_affectation">Date D'affectation</label>
                     <div class="controls">
@@ -80,15 +103,25 @@
                 </div>
                 
                 <div class="control-group">
-                    <label class="control-label" for="equipe">Equipe</label>
+                    <label class="control-label" for="equipe">Equipe <span class="required">*</span></label>
                     <div class="controls">
-                        <select name="equipe" class="span3">
+                        <select name="equipe" class="span3" required="required">
                             {% for equipe in equipes %}
                                 <option value="{{equipe.id}}"  {%if equipe.id==joueur.equipe%} selected="selected" {%endif%}>{{equipe.nom}}</option>
                             {% endfor %}
                         </select>
                     </div>
                 </div>
+                
+                <div class="control-group">
+                    <label class="control-label" for="userfile">Photo</label>
+                    <div class="controls">
+                        <input type="file" name="userfile" class="span3"/>
+                        <div class="erreur">
+                          {{error}}
+                        </div>
+                    </div>
+                </div>   
                 
                 <div class="control-group">
                     <div class="controls">

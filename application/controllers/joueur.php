@@ -32,9 +32,7 @@ class Joueur extends CI_Controller {
                 $data['equipes'] = $this->equipe_model->get_all();
                 $this->twig->render('joueur/ajoutjoueur', $data);
             } else {
-                
-                
-                
+
                 $config['upload_path'] = './uploads/';
                 $config['allowed_types'] = 'gif|jpg|png';
                 $config['max_size']	= '100';
@@ -73,8 +71,31 @@ class Joueur extends CI_Controller {
                 $data['joueur'] = $this->joueur_model->get_joueur($id)->row();
                 $this->twig->render('joueur/modifierjoueur', $data);
             } else {
-                $this->joueur_model->update_joueur($id);
-                redirect('/joueur');
+                
+                            $config['upload_path'] = './uploads/';
+                            $config['allowed_types'] = 'gif|jpg|png';
+                            $config['max_size']	= '100';
+                            $config['max_width']  = '1024';
+                            $config['max_height']  = '768';
+                            $config['encrypt_name']  = TRUE;
+                            $this->load->library('upload', $config);
+                            
+                            if ( ! $this->upload->do_upload()){}
+                            $photo = $this->upload->data();
+                            $data['photo'] = $photo['file_name']; 
+                            $data['id'] = $id;
+                            if($photo['file_name'])
+                            { 
+                                    
+                                    $this->joueur_model->update_joueurphoto($data);
+                                    redirect('/joueur');
+                            }
+                            else
+                            {
+                                $this->joueur_model->update_joueur($id);
+                                redirect('/joueur');
+                            }
+
             }
         }
     }

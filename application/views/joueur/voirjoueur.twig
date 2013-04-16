@@ -1,18 +1,24 @@
 {% extends "layout.twig" %}
 
-{% block title %} {{parent()}} - Gestion des Joueurs{% endblock title %}
+{% block title %} {{parent()}} - Détails Joueurs{% endblock title %}
 
 {% block container%}
     <div class="span12 well"> 
-        <h4>Gestion des Joueurs </h4>
+        <h4>Détails Joueurs </h4>
         <hr>
-
+        <div class="span4">
+            <p> <img src="{{base_url()}}uploads/{{joueur.photo}}" alt="" class="img-polaroid span3" style="height: 220px;"></p>
+        </div>
+        <div class="span6">
         <p><strong>Nom : </strong>{{joueur.nom}}</p>
         <p><strong>Date de naissance : </strong>{{joueur.date_naissance}}</p>
         <p><strong>Poste : </strong>{{joueur.post}}</p>
         <p><strong>Ville : </strong>{{joueur.ville}}</p>
+        <p><strong>Taille: </strong>{{joueur.taille}}</p>
+        <p><strong>Poid : </strong>{{joueur.poids}}</p>
         <p><strong>date d'affectation : </strong>{{joueur.date_affectation}}</p>
         <p><strong>Equipe : {{joueur.equipe}}</strong></p>
+        </div>
     </div>
 {% endblock container%}
 
