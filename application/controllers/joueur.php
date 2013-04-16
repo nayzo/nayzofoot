@@ -86,7 +86,7 @@ class Joueur extends CI_Controller {
                             $data['id'] = $id;
                             if($photo['file_name'])
                             { 
-                                    
+                                    $this->suppphoto($id);
                                     $this->joueur_model->update_joueurphoto($data);
                                     redirect('/joueur');
                             }
@@ -113,8 +113,16 @@ class Joueur extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
+            $this->suppphoto($id);
             $this->joueur_model->delete_joueur($id);
                 redirect('/joueur');
         }
+    }
+    
+    public function suppphoto($id)
+    {
+        $photo = $this->joueur_model->get_joueur($id)->row()->photo;
+        $path = __DIR__.'/../../uploads/'.$photo;
+        unlink ($path);
     }
 }

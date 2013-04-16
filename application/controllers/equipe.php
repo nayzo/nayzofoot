@@ -84,7 +84,7 @@ class Equipe extends CI_Controller {
                             $data['id'] = $id;
                             if($photo['file_name'])
                             { 
-                                    
+                                    $this->suppphoto($id);
                                     $this->equipe_model->update_equipephoto($data);
                                     redirect('/equipe');
                             }
@@ -111,10 +111,16 @@ class Equipe extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
+            $this->suppphoto($id);
             $this->equipe_model->delete_equipe($id);
                 redirect('/equipe');
         }
     }
 
-    
+    public function suppphoto($id)
+    {
+        $photo = $this->joueur_model->get_joueur($id)->row()->photo;
+        $path = __DIR__.'/../../uploads/'.$photo;
+        unlink ($path);
+    }
 }
