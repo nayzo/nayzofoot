@@ -52,9 +52,8 @@ class Joueur extends CI_Controller {
                 }
                 else
                 {
-                       // $data = array('upload_data' => $this->upload->data());
                     $photo = $this->upload->data();
-                    $this->joueur_model->add_joueur($photo->file_name);
+                    $this->joueur_model->add_joueur($photo['file_name']);
                     redirect('/joueur');
                 } 
                 
