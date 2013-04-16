@@ -32,9 +32,9 @@ class Classement_model extends CI_Model {
         return $query->result;
     }
     
-    function get_if_one_saison_courante()
+    function get_if_one_saison_courant()
     {
-        $this->db->where('saison_courante', 1);     
+        $this->db->where('saison_courant', 1);     
         $query = $this->db->get('saison');
         
         if($query->num_rows() == 1)

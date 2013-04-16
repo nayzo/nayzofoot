@@ -19,9 +19,9 @@ class Saison_model extends CI_Model {
         return  $this->db->insert_id()  ;
     }
     
-    function setsaison_courante($id){
+    function setsaison_courant($id){
             $data = array(
-            'saison_courante' => 1,
+            'saison_courant' => 1,
         );
         $this->db->where('id', $id);     
         $this->db->update('saison', $data);
@@ -32,7 +32,7 @@ class Saison_model extends CI_Model {
             if($one->id != $id)
             {
                 $data = array(
-                'saison_courante' => 0,
+                'saison_courant' => 0,
                 );
                 $this->db->where('id', $one->id);     
                 $this->db->update('saison', $data);
@@ -56,10 +56,10 @@ class Saison_model extends CI_Model {
         return $this->db->get();
     }
     
-    function get_saison_courante(){
-        $this->db->select('id')
+    function get_saison_courant(){
+        $this->db->select('*')
                 ->from('saison')
-                ->where('saison_courante', 1)
+                ->where('saison_courant', 1)
                 ->limit(1);
         return $this->db->get();
     }

@@ -16,7 +16,7 @@ class Classement extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
-            if(!$this->classement_model->get_if_one_saison_courante())
+            if(!$this->classement_model->get_if_one_saison_courant())
             {
                 $data['testcourantexist'] = false;
                 $this->twig->render('classement/championnat', $data);
@@ -24,7 +24,7 @@ class Classement extends CI_Controller {
             else
             {
                 $data['testcourantexist'] = true;
-                $saison = $this->saison_model->get_saison_courante()->row();
+                $saison = $this->saison_model->get_saison_courant()->row();
                 $data['classements'] = $this->classement_model->get_all_championnat($saison->id);
                 $this->twig->render('classement/championnat', $data);
             }
@@ -36,7 +36,7 @@ class Classement extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
-            if(!$this->classement_model->get_if_one_saison_courante())
+            if(!$this->classement_model->get_if_one_saison_courant())
             {
                 $data['testcourantexist'] = false;
                 $this->twig->render('classement/coupe', $data);
@@ -44,7 +44,7 @@ class Classement extends CI_Controller {
             else
             {
                 $data['testcourantexist'] = true;
-                $saison = $this->saison_model->get_saison_courante()->row();
+                $saison = $this->saison_model->get_saison_courant()->row();
                 $data['classements'] = $this->classement_model->get_all_coupe($saison->id);
                 $this->twig->render('classement/coupe', $data);
             }            

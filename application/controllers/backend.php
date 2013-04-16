@@ -30,7 +30,17 @@ class Backend extends CI_Controller {
             return false;
         } else {
              foreach($req as $val){
-                $login_in = array('id' => $val->id, 'login' => $val->login);
+                 $this->load->model('saison_model');
+                 $saison = $this->saison_model->get_saison_courant()->row();
+                 if($saison)
+                 {
+                     $login_in = array('id' => $val->id, 'login' => $val->login, 'saison' => $saison->saison, 'saisonid' => $saison->id);
+                 }
+                 else
+                 {
+                     $login_in = array('id' => $val->id, 'login' => $val->login);
+                 }
+                 
                 $this->session->set_userdata('login_in', $login_in);
              }
             return TRUE;

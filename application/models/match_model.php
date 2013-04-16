@@ -34,10 +34,10 @@ class Match_model extends CI_Model {
         return $this->db->get();
     }
     
-    function get_saison_courante(){
+    function get_saison_courant(){
         $this->db->select('id')
                 ->from('saison')
-                ->where('saison_courante', 1)
+                ->where('saison_courant', 1)
                 ->limit(1);
         return $this->db->get();
     }

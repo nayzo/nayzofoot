@@ -31,8 +31,8 @@ class Saison extends CI_Controller {
                 $this->twig->render('saison/ajoutsaison');
             } else {                
                 $id = $this->saison_model->add_saison();
-                if ($this->input->post('saison_courante'))
-                    $this->saison_model->setsaison_courante($id);
+                if ($this->input->post('saison_courant'))
+                    $this->saison_model->setsaison_courant($id);
                 $this->classement_model->add_classement($id);
                 redirect('/saison');
             }
@@ -50,8 +50,8 @@ class Saison extends CI_Controller {
                 $this->twig->render('saison/modifiersaison', $data);
             } else {
                 $this->saison_model->update_saison($id);
-                if ($this->input->post('saison_courante'))
-                    $this->saison_model->setsaison_courante($id);
+                if ($this->input->post('saison_courant'))
+                    $this->saison_model->setsaison_courant($id);
                 redirect('/saison');
             }
         }
@@ -79,7 +79,8 @@ class Saison extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
-                $this->saison_model->setsaison_courante($id);
+                // saison session
+                $this->saison_model->setsaison_courant($id);
                 redirect('/saison');
 
         }
