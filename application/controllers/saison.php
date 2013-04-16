@@ -75,7 +75,7 @@ class Saison extends CI_Controller {
         }
     }
     
-    public function courant($id) {
+    public function activer($id) {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
