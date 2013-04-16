@@ -24,7 +24,7 @@ class Equipe extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
-            $this->form_validation->set_rules('nom', 'Nom', 'trim|required');
+            $this->form_validation->set_rules('nom_equipe', 'Nom', 'trim|required');
             $this->form_validation->set_rules('entreneur', 'Entreneur', 'trim|required');
 
             if ($this->form_validation->run() == FALSE) {
@@ -60,7 +60,7 @@ class Equipe extends CI_Controller {
             redirect('/');
         else 
         {
-            $this->form_validation->set_rules('nom', 'Nom', 'trim|required');
+            $this->form_validation->set_rules('nom_equipe', 'Nom', 'trim|required');
             $this->form_validation->set_rules('entreneur', 'Entreneur', 'trim|required');
 
             if ($this->form_validation->run() == FALSE) 
@@ -86,7 +86,7 @@ class Equipe extends CI_Controller {
                             { 
                                     
                                     $this->equipe_model->update_equipephoto($data);
-                                    redirect('/joueur');
+                                    redirect('/equipe');
                             }
                             else
                             {

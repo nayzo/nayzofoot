@@ -4,6 +4,7 @@
 
 {% block container%}
     <div class="span12 well"> 
+        <form action="/match/ajout" method="post">
         <label> Type</label>
         <select name="type">
             <option value="semi-final">semi-final</option>
@@ -36,5 +37,19 @@
          {% endfor %}
         </select>
         <br>
+        <select name="equipe_visit">
+         {% for equipe in equipes %}
+            <option value="{{equipe.id}}">{{equipe.nom_equipe}}</option>            
+         {% endfor %}
+        </select>
+        <br>
+         <select name="equipe_recev">
+         {% for equipe in equipes %}
+            <option value="{{equipe.id}}">{{equipe.nom_equipe}}</option>            
+         {% endfor %}
+        </select>
+        <br>
+        <button type="submit" class="btn btn-info">Ajouter</button>
+        </form>
     </div>
 {% endblock container%}
