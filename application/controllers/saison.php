@@ -79,8 +79,12 @@ class Saison extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
-                // saison session
                 $this->saison_model->setsaison_courant($id);
+                $data = $this->saison_model->get_saison_courant()->row();
+                $login_in = $this->session->userdata('login_in');
+                $login_in['saison'] = $data->saison;
+                $login_in['saisonid'] = $id;
+                $this->session->set_userdata('login_in', $login_in);
                 redirect('/saison');
 
         }
