@@ -33,6 +33,8 @@ class Joueur_model extends CI_Model {
     function update_joueur($id){
             $data = array(
             'nom' => $this->input->post('nom'),
+            'taille' => $this->input->post('taille'),
+            'poids' => $this->input->post('poids'),  
             'equipe'    => $this->input->post('equipe'),
             'date_naissance'      => $this->input->post('date_naissance'),            
             'ville' => $this->input->post('ville'),
@@ -40,6 +42,22 @@ class Joueur_model extends CI_Model {
             'post' => $this->input->post('post')
         );
         $this->db->where('id', $id);     
+        $this->db->update('joueur', $data);
+    }
+    
+    function update_joueur_photo($tab){
+            $data = array(
+            'nom' => $this->input->post('nom'),
+            'taille' => $this->input->post('taille'),
+            'poids' => $this->input->post('poids'),
+            'photo' => $tab['photo'],    
+            'equipe'    => $this->input->post('equipe'),
+            'date_naissance'      => $this->input->post('date_naissance'),            
+            'ville' => $this->input->post('ville'),
+            'date_affectation' => $this->input->post('date_affectation'),
+            'post' => $this->input->post('post')
+        );
+        $this->db->where('id', $tab['id']);     
         $this->db->update('joueur', $data);
     }
        
