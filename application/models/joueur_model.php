@@ -45,7 +45,8 @@ class Joueur_model extends CI_Model {
         $this->db->update('joueur', $data);
     }
     
-    function update_joueur_photo($tab){
+    function update_joueurphoto($tab){
+       
             $data = array(
             'nom' => $this->input->post('nom'),
             'taille' => $this->input->post('taille'),
