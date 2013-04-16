@@ -24,15 +24,33 @@ class Equipe extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
-            $this->form_validation->set_rules('nom', 'Nom', 'trim|required');
-            $this->form_validation->set_rules('directeur', 'Directeur', 'trim|required');
+            $this->form_validation->set_rules('nom_equipe', 'Nom', 'trim|required');
             $this->form_validation->set_rules('entreneur', 'Entreneur', 'trim|required');
 
             if ($this->form_validation->run() == FALSE) {
                 $this->twig->render('equipe/ajoutequipe');
-            } else {
-                $this->equipe_model->add_equipe();
-                redirect('/equipe');
+            } 
+            else 
+            {                                    
+                $config['upload_path'] = './uploads/';
+                $config['allowed_types'] = 'gif|jpg|png';
+                $config['max_size']	= '100';
+                $config['max_width']  = '1024';
+                $config['max_height']  = '768';
+                $config['encrypt_name']  = TRUE;
+                $this->load->library('upload', $config);
+                if ( ! $this->upload->do_upload())
+                {              
+                        $data['error'] = $this->upload->display_errors();
+                        $this->twig->render('equipe/ajoutequipe', $data);
+                }
+                else
+                {
+                    $photo = $this->upload->data();
+                    $this->equipe_model->add_equipe($photo['file_name']);
+                    redirect('/equipe');
+                }
+
             }
         }
     }
@@ -40,17 +58,42 @@ class Equipe extends CI_Controller {
     public function modifier($id) {
         if (!$this->session->userdata('login_in'))
             redirect('/');
-        else {
-            $this->form_validation->set_rules('nom', 'Nom', 'trim|required');
-            $this->form_validation->set_rules('directeur', 'Directeur', 'trim|required');
+        else 
+        {
+            $this->form_validation->set_rules('nom_equipe', 'Nom', 'trim|required');
             $this->form_validation->set_rules('entreneur', 'Entreneur', 'trim|required');
 
-            if ($this->form_validation->run() == FALSE) {
+            if ($this->form_validation->run() == FALSE) 
+            {
                 $data['equipe'] = $this->equipe_model->get_equipe($id)->row();
                 $this->twig->render('equipe/modifierequipe', $data);
-            } else {
-                $this->equipe_model->update_equipe($id);
-                redirect('/equipe');
+            } 
+            else 
+            {
+                            $config['upload_path'] = './uploads/';
+                            $config['allowed_types'] = 'gif|jpg|png';
+                            $config['max_size']	= '100';
+                            $config['max_width']  = '1024';
+                            $config['max_height']  = '768';
+                            $config['encrypt_name']  = TRUE;
+                            $this->load->library('upload', $config);
+                            
+                            if ( ! $this->upload->do_upload()){}
+                            $photo = $this->upload->data();
+                            $data['photo'] = $photo['file_name']; 
+                            $data['id'] = $id;
+                            if($photo['file_name'])
+                            { 
+                                    
+                                    $this->equipe_model->update_equipephoto($data);
+                                    redirect('/equipe');
+                            }
+                            else
+                            {
+                                $this->equipe_model->update_equipe($id);
+                                redirect('/equipe');
+                            }
+  
             }
         }
     }

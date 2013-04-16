@@ -6,11 +6,18 @@
     <div class="span12 well"> 
         <h4>Gestion des Equipes </h4>
         <hr>
-        <p><strong>Nom : </strong>{{equipe.nom}}</p>
-        <p><strong>Entreneur : </strong>{{equipe.entreneur}}</p>
-        <p><strong>Date de Création : </strong>{{equipe.date_creation}}</p>
-        <p><strong>Directeur : </strong>{{equipe.directeur}}</p>
-        <p><strong>lieu d'origin : </strong>{{equipe.lieu_origin}}</p>
+        <div class="span4">
+            <p> <img src="{{base_url()}}uploads/{{equipe.logo}}" alt="" class="img-polaroid span3" style="height: 220px;"></p>
+        </div>
+        <div class="span6">
+            <p><strong>Nom : </strong>{{equipe.nom_equipe}}</p>
+            <p><strong>Entreneur : </strong>{{equipe.entreneur}}</p>
+            <p><strong>Date de Création : </strong>{{equipe.date_creation}}</p>
+            <p><strong>lieu d'origin : </strong>{{equipe.lieu_origin}}</p>
+            <p><strong>Site Web : </strong>{{equipe.siteweb}}</p>
+            <p><strong>Stade : </strong>{{equipe.stade}}</p>
+            <p><strong>Ligue Nationale : </strong>{{equipe.ligue}}</p>
+        </div>
     </div>
 {% endblock container%}
 
