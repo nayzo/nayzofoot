@@ -32,8 +32,32 @@ class Joueur extends CI_Controller {
                 $data['equipes'] = $this->equipe_model->get_all();
                 $this->twig->render('joueur/ajoutjoueur', $data);
             } else {
-                $this->joueur_model->add_joueur();
-                redirect('/joueur');
+                
+                
+                
+                $config['upload_path'] = './uploads/';
+                $config['allowed_types'] = 'gif|jpg|png';
+                $config['max_size']	= '100';
+                $config['max_width']  = '1024';
+                $config['max_height']  = '768';
+                $config['encrypt_name']  = TRUE;
+
+                $this->load->library('upload', $config);
+
+                if ( ! $this->upload->do_upload())
+                {
+                        $data['equipes'] = $this->equipe_model->get_all();                
+                        $data['error'] = $this->upload->display_errors();
+                        $this->twig->render('joueur/ajoutjoueur', $data);
+                }
+                else
+                {
+                       // $data = array('upload_data' => $this->upload->data());
+                    $photo = $this->upload->data();
+                    $this->joueur_model->add_joueur($photo->file_name);
+                    redirect('/joueur');
+                } 
+                
             }
         }
     }

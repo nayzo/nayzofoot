@@ -14,9 +14,12 @@ class Joueur_model extends CI_Model {
         return $query->result();
     }
     
-    function add_joueur(){
+    function add_joueur($photo){
             $data = array(
             'nom' => $this->input->post('nom'),
+            'taille' => $this->input->post('taille'),
+            'poids' => $this->input->post('poids'),
+            'photo' => $photo,    
             'equipe'    => $this->input->post('equipe'),
             'date_naissance'      => $this->input->post('date_naissance'),            
             'ville' => $this->input->post('ville'),
