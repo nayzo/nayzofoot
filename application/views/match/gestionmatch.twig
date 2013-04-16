@@ -1,0 +1,48 @@
+{% extends "layout.twig" %}
+{% block head%}
+{{parent()}}
+<link rel='stylesheet' type='text/css' href='{{cal_css_url('new')}}' />
+<link rel='stylesheet' type='text/css' href='{{cal_css_url('theme')}}' />
+<link rel='stylesheet' type='text/css' href='{{cal_css_url('fullcalendar')}}' />
+<link rel='stylesheet' type='text/css' href='{{cal_css_url('fullcalendar.print')}}' media='print' />
+
+<script type='text/javascript' src='{{cal_js_url('jquery-1.5.2.min')}}'></script>
+<script type='text/javascript' src='{{cal_js_url('jquery-ui-1.8.11.custom.min')}}'></script>
+<script type='text/javascript' src='{{cal_js_url('fullcalendar.min')}}'></script>
+
+<script type='text/javascript'>
+        $(document).ready(function()
+        {
+                var date = new Date();
+                var d = date.getDate();
+                var m = date.getMonth();
+                var y = date.getFullYear();
+		
+                $('#calendar').fullCalendar({
+                        theme: true,
+                        header: {
+                                left: 'prev,next today',
+                                center: 'title',
+                                right: 'month,agendaWeek,agendaDay'
+                        },
+                        editable: true,
+                        events: [ {{ddd}} ]
+                });
+		
+        });
+    </script>
+{% endblock head%}
+
+
+{% block title %} {{parent()}} - Calendier des matchs {% endblock title %}
+
+{% block container%}
+    <div class="span12 well">
+        <h4> Calendier des matchs </h4>
+        <hr>
+        <div id='calendar'></div>
+    </div>
+{% endblock container%}
+
+{% block script%}{% endblock script%}
+
