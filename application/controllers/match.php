@@ -12,6 +12,7 @@ class Match extends CI_Controller {
         $this->load->model('saison_model');
         $this->load->model('arbitre_model');
         $this->load->model('joueur_model');
+        $this->load->model('classement_model');
         $this->twig->addFunction('getsessionhelper');
     }
 
@@ -134,6 +135,39 @@ class Match extends CI_Controller {
                 $tabres['recev'] = $counttablrecev;
                 $tabres['visit'] = $counttablvisit;
                 $this->match_model->update_match_resultat_equipe($tabres);
+                //update classement
+                if($data['match']->categorie == 'championnat')
+                {
+                    if($counttablrecev == $counttablvisit)
+                    {
+                        $this->classement_model->add_point_championnat($data['match']->equipe_visit, 1);
+                        $this->classement_model->add_point_championnat($data['match']->equipe_recev, 1);
+                    }
+                    else if($counttablrecev < $counttablvisit)
+                    {
+                        $this->classement_model->add_point_championnat($data['match']->equipe_visit, 3);
+                    }
+                    else
+                    {
+                        $this->classement_model->add_point_championnat($data['match']->equipe_recev, 3); 
+                    }
+                }
+                else if($data['match']->categorie == 'coupe')
+                {
+                    if($counttablrecev == $counttablvisit)
+                    {
+                        $this->classement_model->add_point_coupe($data['match']->equipe_visit, 1);
+                        $this->classement_model->add_point_coupe($data['match']->equipe_recev, 1);
+                    }
+                    else if($counttablrecev < $counttablvisit)
+                    {
+                        $this->classement_model->add_point_coupe($data['match']->equipe_visit, 3);
+                    }
+                    else
+                    {
+                        $this->classement_model->add_point_coupe($data['match']->equipe_recev, 3); 
+                    }
+                }
                 redirect('/');
             }
         }
