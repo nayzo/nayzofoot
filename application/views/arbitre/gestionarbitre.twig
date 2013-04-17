@@ -1,0 +1,32 @@
+{% extends "layout.twig" %}
+
+{% block title %} {{parent()}} - Gestion des Arbitres{% endblock title %}
+
+{% block container%}
+    <div class="span12 well"> 
+        <h4>Gestion des Arbitres </h4>
+        <hr>
+       <div class="btn-toolbar">
+            <a href="/arbitre/ajout" class="btn pull-right"><i class="icon-plus-sign"></i> <strong>Ajouter un arbitre</strong></a>
+       </div>
+        
+        <table class="table table-bordered table-hover">
+                <tr>
+                  <th>Nom</th>
+                  <th>Description</th>
+                  <th>Action</th>
+                </tr>
+                 {% for arbitre in arbitres %}
+                <tr>
+                  <td>{{arbitre.nom}}</td>
+                  <td>{{arbitre.description}}</td>
+                  <td>
+                      <a href="/arbitre/modifier/{{arbitre.id}}" title="Modifier" class="btn"><i class="icon-edit"></i></a> 
+                      <a href="/arbitre/supprimer/{{arbitre.id}}" title="Supprimer" class="btn deleteadmin"><i class="icon-trash"></i></a>
+                  </td>
+                </tr>
+         
+              {% endfor %}
+            </table>
+{% endblock container%}
+

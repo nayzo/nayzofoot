@@ -10,6 +10,7 @@ class Match extends CI_Controller {
         $this->load->model('equipe_model');
         $this->load->model('match_model');
         $this->load->model('saison_model');
+        $this->load->model('arbitre_model');
         $this->twig->addFunction('getsessionhelper');
     }
 
@@ -30,9 +31,11 @@ class Match extends CI_Controller {
 
             if ($this->form_validation->run() == FALSE) {
                 $data['saisons'] = $this->saison_model->get_all();
+                $data['equipes'] = $this->equipe_model->get_all();
+                $data['arbitres'] = $this->arbitre_model->get_all();
                 $this->twig->render('match/ajoutmatch', $data);
             } else {
-                $this->equipe_model->add_equipe();
+                $this->match_model->add_match();
                 redirect('/equipe');
             }
         }
@@ -42,24 +45,18 @@ class Match extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
-            $this->form_validation->set_rules('nom', 'Nom', 'trim|required');
-            $this->form_validation->set_rules('directeur', 'directeur', 'trim|required');
-            $this->form_validation->set_rules('entreneur', 'entreneur', 'trim|required');
+            $this->form_validation->set_rules('arbitre', 'Arbitre', 'trim|required');
 
-            if ($this->form_validation->run() == FALSE) {
-                $this->twig->render('modifierequipe', $this->equipe_model->get_equipe($id)->row());
+           if ($this->form_validation->run() == FALSE) {
+                $data['saisons'] = $this->saison_model->get_all();
+                $data['equipes'] = $this->equipe_model->get_all();
+                $data['arbitres'] = $this->arbitre_model->get_all();
+                $data['match'] = $this->match_model->get_match($id)->row();
+                $this->twig->render('match/ajoutmatch', $data);
             } else {
-                $this->equipe_model->update_equipe();
+                $this->match_model->update_match($id);
                 redirect('/equipe');
             }
-        }
-    }
-
-    public function voir($id) {
-        if (!$this->session->userdata('login_in'))
-            redirect('/');
-        else {
-            $this->twig->render('equipe/voirequipe', $this->equipe_model->get_equipe($id)->row());
         }
     }
 

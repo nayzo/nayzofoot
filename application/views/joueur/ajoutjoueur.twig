@@ -20,7 +20,6 @@
                             {{ form_error('nom') }}         
                         </div>
                     </div>
-                    
                 </div>
                 
                 <div class="control-group">
@@ -103,7 +102,7 @@
                     <div class="controls">
                         <select name="equipe" class="span3" required="required">
                             {% for equipe in equipes %}
-                                <option value="{{equipe.id}}">{{equipe.nom}}</option>
+                                <option value="{{equipe.id}}">{{equipe.nom_equipe}}</option>
                             {% endfor %}
                         </select>
                         <div class="erreur">

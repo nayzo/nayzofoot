@@ -1,40 +1,123 @@
 {% extends "layout.twig" %}
 
-{% block title %} {{parent()}} - Ajouter Match{% endblock title %}
+{% block title %} {{parent()}} - Ajouter un Match{% endblock title %}
 
 {% block container%}
     <div class="span12 well"> 
-        <label> Type</label>
-        <select name="type">
-            <option value="semi-final">semi-final</option>
-            <option value="final">final</option>
-        </select>
-        <br>
-        <label> Saison</label>
-        <select name="saison">
-         {% for saison in saisons%}
-            <option value="{{saison.id}}">{{saison.saison}}</option>            
-         {% endfor %}
-        </select>
-        <br>
-        <label> Catégorie</label>
-        <select name="categorie">
-            <option value="championnat">championnat</option>
-            <option value="coupe">coupe</option>
-        </select>
-        <br>
-        <label> Date et temps match</label>
-        <input type="datetime" name="date_match">
-        <br>
-        <label> Stade</label>
-        <input type="text" name="stade">
-        <br>
-         <label> Arbitre</label>
-        <select name="arbitre">
-         {% for arbitre in arbitres %}
-            <option value="{{arbitre.id}}">{{arbitre.nom}}</option>            
-         {% endfor %}
-        </select>
-        <br>
+        <h4 class="text-center">Ajouter un Match </h4>
+        <hr>
+         <form action='/match/ajout' method="POST" class="form-horizontal offset3">
+            <fieldset>
+                <div class="control-group">
+                    <label class="control-label" for="type">Type <span class="required">*</span></label>
+                    <div class="controls">
+                        <select name="type" required="required">
+                            <option value="semi-final">semi-final</option>
+                            <option value="final">final</option>
+                        </select>
+                        <div class="erreur">
+                            {{ form_error('type') }}         
+                        </div>
+                    </div>
+                </div>
+                    
+                <div class="control-group">
+                    <label class="control-label" for="saison">Saison <span class="required">*</span></label>
+                    <div class="controls">
+                        <select name="saison" required="required">
+                            {% for saison in saisons%}
+                                <option value="{{saison.id}}">{{saison.saison}}</option>            
+                            {% endfor %}
+                        </select>
+                        <div class="erreur">
+                            {{ form_error('saison') }}         
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label" for="categorie">Catégorie <span class="required">*</span></label>
+                    <div class="controls">
+                       <select name="categorie" required="required">
+                            <option value="championnat">championnat</option>
+                            <option value="coupe">coupe</option>
+                        </select>
+                        <div class="erreur">
+                            {{ form_error('categorie') }}         
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label" for="date_match">Date et temps match <span class="required">*</span></label>
+                    <div class="controls">
+                        <input type="date" name="date_match" required="required" class="span2">
+                        <input type="time" name="heur_match" required="required" class="span1">
+                        <div class="erreur">
+                            {{ form_error('date_match') }}         
+                        </div>
+                    </div>
+                </div>
+                    
+               <div class="control-group">
+                    <label class="control-label" for="stade">Stade <span class="required">*</span></label>
+                    <div class="controls">
+                        <input type="text" name="stade" required="required">
+                        <div class="erreur">
+                            {{ form_error('stade') }}         
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label" for="arbitre">Arbitre <span class="required">*</span></label>
+                    <div class="controls">
+                        <select name="arbitre" required="required">
+                        {% for arbitre in arbitres %}
+                            <option value="{{arbitre.id}}">{{arbitre.nom}}</option>            
+                        {% endfor %}
+                            </select>
+                        <div class="erreur">
+                            {{ form_error('arbitre') }}         
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label" for="equipe_visit">Equipe Visiteur <span class="required">*</span></label>
+                    <div class="controls">
+                         <select name="equipe_visit" required="required">
+                            {% for equipe in equipes %}
+                                <option value="{{equipe.id}}">{{equipe.nom_equipe}}</option>            
+                            {% endfor %}
+                        </select>
+                        <div class="erreur">
+                            {{ form_error('equipe_visit') }}         
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label" for="equipe_recev">Equipe Receveu <span class="required">*</span></label>
+                    <div class="controls">
+                         <select name="equipe_recev" required="required">
+                            {% for equipe in equipes %}
+                                <option value="{{equipe.id}}">{{equipe.nom_equipe}}</option>            
+                            {% endfor %}
+                        </select>
+                        <div class="erreur">
+                            {{ form_error('equipe_recev') }}         
+                        </div>
+                    </div>
+                </div>
+ 
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" class="btn btn-info">Ajouter</button>
+                    </div>
+                </div>
+                    
+            </fieldset>
+        </form>   
     </div>
 {% endblock container%}

@@ -1,10 +1,10 @@
 {% extends "layout.twig" %}
 
-{% block title %} {{parent()}} - Modifier Joueur{% endblock title %}
+{% block title %} {{parent()}} - Modifier Arbitre{% endblock title %}
 
 {% block container%}
     <div class="span12 well"> 
-        <h4 class="text-center">Modifier un Joueur </h4>
+        <h4 class="text-center">Modifier un Arbitre </h4>
         <hr>
          <form action='/joueur/modifier/{{joueur.id}}' method="POST" class="form-horizontal offset3" enctype="multipart/form-data">
             <fieldset>
@@ -30,7 +30,7 @@
                 <div class="control-group">
                     <label class="control-label" for="date_naissance">Date de Naissance</label>
                     <div class="controls">
-                        <input type="date" name="date_naissance" class="span3" required="required" value="{{ set_value('date_naissance', joueur.date_naissance) }}"/>
+                        <input type="date" name="date_naissance" class="span3" value="{{ set_value('date_naissance', joueur.date_naissance) }}"/>
                     </div>
                 </div>
                 
@@ -98,7 +98,7 @@
                 <div class="control-group">
                     <label class="control-label" for="date_affectation">Date D'affectation</label>
                     <div class="controls">
-                        <input type="date" name="date_affectation" class="span3" required="required" value="{{ set_value('date_affectation', joueur.date_affectation) }}"/>
+                        <input type="date" name="date_affectation" class="span3" value="{{ set_value('date_affectation', joueur.date_affectation) }}"/>
                     </div>
                 </div>
                 
@@ -107,7 +107,7 @@
                     <div class="controls">
                         <select name="equipe" class="span3" required="required">
                             {% for equipe in equipes %}
-                                <option value="{{equipe.id}}"  {%if equipe.id==joueur.equipe%} selected="selected" {%endif%}>{{equipe.nom}}</option>
+                                <option value="{{equipe.id}}"  {%if equipe.id==joueur.equipe%} selected="selected" {%endif%}>{{equipe.nom_equipe}}</option>
                             {% endfor %}
                         </select>
                     </div>
