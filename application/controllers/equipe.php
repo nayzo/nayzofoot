@@ -9,6 +9,7 @@ class Equipe extends CI_Controller {
         parent::__construct();
         $this->load->model('equipe_model');
         $this->load->model('joueur_model');
+        $this->load->model('classement_model');
         $this->twig->addFunction('getsessionhelper');
     }
 
@@ -121,6 +122,7 @@ class Equipe extends CI_Controller {
             if(!$id) redirect('/');
             $this->suppphoto($id);
             $this->equipe_model->delete_equipe($id);
+            $this->classement_model->delete_classement_equipe($id);
                 redirect('/equipe');
         }
     }

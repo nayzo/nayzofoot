@@ -74,6 +74,7 @@ class Saison extends CI_Controller {
             else
             {
                 $this->saison_model->delete_saison($id);
+                $this->classement_model->delete_classement_saison($id);
                 redirect('/saison');
             }
             

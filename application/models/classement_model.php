@@ -42,4 +42,14 @@ class Classement_model extends CI_Model {
         else
             return false;
     }
+    
+     function delete_classement_equipe($id){
+        $this->db->where('equipe', $id);     
+        $this->db->delete('classement');
+    }
+    
+    function delete_classement_saison($id){
+        $this->db->where('saison', $id);     
+        $this->db->delete('classement');
+    }
 }
