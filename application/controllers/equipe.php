@@ -104,6 +104,7 @@ class Equipe extends CI_Controller {
             redirect('/');
         else {
             $data['equipe'] = $this->equipe_model->get_equipe($id)->row();
+            $data['joueurs'] = $this->joueur_model->get_joueur_by_equipe();
             $this->twig->render('equipe/voirequipe', $data);
         }
     }
