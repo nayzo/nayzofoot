@@ -12,20 +12,18 @@
         
         <table class="table table-bordered table-hover">
                 <tr>
+                  <th>Logo</th>
                   <th>Nom</th>
                   <th>Entreneur</th>
-                  <th>Date de Création</th>
-                  <th>Directeur</th>
-                  <th>Lieu d'origin</th>
+                  <th>Ligue Nationale</th>
                   <th>Action</th>
                 </tr>
                  {% for equipe in equipes %}
                 <tr>
-                  <td>{{equipe.nom}}</td>
+                  <td> <img src="{{base_url()}}uploads/{{equipe.logo}}" alt="" class="img-polaroid span1" style="height: 60px;"></td>
+                  <td>{{equipe.nom_equipe}}</td>
                   <td>{{equipe.entreneur}}</td>
-                  <td>{{equipe.date_creation}}</td>
-                  <td>{{equipe.directeur}}</td>
-                  <td>{{equipe.lieu_origin}}</td>
+                  <td>{{equipe.ligue}}</td>
                   <td>
                       <a href="/equipe/voir/{{equipe.id}}" title="voir" class="btn"><i class="icon-eye-open"></i></a>
                       <a href="/equipe/modifier/{{equipe.id}}" title="Modifier" class="btn"><i class="icon-edit"></i></a> 

@@ -95,7 +95,6 @@ class Joueur extends CI_Controller {
                                 $this->joueur_model->update_joueur($id);
                                 redirect('/joueur');
                             }
-
             }
         }
     }

@@ -85,6 +85,7 @@ class Equipe extends CI_Controller {
                             if($photo['file_name'])
                             { 
                                     $this->suppphoto($id);
+
                                     $this->equipe_model->update_equipephoto($data);
                                     redirect('/equipe');
                             }
@@ -92,8 +93,7 @@ class Equipe extends CI_Controller {
                             {
                                 $this->equipe_model->update_equipe($id);
                                 redirect('/equipe');
-                            }
-  
+                            }  
             }
         }
     }

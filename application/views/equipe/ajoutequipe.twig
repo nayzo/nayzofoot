@@ -1,41 +1,37 @@
 {% extends "layout.twig" %}
 
-{% block title %} {{parent()}} - Home{% endblock title %}
+{% block title %} {{parent()}} - Ajouter Equipe {% endblock title %}
 
 {% block container%}
     <div class="span12 well"> 
         <h4 class="text-center">Ajouter une Equipe </h4>
         <hr>
-         <form action='/equipe/ajout' method="POST" class="form-horizontal offset3" >
+         <form action='/equipe/ajout' method="POST" class="form-horizontal offset3" enctype="multipart/form-data">
             <fieldset>
                 <div class="control-group">
-                <div class="error span5">{{ validation_errors() }}</div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="nom">Nom</label>
+                    <label class="control-label" for="nom_equipe">Nom <span class="required">*</span></label>
                     <div class="controls">
-                        <input type="text" name="nom" class="span3" required="required"/>
+                        <input type="text" name="nom_equipe" class="span3" required="required"/>
+                        <div class="erreur">
+                            {{ form_error('nom_equipe') }}         
+                        </div>
                     </div>
                 </div>
 
                 <div class="control-group">
-                    <label class="control-label" for="entreneur">Entreneur</label>
+                    <label class="control-label" for="entreneur">Entreneur <span class="required">*</span></label>
                     <div class="controls">
                         <input type="text" name="entreneur" class="span3" required="required"/>
+                        <div class="erreur">
+                            {{ form_error('entreneur') }}         
+                        </div>
                     </div>
                 </div>
                 
                 <div class="control-group">
                     <label class="control-label" for="date_creation">Date de Création</label>
                     <div class="controls">
-                        <input type="date" name="date_creation" class="span3" required="required"/>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label" for="directeur">Directeur</label>
-                    <div class="controls">
-                        <input type="text" name="directeur" class="span3" required="required"/>
+                        <input type="date" name="date_creation" class="span3"/>
                     </div>
                 </div>
                 
@@ -70,13 +66,47 @@
                     </div>
                 </div>
                 
-                <div class="control-group">
-                    <label class="control-label" for="description">Description</label>
+               <div class="control-group">
+                    <label class="control-label" for="siteweb">Site Web</label>
                     <div class="controls">
-                        <textarea name="description" class="span3" rows="3"></textarea>
+                        <input type="text" name="siteweb" class="span3"/>
                     </div>
                 </div>
-
+                    
+               <div class="control-group">
+                    <label class="control-label" for="stade">Stade</label>
+                    <div class="controls">
+                        <input type="text" name="stade" class="span3"/>
+                    </div>
+                </div>
+                    
+                 <div class="control-group">
+                    <label class="control-label" for="Ligue">Ligue Nationale <span class="required">*</span></label>
+                    <div class="controls">
+                        <select name="ligue" class="span3">
+                            <option value="Football Pro ligue 1">Football Pro ligue 1</option>
+                            <option value="Football Pro ligue 2">Football Pro ligue 2</option>
+                            <option value="Football Amateur">Football Amateur</option>
+                            <option value="Football Féminin">Football Féminin</option>
+                            <option value="Futsal">Futsal</option>
+                        </select>
+                        <div class="erreur">
+                            {{ form_error('ligue') }}         
+                        </div>
+                    </div>
+                </div>
+                    
+               <div class="control-group">
+                    <label class="control-label" for="userfile">Logo</label>
+                    <div class="controls">
+                        <input type="file" name="userfile" class="span3" required="required"/>
+                        
+                    </div>
+                    <div class="erreur">
+                          {{error}}
+                        </div>
+                </div>
+                
                 <div class="control-group">
                     <div class="controls">
                         <button type="submit" class="btn btn-info">Ajouter</button>
