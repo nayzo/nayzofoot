@@ -1,0 +1,105 @@
+{% extends "layout.twig" %}
+
+{% block title %} {{parent()}} - Ajouter Resultat Match{% endblock title %}
+
+{% block container%}
+    <div class="span12 well"> 
+        <h4 class="text-center">Ajouter Resultat Match</h4>
+        <hr>
+         <form action='/match/resultat/{{match.id}}' method="POST" class="form-horizontal offset3" >
+            <fieldset>
+                <div class="control-group">
+                <div class="error span5">{{ validation_errors() }}</div>
+                </div>
+
+                    
+                    
+                equipe receveur: {{equiperecev.nom_equipe}}
+                <br> nb but : <input type="integer" name="sendvalbutrecev" id="nbbutrecev" value="0"> <input id="clickrecev" type="button" value="ok">
+                <br>
+                <div id="recevappend">                    
+                </div>
+                
+                 <hr>
+                 
+                 equipe visiteur: {{equipevisit.nom_equipe}}
+                 <br> nb but : <input type="integer" name="sendvalbutvisit" id="nbbutvisit" value="0"> <input id="clickvisit" type="button" value="ok">
+                <br>
+                <div id="visitappend">                    
+                </div>
+                    
+                    
+                    
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" class="btn btn-info">Ajouter</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>   
+    </div>
+
+{% endblock container%}
+
+{%block script%}
+<script language="javascript">
+$(document).ready(function(){
+    $('#clickrecev').on('click', function()
+    {
+            var res = $('#nbbutrecev').val();
+            if(res < 0)
+            {
+                alert('le nombre de but doit être supèrieur à zero');
+                $('#nbbutrecev').val(0);
+            }
+            else if( res > 0)
+            {
+                    $('.blockreciv').remove();  
+                    var valeur = '';
+                    for(i=1; i<=res; i++)
+                    {
+                            valeur += '<div class="blockreciv">' ;
+                            valeur += '<select name="recevjoueur[]">';
+                             {% for joueur in jreqrecevs %}
+                                  valeur += '<option value="{{joueur.id}}"> {{joueur.nom}} </option>';           
+                             {% endfor %}
+                             valeur += '</select> '; 
+                             valeur += ' <input type="time" name="recevtime[]">';                             
+                            valeur +=  '</div>';
+                            $('#recevappend').append(valeur);
+                            valeur = '';
+                    }
+            }                  
+    });
+
+    $('#clickvisit').on('click', function()
+    {
+            var res = $('#nbbutvisit').val();
+            if(res < 0)
+            {
+                alert('le nombre de but doit être supèrieur à zero');
+                $('#nbbutvisit').val(0);
+            }
+            else if( res > 0)
+            {
+                    $('.blockvisit').remove();  
+                    var valeur = '';
+                    for(i=1; i<=res; i++)
+                    {
+                            valeur += '<div class="blockvisit">' ;
+                            valeur += '<select name="visitjoueur[]">';
+                             {% for joueur in jreqrecevs %}
+                                 valeur += '<option value="{{joueur.id}}"> {{joueur.nom}} </option>';           
+                             {% endfor %}
+                             valeur += '</select> '; 
+                             valeur += ' <input type="time" name="visittime[]">';                             
+                            valeur +=  '</div>';
+                            $('#visitappend').append(valeur);
+                            valeur = '';
+                    }
+            }                  
+    });
+    
+});
+</script>
+{%endblock script%}

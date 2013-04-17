@@ -11,6 +11,7 @@ class Match extends CI_Controller {
         $this->load->model('match_model');
         $this->load->model('saison_model');
         $this->load->model('arbitre_model');
+        $this->load->model('joueur_model');
         $this->twig->addFunction('getsessionhelper');
     }
 
@@ -61,13 +62,74 @@ class Match extends CI_Controller {
     }
 
 
-    function resultat()
+    function voir($idmatch)
     {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else
         {
-            
+            $data['match'] = $this->match_module->get_match($idmatch)->row();
+            $this->twig->render('match/voirmatch', $data);
+        }
+    }
+    
+    function resultat($idmatch)
+    {
+        if (!$this->session->userdata('login_in'))
+            redirect('/');
+        else
+        {
+            $this->form_validation->set_rules('sendvalbutrecev', 'Receveur', 'trim|required');
+            $this->form_validation->set_rules('sendvalbutvisit', 'Visiteur', 'trim|required');
+            $data['match'] = $this->match_model->get_match($idmatch)->row();  
+            if ($this->form_validation->run() == FALSE) 
+            {                              
+                $data['equiperecev'] = $this->equipe_model->get_equipe($data['match']->equipe_recev)->row();
+                $data['equipevisit'] = $this->equipe_model->get_equipe($data['match']->equipe_visit)->row();
+                $data['jreqrecevs'] = $this->joueur_model->get_joueur_by_equipe($data['match']->equipe_recev);
+                $data['jreqvisits'] = $this->joueur_model->get_joueur_by_equipe($data['match']->equipe_visit);
+                $this->twig->render('resultat/ajoutresultat', $data);
+            }
+            else 
+            {
+                // partie equipe receveur
+                $recevjoueurs = $this->input->post('recevjoueur');
+                if($recevjoueurs)
+                    $counttablrecev = count($recevjoueurs);
+                else
+                    $counttablrecev = 0;
+                $recevtimes = $this->input->post('recevtime');
+                 
+                for($i=0; $i<$counttablrecev; $i++)
+                {
+                    $datarecev['match'] = $idmatch;
+                    $datarecev['equipe'] = $data['match']->equipe_recev;
+                    $datarecev['joueur'] = $recevjoueurs[$i];
+                    $datarecev['date_but'] = $recevtimes[$i];
+                    $this->match_model->add_resultat_match($datarecev);
+                }
+                // partie equipe visiteur
+                $visitjoueurs = $this->input->post('visitjoueur');
+                if($visitjoueurs)
+                    $counttablvisit = count($visitjoueurs);                
+                else
+                    $counttablvisit = 0;     
+                $visittimes = $this->input->post('visittime');
+                
+                for($i=0; $i<$counttablvisit; $i++)
+                {
+                    $datavisit['match'] = $idmatch;
+                    $datavisit['equipe'] = $data['match']->equipe_visit;
+                    $datavisit['joueur'] = $visitjoueurs[$i];
+                    $datavisit['date_but'] = $visittimes[$i];
+                    $this->match_model->add_resultat_match($datavisit);
+                }
+                $tabres['id'] = $idmatch;
+                $tabres['recev'] = $counttablrecev;
+                $tabres['visit'] = $counttablvisit;
+                $this->match_model->update_match_resultat_equipe($tabres);
+                redirect('/');
+            }
         }
     }
 

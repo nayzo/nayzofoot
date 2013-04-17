@@ -78,9 +78,11 @@
                 {% block container%}{% endblock container%}
             </div>
         </section>
+        
         {#---SCRIPT---#} 
        <script src="{{base_url()}}assets/js/jquery-1.9.1.min.js"></script>
        <script src="{{base_url()}}assets/js/bootstrap.js"></script>
        <script src="{{base_url()}}assets/js/foot.js"></script>
+       {%block script%}{%endblock script%}
     </body>
 </html>
