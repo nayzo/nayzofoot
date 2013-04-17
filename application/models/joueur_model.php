@@ -70,6 +70,15 @@ class Joueur_model extends CI_Model {
         return $this->db->get();   
     }
     
+    function get_joueur_by_equipe($idequipe){
+        
+        $this->db->select('*');
+        $this->db->from('joueur');
+        $this->db->where('equipe', $idequipe);
+        $query = $this->db->get();
+        return $query->result();
+    }
+    
     function delete_joueur($id){
         $this->db->where('id', $id);     
         $this->db->delete('joueur');

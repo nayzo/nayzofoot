@@ -11,6 +11,7 @@ class Match extends CI_Controller {
         $this->load->model('match_model');
         $this->load->model('saison_model');
         $this->load->model('arbitre_model');
+        $this->load->model('joueur_model');
         $this->twig->addFunction('getsessionhelper');
     }
 
@@ -61,13 +62,40 @@ class Match extends CI_Controller {
     }
 
 
-    function resultat()
+    function voir($idmatch)
     {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else
         {
-            
+            $data['match'] = $this->match_module->get_match($idmatch)->row();
+            $this->twig->render('match/voirmatch', $data);
+        }
+    }
+    
+    function resultat($idmatch)
+    {
+        if (!$this->session->userdata('login_in'))
+            redirect('/');
+        else
+        {
+            $this->form_validation->set_rules('arbitre', 'Arbitre', 'trim|required');
+
+            if ($this->form_validation->run() == FALSE) 
+            {
+                $data['match'] = $this->match_model->get_match($idmatch)->row();
+                
+                $data['equiperecev'] = $this->equipe_model->get_equipe($data['match']->equipe_recev)->row();
+            //    print_r($data['equiperecev']);                return;
+                $data['equipevisit'] = $this->equipe_model->get_equipe($data['match']->equipe_visit)->row();
+                $data['jreqrecevs'] = $this->joueur_model->get_joueur_by_equipe($data['match']->equipe_recev);
+                $data['jreqvisits'] = $this->joueur_model->get_joueur_by_equipe($data['match']->equipe_visit);
+                $this->twig->render('resultat/ajoutresultat', $data);
+            }
+            else 
+            {
+                //recuperation de resultat et enregistrement dans bd + redirection au index
+            }
         }
     }
 
