@@ -44,10 +44,12 @@ class Saison extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
+            if(!$id) redirect('/');
             $this->form_validation->set_rules('saison', 'Saison', 'trim|required');
 
             if ($this->form_validation->run() == FALSE) {
                 $data['saison'] = $this->saison_model->get_saison($id)->row();
+                if(!$data['saison']) redirect('/');
                 $this->twig->render('saison/modifiersaison', $data);
             } else {
                 $this->saison_model->update_saison($id);
@@ -62,6 +64,7 @@ class Saison extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
+            if(!$id) redirect('/');
             if(getsessionhelper()['saisonid'] == $id)
             {
                 $data['saisonerreur'] ='Impossible de supprimer le saison courant';
@@ -81,6 +84,7 @@ class Saison extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
+                if(!$id) redirect('/');
                 $this->saison_model->setsaison_courant($id);
                 $data = $this->saison_model->get_saison_courant()->row();
                 $login_in = $this->session->userdata('login_in');

@@ -60,4 +60,16 @@ class Match_model extends CI_Model {
         $this->db->where('id', $table['id']);        
         $this->db->update('match', $data); 
     }
+    
+    function supprimer_resultat_match($id)
+    {
+        $this->db->where('match', $id);     
+        $this->db->delete('resultatmatch');
+    }
+    
+    function supprimer_match($id)
+    {
+        $this->db->where('id', $id);     
+        $this->db->delete('match');
+    }
 }

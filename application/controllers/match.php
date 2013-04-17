@@ -46,6 +46,7 @@ class Match extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
+            if(!$id) redirect('/');
             $this->form_validation->set_rules('arbitre', 'Arbitre', 'trim|required');
 
            if ($this->form_validation->run() == FALSE) {
@@ -53,6 +54,7 @@ class Match extends CI_Controller {
                 $data['equipes'] = $this->equipe_model->get_all();
                 $data['arbitres'] = $this->arbitre_model->get_all();
                 $data['match'] = $this->match_model->get_match($id)->row();
+                if(!$data['match']) redirect('/');
                 $this->twig->render('match/ajoutmatch', $data);
             } else {
                 $this->match_model->update_match($id);
@@ -68,7 +70,9 @@ class Match extends CI_Controller {
             redirect('/');
         else
         {
+            if(!$idmatch) redirect('/');
             $data['match'] = $this->match_module->get_match($idmatch)->row();
+            if(!$data['match']) redirect('/');
             $this->twig->render('match/voirmatch', $data);
         }
     }
@@ -79,9 +83,11 @@ class Match extends CI_Controller {
             redirect('/');
         else
         {
+            if(!$idmatch) redirect('/');
             $this->form_validation->set_rules('sendvalbutrecev', 'Receveur', 'trim|required');
             $this->form_validation->set_rules('sendvalbutvisit', 'Visiteur', 'trim|required');
             $data['match'] = $this->match_model->get_match($idmatch)->row();  
+            if(!$data['match']) redirect('/');
             if ($this->form_validation->run() == FALSE) 
             {                              
                 $data['equiperecev'] = $this->equipe_model->get_equipe($data['match']->equipe_recev)->row();
@@ -133,4 +139,16 @@ class Match extends CI_Controller {
         }
     }
 
+    function supprimer($idmatch)
+    {
+        if (!$this->session->userdata('login_in'))
+            redirect('/');
+        else
+        {
+            if(!$idmatch) redirect('/');
+            $this->match_model->supprimer_resultat_match($idmatch);
+            $this->match_model->supprimer_match($idmatch);
+            redirect('/');
+        }
+    }
 }

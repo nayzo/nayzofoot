@@ -39,10 +39,12 @@ class Arbitre extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
+            if(!$id) redirect('/');
             $this->form_validation->set_rules('nom', 'Nom', 'trim|required');
 
             if ($this->form_validation->run() == FALSE) {
                 $data['arbitre'] = $this->arbitre_model->get_arbitre($id)->row();
+                if(!$data['arbitre']) redirect('/');
                 $this->twig->render('arbitre/modifierarbitre', $data);
             } else {
                 $this->arbitre_model->update_arbitre($id);
@@ -55,6 +57,7 @@ class Arbitre extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
+            if(!$id) redirect('/');
             $this->arbitre_model->delete_arbitre($id);
                 redirect('/arbitre');
         }

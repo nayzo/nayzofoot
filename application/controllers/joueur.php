@@ -63,12 +63,14 @@ class Joueur extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
+            if(!$id) redirect('/');
             $this->form_validation->set_rules('nom', 'Nom', 'trim|required');
             $this->form_validation->set_rules('equipe', 'Equipe', 'trim|required');
 
             if ($this->form_validation->run() == FALSE) {
                 $data['equipes'] = $this->equipe_model->get_all();
                 $data['joueur'] = $this->joueur_model->get_joueur($id)->row();
+                if(!$data['joueur']) redirect('/');
                 $this->twig->render('joueur/modifierjoueur', $data);
             } else {
                 
@@ -103,7 +105,10 @@ class Joueur extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
+            if(!$id) redirect('/');
             $data['joueur'] = $this->joueur_model->get_joueur($id)->row();
+            if(!$data['joueur']) redirect('/');
+            $data['equipe'] = $this->equipe_model->get_equipe($id)->row();
             $this->twig->render('joueur/voirjoueur', $data);
         }
     }
@@ -112,6 +117,7 @@ class Joueur extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
+            if(!$id) redirect('/');
             $this->suppphoto($id);
             $this->joueur_model->delete_joueur($id);
                 redirect('/joueur');
