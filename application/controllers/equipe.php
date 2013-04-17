@@ -8,6 +8,8 @@ class Equipe extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('equipe_model');
+        $this->load->model('joueur_model');
+        $this->load->model('classement_model');
         $this->twig->addFunction('getsessionhelper');
     }
 
@@ -60,12 +62,14 @@ class Equipe extends CI_Controller {
             redirect('/');
         else 
         {
+            if(!$id) redirect('/');
             $this->form_validation->set_rules('nom_equipe', 'Nom', 'trim|required');
             $this->form_validation->set_rules('entreneur', 'Entreneur', 'trim|required');
 
             if ($this->form_validation->run() == FALSE) 
             {
                 $data['equipe'] = $this->equipe_model->get_equipe($id)->row();
+                if(!$data['equipe']) redirect('/');
                 $this->twig->render('equipe/modifierequipe', $data);
             } 
             else 
@@ -103,7 +107,10 @@ class Equipe extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
+            if(!$id) redirect('/');
             $data['equipe'] = $this->equipe_model->get_equipe($id)->row();
+            if(!$data['equipe']) redirect('/');
+            $data['joueurs'] = $this->joueur_model->get_joueur_by_equipe($id);
             $this->twig->render('equipe/voirequipe', $data);
         }
     }
@@ -112,14 +119,17 @@ class Equipe extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
+            if(!$id) redirect('/');
             $this->suppphoto($id);
             $this->equipe_model->delete_equipe($id);
+            $this->classement_model->delete_classement_equipe($id);
                 redirect('/equipe');
         }
     }
 
      public function suppphoto($id)
     {
+         if(!$id) redirect('/');
         $photo = $this->equipe_model->get_equipe($id)->row()->photo;
         $path = __DIR__.'/../../uploads/'.$photo;
         unlink ($path);
