@@ -45,4 +45,19 @@ class Match_model extends CI_Model {
                 ->limit(1);
         return $this->db->get();
     }
+    
+    function add_resultat_match($data)
+    {
+        $this->db->insert('resultatmatch', $data);
+    }
+    
+    function update_match_resultat_equipe($table)
+    {
+        $data = array(
+            'resultat_equipe_recev' => $table['recev'],
+            'resultat_equipe_visit' => $table['visit']                   
+        );
+        $this->db->where('id', $table['id']);        
+        $this->db->update('match', $data); 
+    }
 }
