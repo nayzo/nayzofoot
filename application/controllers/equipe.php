@@ -120,7 +120,7 @@ class Equipe extends CI_Controller {
 
     public function suppphoto($id)
     {
-        $photo = $this->joueur_model->get_joueur($id)->row()->photo;
+        $photo = $this->equipe_model->get_equipe($id)->row()->photo;
         $path = __DIR__.'/../../uploads/'.$photo;
         unlink ($path);
     }
