@@ -17,6 +17,7 @@ class Saison extends CI_Controller {
             redirect('/');
         else {
             $data['saisons'] = $this->saison_model->get_all();
+            $data['saisonerreur'] ='';
             $this->twig->render('saison/gestionsaison', $data);
         }
     }
@@ -61,8 +62,18 @@ class Saison extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
-            $this->saison_model->delete_saison($id);
+            if(getsessionhelper()['saisonid'] == $id)
+            {
+                $data['saisonerreur'] ='Impossible de supprimer le saison courant';
+                $data['saisons'] = $this->saison_model->get_all();
+                $this->twig->render('saison/gestionsaison', $data);
+            }
+            else
+            {
+                $this->saison_model->delete_saison($id);
                 redirect('/saison');
+            }
+            
         }
     }
     
