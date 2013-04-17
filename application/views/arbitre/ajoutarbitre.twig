@@ -1,0 +1,37 @@
+{% extends "layout.twig" %}
+
+{% block title %} {{parent()}} - Ajouter un arbitre{% endblock title %}
+
+{% block container%}
+    <div class="span12 well"> 
+        <h4 class="text-center">Ajouter un arbitre </h4>
+        <hr>
+         <form action='/arbitre/ajout' method="POST" class="form-horizontal offset3">
+            <fieldset>
+                <div class="control-group">
+                    <label class="control-label" for="nom">Nom <span class="required">*</span></label>
+                    <div class="controls">
+                        <input type="text" name="nom" class="span3" required="required"/>
+                        <div class="erreur">
+                            {{ form_error('nom') }}         
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label" for="description">Description</label>
+                    <div class="controls">
+                        <textarea name="description" class="span3"></textarea>
+                    </div>
+                </div>
+                    
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" class="btn btn-info">Ajouter</button>
+                    </div>
+                </div>
+                    
+            </fieldset>
+        </form>   
+    </div>
+{% endblock container%}

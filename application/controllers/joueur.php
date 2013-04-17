@@ -86,7 +86,7 @@ class Joueur extends CI_Controller {
                             $data['id'] = $id;
                             if($photo['file_name'])
                             { 
-                                    $this->suppphoto($id);
+                                    $this->suppphoto($id);      
                                     $this->joueur_model->update_joueurphoto($data);
                                     redirect('/joueur');
                             }

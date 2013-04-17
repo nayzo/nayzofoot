@@ -43,7 +43,7 @@ class Arbitre extends CI_Controller {
 
             if ($this->form_validation->run() == FALSE) {
                 $data['arbitre'] = $this->arbitre_model->get_arbitre($id)->row();
-                $this->twig->render('modifierarbitre', $data);
+                $this->twig->render('/arbitre/modifierarbitre', $data);
             } else {
                 $this->arbitre_model->update_arbitre($id);
                 redirect('/arbitre');

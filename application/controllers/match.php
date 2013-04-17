@@ -60,6 +60,7 @@ class Match extends CI_Controller {
         }
     }
 
+
     function resultat()
     {
         if (!$this->session->userdata('login_in'))
@@ -69,4 +70,5 @@ class Match extends CI_Controller {
             
         }
     }
+
 }

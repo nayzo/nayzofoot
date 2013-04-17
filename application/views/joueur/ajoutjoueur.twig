@@ -1,6 +1,6 @@
 {% extends "layout.twig" %}
 
-{% block title %} {{parent()}} - Ajouter un Joueur{% endblock title %}
+{% block title %} {{parent()}} - Ajouter Joueur{% endblock title %}
 
 {% block container%}
     <div class="span12 well"> 
@@ -8,10 +8,6 @@
         <hr>
          <form action='/joueur/ajout' method="POST" class="form-horizontal offset3" enctype="multipart/form-data">
             <fieldset>
-                {#<div class="control-group">
-                    <div class="error span5">{{ validation_errors() }}</div>
-                </div>#}
-                  
                 <div class="control-group">
                     <label class="control-label" for="nom">Nom <span class="required">*</span></label>
                     <div class="controls">
@@ -103,7 +99,7 @@
                     <div class="controls">
                         <select name="equipe" class="span3" required="required">
                             {% for equipe in equipes %}
-                                <option value="{{equipe.id}}">{{equipe.nom}}</option>
+                                <option value="{{equipe.id}}">{{equipe.nom_equipe}}</option>
                             {% endfor %}
                         </select>
                         <div class="erreur">
