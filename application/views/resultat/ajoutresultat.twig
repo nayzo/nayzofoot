@@ -6,35 +6,36 @@
     <div class="span12 well"> 
         <h4 class="text-center">Ajouter Resultat Match</h4>
         <hr>
-         <form action='/match/resultat/{{match.id}}' method="POST" class="form-horizontal offset3" >
+         <form action='/match/resultat/{{match.id}}' method="POST" class="form-horizontal" >
             <fieldset>
                 <div class="control-group">
-                <div class="error span5">{{ validation_errors() }}</div>
-                </div>
-
-                    
-                    
-                equipe receveur: {{equiperecev.nom_equipe}}
-                <br> nb but : <input type="integer" name="sendvalbutrecev" id="nbbutrecev" value="0"> <input id="clickrecev" type="button" value="ok">
-                <br>
-                <div id="recevappend">                    
+                    <div class="error span5">{{ validation_errors() }}</div>
                 </div>
                 
-                 <hr>
-                 
-                 equipe visiteur: {{equipevisit.nom_equipe}}
-                 <br> nb but : <input type="integer" name="sendvalbutvisit" id="nbbutvisit" value="0"> <input id="clickvisit" type="button" value="ok">
-                <br>
-                <div id="visitappend">                    
-                </div>
-                    
-                    
-                    
-                <div class="control-group">
-                    <div class="controls">
-                        <button type="submit" class="btn btn-info">Ajouter</button>
-                    </div>
-                </div>
+               <div class="span5 offset1">
+                   
+                   <p><strong>Equipe Receveur :</strong> {{equiperecev.nom_equipe}}</p>
+                   <hr>
+                   
+                   <label>Nombre de But</label>
+                   <input type="number" name="sendvalbutrecev" class="span2" id="nbbutrecev" value="0"/>
+                   <input id="clickrecev" type="button" class="btn" value="Ajouter">
+                   <div id="recevappend"></div>
+               </div>
+               
+              <div class="span5">
+                   <p><strong>Equipe Visiteur :</strong> {{equipevisit.nom_equipe}}</p>
+                   <hr>
+                   <label>Nombre de But</label>
+                   <input type="number" name="sendvalbutvisit" class="span2" id="nbbutvisit" value="0"/>
+                   <input id="clickvisit" type="button" class="btn" value="Ajouter">
+                   <div id="visitappend"></div>
+               </div>
+                    <div class="span11"><hr></div>
+                    <div class="span3 offset4" style="margin-top: 30px">
+                      
+                        <input class="btn btn-block btn-info" type="submit" value="Ajouter Résultat">
+              </div>
             </fieldset>
         </form>   
     </div>
@@ -58,13 +59,15 @@ $(document).ready(function(){
                     var valeur = '';
                     for(i=1; i<=res; i++)
                     {
+                       
                             valeur += '<div class="blockreciv">' ;
-                            valeur += '<select name="recevjoueur[]">';
+                            valeur += '<label>Nom du joueur et temp de marquage<label>' ;
+                            valeur += '<select name="recevjoueur[]" class="span2">';
                              {% for joueur in jreqrecevs %}
                                   valeur += '<option value="{{joueur.id}}"> {{joueur.nom}} </option>';           
                              {% endfor %}
                              valeur += '</select> '; 
-                             valeur += ' <input type="time" name="recevtime[]">';                             
+                             valeur += ' <input type="time" name="recevtime[]" class="span1">';                             
                             valeur +=  '</div>';
                             $('#recevappend').append(valeur);
                             valeur = '';
@@ -87,12 +90,13 @@ $(document).ready(function(){
                     for(i=1; i<=res; i++)
                     {
                             valeur += '<div class="blockvisit">' ;
-                            valeur += '<select name="visitjoueur[]">';
+                            valeur += '<label>Nom du joueur et temp de marquage<label>' ;
+                            valeur += '<select name="visitjoueur[]" class="span2">';
                              {% for joueur in jreqrecevs %}
                                  valeur += '<option value="{{joueur.id}}"> {{joueur.nom}} </option>';           
                              {% endfor %}
                              valeur += '</select> '; 
-                             valeur += ' <input type="time" name="visittime[]">';                             
+                             valeur += ' <input type="time" name="visittime[]" class="span1">';                             
                             valeur +=  '</div>';
                             $('#visitappend').append(valeur);
                             valeur = '';
