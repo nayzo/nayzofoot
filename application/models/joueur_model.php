@@ -83,4 +83,17 @@ class Joueur_model extends CI_Model {
         $this->db->where('id', $id);     
         $this->db->delete('joueur');
     }
+    
+    function delete_joueur_by_equipe($id){
+        $this->db->where('equipe', $id);     
+        $this->db->delete('joueur');
+    }
+    
+    function get_all_by_equipe($id){
+        $this->db->select('photo');
+        $this->db->from('joueur');
+        $this->db->where('equipe', $id);
+        $query = $this->db->get();
+        return $query->result();
+    }
 }

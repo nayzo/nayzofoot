@@ -122,6 +122,12 @@ class Equipe extends CI_Controller {
             if(!$id) redirect('/');
             $this->suppphoto($id);
             $this->equipe_model->delete_equipe($id);
+            $jouers = $this->joueur_model->get_all_by_equipe($id);
+            foreach($jouers as $req)
+            {
+                $this->suppphoto_joueur($req->photo);
+            }
+            $this->joueur_model->delete_joueur_by_equipe($id);
             $this->classement_model->delete_classement_equipe($id);
                 redirect('/equipe');
         }
@@ -130,7 +136,13 @@ class Equipe extends CI_Controller {
      public function suppphoto($id)
     {
          if(!$id) redirect('/');
-        $photo = $this->equipe_model->get_equipe($id)->row()->photo;
+        $logo = $this->equipe_model->get_equipe($id)->row()->logo;
+        $path = __DIR__.'/../../uploads/'.$logo;
+        unlink ($path);
+    }
+    
+    public function suppphoto_joueur($photo)
+    {
         $path = __DIR__.'/../../uploads/'.$photo;
         unlink ($path);
     }

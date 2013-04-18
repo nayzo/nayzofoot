@@ -56,7 +56,7 @@ class Match extends CI_Controller {
                 $data['arbitres'] = $this->arbitre_model->get_all();
                 $data['match'] = $this->match_model->get_match($id)->row();
                 if(!$data['match']) redirect('/');
-                $this->twig->render('match/ajoutmatch', $data);
+                $this->twig->render('match/modifiermatch', $data);
             } else {
                 $this->match_model->update_match($id);
                 redirect('/equipe');
@@ -72,8 +72,12 @@ class Match extends CI_Controller {
         else
         {
             if(!$idmatch) redirect('/');
-            $data['match'] = $this->match_module->get_match($idmatch)->row();
+            $data['match'] = $this->match_model->get_match($idmatch)->row();
             if(!$data['match']) redirect('/');
+            $data['equipe_recev'] = $this->equipe_model->get_equipe($data['match']->equipe_recev)->row();
+            $data['equipe_visit'] = $this->equipe_model->get_equipe($data['match']->equipe_visit)->row();
+            $data['resultats'] = $this->match_model->get_match_resultats($idmatch);
+            $data['arbitre'] = $this->arbitre_model->get_arbitre($data['match']->arbitre)->row();
             $this->twig->render('match/voirmatch', $data);
         }
     }

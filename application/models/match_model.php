@@ -72,4 +72,12 @@ class Match_model extends CI_Model {
         $this->db->where('id', $id);     
         $this->db->delete('match');
     }
+    
+    public function get_match_resultats($id){
+        $this->db->select('*')
+                ->from('resultatmatch')
+                ->where('match', $id);
+        $query = $this->db->get();
+        return $query->result();
+    }
 }
