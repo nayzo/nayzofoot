@@ -3,10 +3,10 @@
 {% block title %} {{parent()}} - Modifier Joueur{% endblock title %}
 
 {% block container%}
-    <div class="span12 well"> 
+    <div class="well"> 
         <h4 class="text-center">Modifier un Joueur </h4>
         <hr>
-         <form action='/joueur/modifier/{{joueur.id}}' method="POST" class="form-horizontal offset3" enctype="multipart/form-data">
+         <form action='/joueur/modifier/{{joueur.id}}' method="POST" class="form-horizontal offset2" enctype="multipart/form-data">
             <fieldset>
                 <div class="control-group">
                    <label class="control-label" for="photo" >Photo</label>

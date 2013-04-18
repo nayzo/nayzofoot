@@ -1,0 +1,33 @@
+{% extends "layout.twig" %}
+
+{% block title %} {{parent()}} - Détail Match{% endblock title %}
+
+{% block container%}
+    <div class="span11 well"> 
+        <ul class="nav nav-pills">
+            <li><h4>Détail Match </h4></li>
+            <li class="pull-right"><a href="/match/supprimer/{{match.id}}" class="btn">Supprimer match</a></li>
+        </ul>
+        <hr>
+        <div class="span11">
+        <p><strong>Type : </strong>{{match.type}}</p>
+        <p><strong>saison : </strong>{{getsessionhelper()['saison']}}</p>
+        <p><strong>categorie : </strong>{{match.categorie}}</p>
+        <p><strong>Date et heure match : </strong>{{match.date_match}} | {{match.heur_match}}</p>
+        <p><strong>Stade : </strong>{{match.stade}}</p>
+        <p><strong>Arbitre : </strong>{{arbitre.nom}}</p>
+        </div>
+        <div class="span2">
+            <p><strong>Equipe Receveur : </strong>{{equipe_recev.nom_equipe}}</p>
+            <p><img src="{{base_url()}}uploads/{{equipe_recev.logo}}" alt="" class="img-polaroid span2" style="height: 100px;"></p>
+        </div>
+        <div class="span2">
+            <p><strong>Equipe Visiteur : </strong>{{equipe_visit.nom_equipe}}</p>
+            <p><img src="{{base_url()}}uploads/{{equipe_visit.logo}}" alt="" class="img-polaroid span2" style="height: 100px;"></p>
+        </div>
+        <div class="span2"></div>
+        
+        
+    </div>
+{% endblock container%}
+

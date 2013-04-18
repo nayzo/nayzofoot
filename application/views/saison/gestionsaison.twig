@@ -3,17 +3,17 @@
 {% block title %} {{parent()}} - Gestion des Saisons{% endblock title %}
 
 {% block container%}
-<div class="span12 well"> 
+<div class="well"> 
     <h4>Gestion des Saisons</h4>
     <hr>
     <div class="btn-toolbar">
         <a href="/saison/ajout" class="btn pull-right"><i class="icon-plus-sign"></i> <strong>Ajouter une saison</strong></a>
     </div>
-    <div class="alert alert-error"><strong>{{ saisonerreur }}</strong></div>
+    {{ saisonerreur }}
     <table class="table table-bordered table-hover">
         <tr>
             <th>Saison</th>
-            <th>Saison courant</th>
+            <th>Saison courante</th>
             <th>Action</th>
         </tr>
                  {% for saison in saisons %}
@@ -33,5 +33,6 @@
 
               {% endfor %}
         </table>
+</div>
 {% endblock container%}
 

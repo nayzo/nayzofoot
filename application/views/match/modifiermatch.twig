@@ -1,0 +1,126 @@
+{% extends "layout.twig" %}
+
+{% block title %} {{parent()}} - Modifier un Match{% endblock title %}
+
+{% block container%}
+    <div class="well"> 
+         <ul class="nav nav-pills">
+            <li><h4>Modifier un Match </h4></li>
+            <li class="pull-right"><a href="/match/supprimer/{{match.id}}" class="btn">Supprimer match</a></li>
+        </ul>
+        <hr>
+         <form action='/match/modifier/{{match.id}}' method="POST" class="form-horizontal offset3">
+            <fieldset>
+                <div class="control-group">
+                    <label class="control-label" for="type">Type <span class="required">*</span></label>
+                    <div class="controls">
+                        <select name="type" required="required" selected="{{ set_value('type', match.type) }}">
+                            <option value="semi-final" {%if match.type=='semi-final'%} selected="selected" {%endif%}>semi-final</option>
+                            <option value="final" {%if match.type=='final'%} selected="selected" {%endif%}>final</option>
+                        </select>
+                        <div class="erreur">
+                            {{ form_error('type') }}         
+                        </div>
+                    </div>
+                </div>
+                    
+                <div class="control-group">
+                    <label class="control-label" for="saison">Saison <span class="required">*</span></label>
+                    <div class="controls">
+                        <select name="saison" required="required" selected="{{ set_value('saison', saison.saison) }}">
+                            {% for saison in saisons%}
+                                <option value="{{saison.id}}" {%if saison.saison==saison.id%} selected="selected" {%endif%}>{{saison.saison}}</option>            
+                            {% endfor %}
+                        </select>
+                        <div class="erreur">
+                            {{ form_error('saison') }}         
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label" for="categorie">Catégorie <span class="required">*</span></label>
+                    <div class="controls">
+                       <select name="categorie" required="required" selected="{{ set_value('categorie', match.categorie) }}">
+                            <option value="championnat" {%if match.categorie=='championnat'%} selected="selected" {%endif%}>championnat</option>
+                            <option value="coupe" {%if match.categorie=='coupe'%} selected="selected" {%endif%}>coupe</option>
+                        </select>
+                        <div class="erreur">
+                            {{ form_error('categorie') }}         
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label" for="date_match">Date et temps match <span class="required">*</span></label>
+                    <div class="controls">
+                        <input type="date" name="date_match" required="required" class="span2"  value="{{ set_value('date_match', match.date_match) }}">
+                        <input type="time" name="heur_match" required="required" class="span1"  value="{{ set_value('heur_match', match.heur_match) }}">
+                        <div class="erreur">
+                            {{ form_error('date_match') }}         
+                        </div>
+                    </div>
+                </div>
+                    
+               <div class="control-group">
+                    <label class="control-label" for="stade">Stade <span class="required">*</span></label>
+                    <div class="controls">
+                        <input type="text" name="stade" required="required" value="{{ set_value('stade', match.stade) }}">
+                        <div class="erreur">
+                            {{ form_error('stade') }}         
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label" for="arbitre">Arbitre <span class="required">*</span></label>
+                    <div class="controls">
+                        <select name="arbitre" required="required" selected="{{ set_value('arbitre', arbitre.arbitre) }}">
+                        {% for arbitre in arbitres %}
+                            <option value="{{arbitre.id}}" {%if arbitre.arbitre==arbitre.id%} selected="selected" {%endif%}>{{arbitre.nom}}</option>            
+                        {% endfor %}
+                            </select>
+                        <div class="erreur">
+                            {{ form_error('arbitre') }}         
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label" for="equipe_visit">Equipe Visiteur <span class="required">*</span></label>
+                    <div class="controls">
+                         <select name="equipe_visit" required="required" selected="{{ set_value('equipe_visit', equipe.equipe_visit) }}">
+                            {% for equipe in equipes %}
+                                <option value="{{equipe.id}}" {%if equipe.equipe_visit==equipe.id%} selected="selected" {%endif%}>{{equipe.nom_equipe}}</option>            
+                            {% endfor %}
+                        </select>
+                        <div class="erreur">
+                            {{ form_error('equipe_visit') }}         
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="control-group">
+                    <label class="control-label" for="equipe_recev">Equipe Receveur <span class="required">*</span></label>
+                    <div class="controls">
+                         <select name="equipe_recev" required="required" selected="{{ set_value('equipe_recev', equipe.equipe_recev) }}">
+                            {% for equipe in equipes %}
+                                <option value="{{equipe.id}}" {%if equipe.equipe_resev==equipe.id%} selected="selected" {%endif%}>{{equipe.nom_equipe}}</option>            
+                            {% endfor %}
+                        </select>
+                        <div class="erreur">
+                            {{ form_error('equipe_recev') }}         
+                        </div>
+                    </div>
+                </div>
+ 
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" class="btn btn-info">Ajouter</button>
+                    </div>
+                </div>
+                    
+            </fieldset>
+        </form>   
+    </div>
+{% endblock container%}
