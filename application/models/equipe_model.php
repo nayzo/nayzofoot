@@ -24,6 +24,17 @@ class Equipe_model extends CI_Model {
         );
 
         $this->db->insert('equipe', $data);
+        
+        //************
+        $equipeid = $this->db->insert_id();
+        $this->load->model('saison_model');
+        $saisons = $this->saison_model->get_all();
+        foreach ($saisons as $eq) {
+            $tab['saison'] = $eq->id;
+            $tab['equipe'] = $equipeid;
+            $this->db->insert('classement', $tab);
+        }
+        
     }
     
     function update_equipe($id){

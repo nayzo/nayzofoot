@@ -34,9 +34,9 @@ class Saison extends CI_Controller {
                 $id = $this->saison_model->add_saison();
                 if ($this->input->post('saison_courant'))
                 {
-                    $this->activercourant($id);
-                    $this->classement_model->add_classement($id);
+                    $this->activercourant($id);                    
                 }
+                $this->classement_model->add_classement($id);
                 redirect('/saison');
             }
         }
