@@ -2,6 +2,7 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title%}FOOTBALL {%endblock title%}</title>
         <!--stylesheet-->
        	<link href="{{base_url()}}assets/css/style.css" rel="stylesheet" type="text/css"  />
@@ -67,16 +68,14 @@
             <div class="container">
                 <div class="row">
                     <!-- logo -->
-                    <div class="span5 offset4">
+                    <div class="offset4">
                         <a href=""><img src="{{base_url()}}assets/img/logo.png" alt=""/></a>
                     </div>
                 </div>
             </div>
         </header>
         <section class="container">
-            <div class="row">
-                {% block container%}{% endblock container%}
-            </div>
+          {% block container%}{% endblock container%}
         </section>
         
         {#---SCRIPT---#} 

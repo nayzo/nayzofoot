@@ -3,7 +3,7 @@
 {% block title %} {{parent()}} - Gestion des Joueurs{% endblock title %}
 
 {% block container%}
-    <div class="span12 well"> 
+    <div class="well"> 
         <h4>Gestion des Joueurs </h4>
         <hr>
        <div class="btn-toolbar">
@@ -30,8 +30,8 @@
                       <a href="/joueur/supprimer/{{joueur.id}}" title="Supprimer" class="btn deleteadmin"><i class="icon-trash"></i></a>
                   </td>
                 </tr>
-         
-              {% endfor %}
-            </table>
+                {% endfor %}
+        </table>
+    </div>      
 {% endblock container%}
 

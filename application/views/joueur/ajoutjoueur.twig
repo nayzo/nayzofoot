@@ -3,26 +3,25 @@
 {% block title %} {{parent()}} - Ajouter Joueur{% endblock title %}
 
 {% block container%}
-    <div class="span12 well"> 
+    <div class="well"> 
         <h4 class="text-center">Ajouter un Joueur </h4>
         <hr>
-         <form action='/joueur/ajout' method="POST" class="form-horizontal offset3" enctype="multipart/form-data">
+         <form action='/joueur/ajout' method="POST" class="form-horizontal offset2" enctype="multipart/form-data">
             <fieldset>
                 <div class="control-group">
                     <label class="control-label" for="nom">Nom <span class="required">*</span></label>
                     <div class="controls">
-                        <input type="text" name="nom" class="span3" required="required"/>
+                        <input type="text" name="nom" class="span3" required="required" value="{{ set_value('nom') }}"/>
                         <div class="erreur">
                             {{ form_error('nom') }}         
                         </div>
                     </div>
-                    
                 </div>
                 
                 <div class="control-group">
                     <label class="control-label" for="date_naissance">Date de Naissance</label>
                     <div class="controls">
-                        <input type="date" name="date_naissance" class="span3"/>
+                        <input type="date" name="date_naissance" class="span3" value="{{ set_value('date_naissance') }}"/>
                     </div>
                 </div>
                 
@@ -76,21 +75,21 @@
                 <div class="control-group">
                     <label class="control-label" for="taille">Taille</label>
                     <div class="controls">
-                        <input type="text" name="taille" class="span3"/>
+                        <input type="text" name="taille" class="span3" value="{{ set_value('taille') }}"/>
                     </div>
                 </div>
                     
                 <div class="control-group">
-                    <label class="control-label" for="poids">Poid</label>
+                    <label class="control-label" for="poids">Poids</label>
                     <div class="controls">
-                        <input type="text" name="poids" class="span3"/>
+                        <input type="text" name="poids" class="span3" value="{{ set_value('poids') }}"/>
                     </div>
                 </div>
                 
                 <div class="control-group">
                     <label class="control-label" for="date_affectation">Date D'affectation</label>
                     <div class="controls">
-                        <input type="date" name="date_affectation" class="span3"/>
+                        <input type="date" name="date_affectation" class="span3" value="{{ set_value('date_affectation') }}"/>
                     </div>
                 </div>
                 
