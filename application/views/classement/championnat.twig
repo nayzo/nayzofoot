@@ -1,0 +1,15 @@
+{% extends "layout.twig" %}
+
+{% block title %} {{parent()}} - Ajouter une Saison{% endblock title %}
+
+{% block container%}
+    <div class="span12 well"> 
+        <h4 class="text-center">Ajouter une Saison </h4>
+        <hr>
+        <br>
+        {% for class in classement %}
+            {{class.nom_equipe}} | {{class.nb_point_championnat}} 
+            <br> 
+        {% endfor %}
+    </div>
+{% endblock container%}

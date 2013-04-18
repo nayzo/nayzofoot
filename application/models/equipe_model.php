@@ -67,4 +67,32 @@ class Equipe_model extends CI_Model {
         $this->db->where('id', $id);     
         $this->db->delete('equipe');
     }
+
+    public function list_equies_ligue_championnat($ligue){
+        $saison = getsessionhelper()['saisonid'];
+        $data = " select * FROM classement c
+                  inner JOIN equipe e
+                  ON c.equipe=e.id
+                  where c.saison=$saison
+                  AND e.ligue='$ligue'
+                  ORDER BY c.nb_point_championnat DESC
+                  ;
+            ";
+        $query = $this->db->query($data);
+        return $query->result();
+    }
+    
+    public function list_equies_ligue_coupe($ligue){
+        $saison = getsessionhelper()['saisonid'];
+        $data = " select * FROM classement c
+                  inner JOIN equipe e
+                  ON c.equipe=e.id
+                  where c.saison=$saison
+                  AND e.ligue='$ligue'
+                  ORDER BY c.nb_point_coupe DESC
+                  ;
+            ";
+        $query = $this->db->query($data);
+        return $query->result();
+    }
 }

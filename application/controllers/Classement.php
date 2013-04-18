@@ -9,6 +9,7 @@ class Classement extends CI_Controller {
         parent::__construct();
         $this->load->model('saison_model');
         $this->load->model('classement_model');
+        $this->load->model('equipe_model');
         $this->twig->addFunction('getsessionhelper'); 
     }
 
@@ -50,4 +51,77 @@ class Classement extends CI_Controller {
             }            
         }
     }
-}
+    
+    function champligueun()
+    {
+        $ligue = 'Football Pro ligue 1';
+        $data['classement'] = $this->equipe_model->list_equies_ligue_championnat($ligue);
+        $this->twig->render('classement/championnat', $data);
+    }
+    
+    function champliguedeux()
+    {
+        $ligue = 'Football Pro ligue 2';
+        $data['classement'] = $this->equipe_model->list_equies_ligue_championnat($ligue);
+        $this->twig->render('classement/championnat', $data);
+    }
+    
+    function champligueamateur()
+    {
+        $ligue = 'Football Amateur';
+        $data['classement'] = $this->equipe_model->list_equies_ligue_championnat($ligue);
+        $this->twig->render('classement/championnat', $data);
+    }
+    
+    function champliguefeminin()
+    {
+        $ligue = 'Football Féminin';
+        $data['classement'] = $this->equipe_model->list_equies_ligue_championnat($ligue);
+        $this->twig->render('classement/championnat', $data);
+    }
+    
+    function champliguefutsal()
+    {
+        $ligue = 'Futsal';
+        $data['classement'] = $this->equipe_model->list_equies_ligue_championnat($ligue);
+        $this->twig->render('classement/championnat', $data);
+    }
+    
+    
+    //**********************************************************
+    
+    function coupeligueun()
+    {
+        $ligue = 'Football Pro ligue 1';
+        $data['classement'] = $this->equipe_model->list_equies_ligue_coupe($ligue);
+        $this->twig->render('classement/championnat', $data);
+    }
+    
+    function coupeliguedeux()
+    {
+        $ligue = 'Football Pro ligue 2';
+        $data['classement'] = $this->equipe_model->list_equies_ligue_coupe($ligue);
+        $this->twig->render('classement/championnat', $data);
+    }
+    
+    function coupeligueamateur()
+    {
+        $ligue = 'Football Amateur';
+        $data['classement'] = $this->equipe_model->list_equies_ligue_coupe($ligue);
+        $this->twig->render('classement/championnat', $data);
+    }
+    
+    function coupeliguefeminin()
+    {
+        $ligue = 'Football Féminin';
+        $data['classement'] = $this->equipe_model->list_equies_ligue_coupe($ligue);
+        $this->twig->render('classement/championnat', $data);
+    }
+    
+    function coupeliguefutsal()
+    {
+        $ligue = 'Futsal';
+        $data['classement'] = $this->equipe_model->list_equies_ligue_coupe($ligue);
+        $this->twig->render('classement/championnat', $data);
+    }
+} 
