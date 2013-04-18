@@ -3,39 +3,35 @@
 {% block title %} {{parent()}} - Gestion des Saisons{% endblock title %}
 
 {% block container%}
-    <div class="span12 well"> 
-        <h4>Gestion des Saisons</h4>
-        <hr>
-       <div class="btn-toolbar">
-            <a href="/saison/ajout" class="btn pull-right"><i class="icon-plus-sign"></i> <strong>Ajouter une saison</strong></a>
-       </div>
-        
-       <div class="control-group">
-            <div class="error span5">{{ saisonerreur }}</div>
-      </div> 
-        
-        <table class="table table-bordered table-hover">
-                <tr>
-                  <th>Saison</th>
-                  <th>Saison courant</th>
-                  <th>Action</th>
-                </tr>
+<div class="span12 well"> 
+    <h4>Gestion des Saisons</h4>
+    <hr>
+    <div class="btn-toolbar">
+        <a href="/saison/ajout" class="btn pull-right"><i class="icon-plus-sign"></i> <strong>Ajouter une saison</strong></a>
+    </div>
+    <div class="alert alert-error"><strong>{{ saisonerreur }}</strong></div>
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>Saison</th>
+            <th>Saison courant</th>
+            <th>Action</th>
+        </tr>
                  {% for saison in saisons %}
-                <tr>
-                  <td>{{saison.saison}}</td>
-                  <td>
+        <tr>
+            <td>{{saison.saison}}</td>
+            <td>
                       {% if saison.saison_courant == 1 %}
-                      <img src="{{base_url()}}assets/img/active.png" alt="actives"/>
+                    <img src="{{base_url()}}assets/img/active.png" alt="actives"/>
                       {% endif %} 
-                      </td>
-                  <td>
-                      <a href="/saison/activer/{{saison.id}}" title="Activer saison courant" class="btn"><i class="icon-ok"></i></a>
-                      <a href="/saison/modifier/{{saison.id}}" title="Modifier" class="btn"><i class="icon-edit"></i></a> 
-                      <a href="/saison/supprimer/{{saison.id}}" title="Supprimer" class="btn deleteadmin"><i class="icon-trash"></i></a>
-                  </td>
-                </tr>
-         
+                </td>
+                <td>
+                    <a href="/saison/activer/{{saison.id}}" title="Activer saison courant" class="btn"><i class="icon-ok"></i></a>
+                    <a href="/saison/modifier/{{saison.id}}" title="Modifier" class="btn"><i class="icon-edit"></i></a> 
+                    <a href="/saison/supprimer/{{saison.id}}" title="Supprimer" class="btn deleteadmin"><i class="icon-trash"></i></a>
+                </td>
+            </tr>
+
               {% endfor %}
-            </table>
+        </table>
 {% endblock container%}
 

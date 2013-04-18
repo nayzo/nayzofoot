@@ -9,7 +9,7 @@
         <div class="span4">
             <p> <img src="{{base_url()}}uploads/{{equipe.logo}}" alt="" class="img-polaroid span3" style="height: 220px;"></p>
         </div>
-        <div class="span6">
+        <div class="span7">
             <p><strong>Nom : </strong>{{equipe.nom_equipe}}</p>
             <p><strong>Entreneur : </strong>{{equipe.entreneur}}</p>
             <p><strong>Date de Création : </strong>{{equipe.date_creation}}</p>
@@ -17,6 +17,19 @@
             <p><strong>Site Web : </strong>{{equipe.siteweb}}</p>
             <p><strong>Stade : </strong>{{equipe.stade}}</p>
             <p><strong>Ligue Nationale : </strong>{{equipe.ligue}}</p>
+        </div>
+        
+        <div class="span12">
+        <h4>Liste des joueurs Pour cette equipe </h4>
+        <hr>
+        {% for joueur in joueurs %}
+            <div class="span3">
+                <p><strong>Nom : </strong>{{joueur.nom}}</p>
+                <p><strong>Poste : </strong>{{joueur.post}}</p> 
+                <hr>
+           </div>
+        {% endfor %}
+         
         </div>
     </div>
 {% endblock container%}
