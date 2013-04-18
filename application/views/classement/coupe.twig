@@ -1,14 +1,14 @@
 {% extends "layout.twig" %}
 
-{% block title %} {{parent()}} - Classement Championnat{% endblock title %}
+{% block title %} {{parent()}} - Classement Coupe{% endblock title %}
 
 {% block container%}
     <div class="span12 well"> 
-        <h4 class="text-center">Classement Championnat</h4>
+        <h4 class="text-center">Classement Coupe</h4>
         <hr>
         <br>
         {% for class in classement %}
-            {{class.nom_equipe}} | {{class.nb_point_championnat}} 
+            {{class.nom_equipe}} | {{class.nb_point_coupe}} 
             <br> 
         {% endfor %}
     </div>

@@ -55,6 +55,7 @@ class Classement extends CI_Controller {
     function champligueun()
     {
         $ligue = 'Football Pro ligue 1';
+        $data['ligue'] = $ligue;
         $data['classement'] = $this->equipe_model->list_equies_ligue_championnat($ligue);
         $this->twig->render('classement/championnat', $data);
     }
@@ -62,6 +63,7 @@ class Classement extends CI_Controller {
     function champliguedeux()
     {
         $ligue = 'Football Pro ligue 2';
+        $data['ligue'] = $ligue;
         $data['classement'] = $this->equipe_model->list_equies_ligue_championnat($ligue);
         $this->twig->render('classement/championnat', $data);
     }
@@ -69,6 +71,7 @@ class Classement extends CI_Controller {
     function champligueamateur()
     {
         $ligue = 'Football Amateur';
+        $data['ligue'] = $ligue;
         $data['classement'] = $this->equipe_model->list_equies_ligue_championnat($ligue);
         $this->twig->render('classement/championnat', $data);
     }
@@ -76,6 +79,7 @@ class Classement extends CI_Controller {
     function champliguefeminin()
     {
         $ligue = 'Football Féminin';
+        $data['ligue'] = $ligue;
         $data['classement'] = $this->equipe_model->list_equies_ligue_championnat($ligue);
         $this->twig->render('classement/championnat', $data);
     }
@@ -83,6 +87,7 @@ class Classement extends CI_Controller {
     function champliguefutsal()
     {
         $ligue = 'Futsal';
+        $data['ligue'] = $ligue;
         $data['classement'] = $this->equipe_model->list_equies_ligue_championnat($ligue);
         $this->twig->render('classement/championnat', $data);
     }
@@ -93,35 +98,40 @@ class Classement extends CI_Controller {
     function coupeligueun()
     {
         $ligue = 'Football Pro ligue 1';
+        $data['ligue'] = $ligue;
         $data['classement'] = $this->equipe_model->list_equies_ligue_coupe($ligue);
-        $this->twig->render('classement/championnat', $data);
+        $this->twig->render('classement/coupe', $data);
     }
     
     function coupeliguedeux()
     {
         $ligue = 'Football Pro ligue 2';
+        $data['ligue'] = $ligue;
         $data['classement'] = $this->equipe_model->list_equies_ligue_coupe($ligue);
-        $this->twig->render('classement/championnat', $data);
+        $this->twig->render('classement/coupe', $data);
     }
     
     function coupeligueamateur()
     {
         $ligue = 'Football Amateur';
+        $data['ligue'] = $ligue;
         $data['classement'] = $this->equipe_model->list_equies_ligue_coupe($ligue);
-        $this->twig->render('classement/championnat', $data);
+        $this->twig->render('classement/coupe', $data);
     }
     
     function coupeliguefeminin()
     {
         $ligue = 'Football Féminin';
+        $data['ligue'] = $ligue;
         $data['classement'] = $this->equipe_model->list_equies_ligue_coupe($ligue);
-        $this->twig->render('classement/championnat', $data);
+        $this->twig->render('classement/coupe', $data);
     }
     
     function coupeliguefutsal()
     {
         $ligue = 'Futsal';
+        $data['ligue'] = $ligue;
         $data['classement'] = $this->equipe_model->list_equies_ligue_coupe($ligue);
-        $this->twig->render('classement/championnat', $data);
+        $this->twig->render('classement/coupe', $data);
     }
 } 
