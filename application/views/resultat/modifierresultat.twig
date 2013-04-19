@@ -21,17 +21,19 @@
                    <input id="clickrecev" type="button" class="btn" value="Ajouter">
                    <div id="recevappend">
                        <label>Nom du joueur et heure de marquage</label>
+                       {% set compteurrecev = 0 %}
                     {% for resultat in resultats %} 
                        <div class="blockreciv">                           
                           
                             {%if resultat.equipe == equiperecev.id%}
+                                {% set compteurrecev = compteurrecev + 1 %}
                             <select name="recevjoueur[]" class="span2">
                              {% for joueur in jreqrecevs %}
                                     <option value="{{joueur.id}}" {%if resultat.joueur == joueur.id%} selected{%endif%}> {{joueur.nom}} </option>        
                              {% endfor %}
                              </select> 
                             <input type="time" name="recevtime[]" class="span1" value="{{resultat.date_but}}"> 
-                                <script> $('#nbbutrecev').val({{loop.index}});</script>
+                                <script> $('#nbbutrecev').val({{compteurrecev}});</script>
                               {%endif%}                          
                        </div>
                     {% endfor %}
@@ -47,17 +49,19 @@
                    <input id="clickvisit" type="button" class="btn" value="Ajouter">
                    <div id="visitappend">
                        <label>Nom du joueur et heure de marquage</label>
+                       {% set compteurrecev = 0 %}
                     {% for resultat in resultats %} 
                        <div class="blockvisit">                           
                           
                             {%if resultat.equipe == equipevisit.id%}
+                                 {% set compteurrecev = compteurrecev + 1 %}
                             <select name="visitjoueur[]" class="span2">
                              {% for joueur in jreqvisits %}
                                     <option value="{{joueur.id}}" {%if resultat.joueur == joueur.id%} selected{%endif%}> {{joueur.nom}} </option>        
                              {% endfor %}
                              </select> 
                             <input type="time" name="visittime[]" class="span1" value="{{resultat.date_but}}"> 
-                                <script> $('#nbbutvisit').val({{loop.index}});</script>
+                                <script> $('#nbbutvisit').val({{compteurrecev}});</script>
                               {%endif%}                          
                        </div>
                     {% endfor %}
