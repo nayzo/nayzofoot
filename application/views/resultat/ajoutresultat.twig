@@ -60,7 +60,7 @@ $(document).ready(function(){
                     {
                        
                             valeur += '<div class="blockreciv">' ;
-                            valeur += '<label>Nom du joueur et temp de marquage<label>' ;
+                            valeur += '<label>Nom du joueur et heure de marquage</label>' ;
                             valeur += '<select name="recevjoueur[]" class="span2">';
                              {% for joueur in jreqrecevs %}
                                   valeur += '<option value="{{joueur.id}}"> {{joueur.nom}} </option>';           
@@ -89,7 +89,7 @@ $(document).ready(function(){
                     for(i=1; i<=res; i++)
                     {
                             valeur += '<div class="blockvisit">' ;
-                            valeur += '<label>Nom du joueur et temp de marquage<label>' ;
+                            valeur += '<label>Nom du joueur et heure de marquage</label>' ;
                             valeur += '<select name="visitjoueur[]" class="span2">';
                              {% for joueur in jreqvisits %}
                                  valeur += '<option value="{{joueur.id}}"> {{joueur.nom}} </option>';           

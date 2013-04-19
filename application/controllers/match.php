@@ -59,7 +59,7 @@ class Match extends CI_Controller {
                 $this->twig->render('match/modifiermatch', $data);
             } else {
                 $this->match_model->update_match($id);
-                redirect('/equipe');
+                redirect("/match/voir/$id");
             }
         }
     }
@@ -172,7 +172,7 @@ class Match extends CI_Controller {
                         $this->classement_model->add_point_coupe($data['match']->equipe_recev, 3); 
                     }
                 }
-                redirect('/');
+                redirect("/match/voir/$idmatch");
             }
         }
     }

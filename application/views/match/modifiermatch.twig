@@ -93,9 +93,9 @@
                 <div class="control-group">
                     <label class="control-label" for="equipe_visit">Equipe Visiteur <span class="required">*</span></label>
                     <div class="controls">
-                         <select name="equipe_visit" required="required" selected="{{ set_value('equipe_visit', match.equipe_visit) }}">
+                         <select name="equipe_visit" required="required" {%if match.resultat_equipe_visit != -1%}disabled {%endif%}>
                             {% for equipe in equipes %}
-                                <option value="{{equipe.id}}" {%if match.equipe_visit==equipe.id%} selected="selected" {%endif%}>{{equipe.nom_equipe}}</option>            
+                                <option value="{{equipe.id}}" {%if match.equipe_visit==equipe.id%} selected {%endif%}>{{equipe.nom_equipe}}</option>            
                             {% endfor %}
                         </select>
                         <div class="erreur">
@@ -107,9 +107,9 @@
                 <div class="control-group">
                     <label class="control-label" for="equipe_recev">Equipe Receveur <span class="required">*</span></label>
                     <div class="controls">
-                         <select name="equipe_recev" required="required" selected="{{ set_value('equipe_recev', match.equipe_recev) }}">
+                         <select name="equipe_recev" required="required" {%if match.resultat_equipe_recev != -1%}disabled {%endif%}>
                             {% for equipe in equipes %}
-                                <option value="{{equipe.id}}" {%if match.equipe_resev==equipe.id%} selected="selected" {%endif%}>{{equipe.nom_equipe}}</option>            
+                                <option value="{{equipe.id}}" {% if match.equipe_recev == equipe.id %} selected {% endif %} >{{equipe.nom_equipe}}</option>            
                             {% endfor %}
                         </select>
                         <div class="erreur">
