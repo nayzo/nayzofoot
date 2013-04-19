@@ -13,11 +13,11 @@
 {% block container%}
     <div class="span12 well"> 
         <h4>Gestion des Matchs </h4>
-        <hr>
-        <!--
+        
        <div class="btn-toolbar">
             <a href="/joueur/ajout" class="btn pull-right"><i class="icon-plus-sign"></i> <strong>Ajouter un Match</strong></a>
-       </div> -->
+       </div>
+        <hr />
         
         <div id='calendar'></div>
         
@@ -25,9 +25,8 @@
 {% endblock container%}
         
 {% block script %}
-<script src='{{ cal_js_url('jquery-1.9.1.min') }}'></script>
 <script src='{{ cal_js_url('jquery-ui-1.10.2.custom.min') }}'></script>
-<script src='{{ cal_js_url('fullcalendar.min') }}'></script>
+<script src='{{ cal_js_url('fullcalendar') }}'></script>
 
 <script>
 
