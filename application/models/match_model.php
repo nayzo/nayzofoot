@@ -1,9 +1,16 @@
 <?php
 class Match_model extends CI_Model {
+    
+    private $table = 'match';
 
     function __construct()
     {
         parent::__construct();
+    }
+    
+    public function get_all()
+    {
+        return $this->db->get($this->table)->result();
     }
     
     function add_match(){

@@ -64,7 +64,7 @@ $autoload['libraries'] = array('session','database', 'twig', 'form_validation');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url','form', 'sessionnzo');
+$autoload['helper'] = array('url','form', 'sessionnzo', 'assets');
 
 
 /*
