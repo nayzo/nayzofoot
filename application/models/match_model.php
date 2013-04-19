@@ -68,7 +68,7 @@ class Match_model extends CI_Model {
         $this->db->update('match', $data); 
     }
     
-    function supprimer_resultat_match($id)
+    function supprimer_resultats_match($id)
     {
         $this->db->where('match', $id);     
         $this->db->delete('resultatmatch');

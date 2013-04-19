@@ -228,7 +228,7 @@ class Match extends CI_Controller {
             else 
             {
                 // suppression des resultats de la BD
-                $this->mutch_model->supprimer_resultat_match($idmatch);
+                $this->match_model->supprimer_resultats_match($idmatch);
                 // partie equipe receveur
                 $recevjoueurs = $this->input->post('recevjoueur');
                 if($recevjoueurs)
@@ -368,7 +368,7 @@ class Match extends CI_Controller {
         else
         {
             if(!$idmatch) redirect('/');
-            $this->match_model->supprimer_resultat_match($idmatch);
+            $this->match_model->supprimer_resultats_match($idmatch);
             $this->match_model->supprimer_match($idmatch);
             redirect('/');
         }
