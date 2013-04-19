@@ -51,7 +51,7 @@ var defaults = {
 	},
 	columnFormat: {
 		month: 'ddd',
-		week: 'ddd M - d',
+		week: 'ddd d - M',
 		day: ''
 	},
 	timeFormat: { // for event elements
@@ -1486,6 +1486,19 @@ function parseTime(s) { // returns minutes since start of day
 
 function formatDate(date, format, options) {
 	return formatDates(date, null, format, options);
+}
+
+
+//Function written by Hamza
+function show_time_fr(e) {
+    var dd = new Date(Date.parse(e.start)); //get the full date from e.start
+    var hh = dd.getHours().toString();
+    var mm = dd.getMinutes().toString();
+    
+    if(hh.length < 2) { hh = '0' + hh}
+    if(mm.length < 2) { mm = '0' + mm}
+    
+    return hh + ':' + mm;
 }
 
 
@@ -4056,7 +4069,7 @@ function AgendaEventRenderer() {
 			">" +
 			"<div class='fc-event-inner'>" +
 			"<div class='fc-event-time'>" +
-			htmlEscape(formatDates(event.start, event.end, opt('timeFormat'))) +
+			show_time_fr(event) +//htmlEscape(formatDates(event.start, event.end, opt('timeFormat'))) +
 			"</div>" +
 			"<div class='fc-event-title'>" +
 			htmlEscape(event.title) +
@@ -4741,7 +4754,6 @@ function DayEventRenderer() {
 	
 	
 	function daySegHTML(segs) { // also sets seg.left and seg.outerWidth
-                var maDate = new Date();
 		var rtl = opt('isRTL');
 		var i;
 		var segCnt=segs.length;
@@ -4759,12 +4771,6 @@ function DayEventRenderer() {
 		var skinCss;
 		var html = '';
                 
-                //seg = segs[0];
-                //event = seg.event;
-                
-                //return event.start.toLocaleString();
-                
-                
 		// calculate desired position/dimensions, create html
 		for (i=0; i<segCnt; i++) {
 			seg = segs[i];
@@ -4773,11 +4779,11 @@ function DayEventRenderer() {
                         classes = ['fc-event-hori'];
                         
                         /**/
-                        if(maDate < event.start) {
-                            classes.push('fc-event-red');
+                        if(event.joue) {
+                            classes.push('fc-event');
                         }
                         else {
-                            classes.push('fc-event');
+                            classes.push('fc-event-red');
                         }
                         /**/
                         
@@ -4820,8 +4826,8 @@ function DayEventRenderer() {
 			if (!event.allDay && seg.isStart) {
 				html +=
 					"<span class='fc-event-time'>" +
-					htmlEscape(formatDates(event.start, event.end, opt('timeFormat'))) +
-					"</span>";
+					show_time_fr(event) +//htmlEscape(formatDates(event.start, event.end, opt('timeFormat'))) +
+					"</span><br />";
 			}
 			html +=
 				"<span class='fc-event-title'>" + htmlEscape(event.title) + "</span>" +

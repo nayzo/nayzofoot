@@ -260,8 +260,8 @@ html .fc,
 	}
         
 .fc-event-red {
-	border: 1px solid rgb(199, 10, 10); /* default BORDER color */
-	background-color: rgb(199, 10, 10); /* default BACKGROUND color */
+	border: 1px solid rgb(100, 182, 10); /* default BORDER color */
+	background-color: rgb(100, 182, 10); /* default BACKGROUND color */
 	color: #fff;               /* default TEXT color */
 	font-size: .85em;
 	cursor: default;
