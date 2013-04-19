@@ -176,6 +176,102 @@ class Match extends CI_Controller {
             }
         }
     }
+    
+    
+    function modifresultat($idmatch)
+    {
+        if (!$this->session->userdata('login_in'))
+            redirect('/');
+        else
+        {
+            if(!$idmatch) redirect('/');
+            $this->form_validation->set_rules('sendvalbutrecev', 'Receveur', 'trim|required');
+            $this->form_validation->set_rules('sendvalbutvisit', 'Visiteur', 'trim|required');
+            $data['match'] = $this->match_model->get_match($idmatch)->row();  
+            if(!$data['match']) redirect('/');
+            if ($this->form_validation->run() == FALSE) 
+            {                              
+                $data['equiperecev'] = $this->equipe_model->get_equipe($data['match']->equipe_recev)->row();
+                $data['equipevisit'] = $this->equipe_model->get_equipe($data['match']->equipe_visit)->row();
+                $data['jreqrecevs'] = $this->joueur_model->get_joueur_by_equipe($data['match']->equipe_recev);
+                $data['jreqvisits'] = $this->joueur_model->get_joueur_by_equipe($data['match']->equipe_visit);
+                $this->twig->render('resultat/ajoutresultat', $data);
+            }
+            else 
+            {
+                // partie equipe receveur
+                $recevjoueurs = $this->input->post('recevjoueur');
+                if($recevjoueurs)
+                    $counttablrecev = count($recevjoueurs);
+                else
+                    $counttablrecev = 0;
+                $recevtimes = $this->input->post('recevtime');
+                 
+                for($i=0; $i<$counttablrecev; $i++)
+                {
+                    $datarecev['match'] = $idmatch;
+                    $datarecev['equipe'] = $data['match']->equipe_recev;
+                    $datarecev['joueur'] = $recevjoueurs[$i];
+                    $datarecev['date_but'] = $recevtimes[$i];
+                    $this->match_model->add_resultat_match($datarecev);
+                }
+                // partie equipe visiteur
+                $visitjoueurs = $this->input->post('visitjoueur');
+                if($visitjoueurs)
+                    $counttablvisit = count($visitjoueurs);                
+                else
+                    $counttablvisit = 0;     
+                $visittimes = $this->input->post('visittime');
+                
+                for($i=0; $i<$counttablvisit; $i++)
+                {
+                    $datavisit['match'] = $idmatch;
+                    $datavisit['equipe'] = $data['match']->equipe_visit;
+                    $datavisit['joueur'] = $visitjoueurs[$i];
+                    $datavisit['date_but'] = $visittimes[$i];
+                    $this->match_model->add_resultat_match($datavisit);
+                }
+                $tabres['id'] = $idmatch;
+                $tabres['recev'] = $counttablrecev;
+                $tabres['visit'] = $counttablvisit;
+                $this->match_model->update_match_resultat_equipe($tabres);
+                //update classement
+                if($data['match']->categorie == 'championnat')
+                {
+                    if($counttablrecev == $counttablvisit)
+                    {
+                        $this->classement_model->add_point_championnat($data['match']->equipe_visit, 1);
+                        $this->classement_model->add_point_championnat($data['match']->equipe_recev, 1);
+                    }
+                    else if($counttablrecev < $counttablvisit)
+                    {
+                        $this->classement_model->add_point_championnat($data['match']->equipe_visit, 3);
+                    }
+                    else
+                    {
+                        $this->classement_model->add_point_championnat($data['match']->equipe_recev, 3); 
+                    }
+                }
+                else if($data['match']->categorie == 'coupe')
+                {
+                    if($counttablrecev == $counttablvisit)
+                    {
+                        $this->classement_model->add_point_coupe($data['match']->equipe_visit, 1);
+                        $this->classement_model->add_point_coupe($data['match']->equipe_recev, 1);
+                    }
+                    else if($counttablrecev < $counttablvisit)
+                    {
+                        $this->classement_model->add_point_coupe($data['match']->equipe_visit, 3);
+                    }
+                    else
+                    {
+                        $this->classement_model->add_point_coupe($data['match']->equipe_recev, 3); 
+                    }
+                }
+                redirect('/');
+            }
+        }
+    }
 
     function supprimer($idmatch)
     {

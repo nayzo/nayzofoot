@@ -8,6 +8,9 @@
             <li><h4>Détail Match </h4></li>
             <li class="pull-right"><a href="/match/modifier/{{match.id}}" class="btn">Modifier match</a></li>
             <li class="pull-right"><a href="/match/supprimer/{{match.id}}" class="btn deleteadmin">Supprimer match</a></li>
+            {%if match.resultat_equipe_visit == -1%}
+            <li class="pull-right"><a href="/match/resultat/{{match.id}}" class="btn">Affecter Résultat</a></li>
+            {%endif%}
         </ul>
         <hr>
         <div class="span10"  style="border-bottom: 1px solid #cccccc">

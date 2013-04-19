@@ -6,8 +6,11 @@
     <div class="well"> 
          <ul class="nav nav-pills">
             <li><h4>Modifier un Match </h4></li>
-            <li class="pull-right"><a href="/match/supprimer/{{match.id}}" class="btn">Voir match</a></li>
+            <li class="pull-right"><a href="/match/voir/{{match.id}}" class="btn">Voir match</a></li>
             <li class="pull-right"><a href="/match/supprimer/{{match.id}}" class="btn deleteadmin">Supprimer match</a></li>
+            {%if match.resultat_equipe_visit == -1%}
+            <li class="pull-right"><a href="/match/resultat/{{match.id}}" class="btn">Affecter Résultat</a></li>
+            {%endif%}
         </ul>
         <hr>
          <form action='/match/modifier/{{match.id}}' method="POST" class="form-horizontal offset3">
@@ -90,9 +93,9 @@
                 <div class="control-group">
                     <label class="control-label" for="equipe_visit">Equipe Visiteur <span class="required">*</span></label>
                     <div class="controls">
-                         <select name="equipe_visit" required="required" selected="{{ set_value('equipe_visit', equipe.equipe_visit) }}">
+                         <select name="equipe_visit" required="required" selected="{{ set_value('equipe_visit', match.equipe_visit) }}">
                             {% for equipe in equipes %}
-                                <option value="{{equipe.id}}" {%if equipe.equipe_visit==equipe.id%} selected="selected" {%endif%}>{{equipe.nom_equipe}}</option>            
+                                <option value="{{equipe.id}}" {%if match.equipe_visit==equipe.id%} selected="selected" {%endif%}>{{equipe.nom_equipe}}</option>            
                             {% endfor %}
                         </select>
                         <div class="erreur">
@@ -104,9 +107,9 @@
                 <div class="control-group">
                     <label class="control-label" for="equipe_recev">Equipe Receveur <span class="required">*</span></label>
                     <div class="controls">
-                         <select name="equipe_recev" required="required" selected="{{ set_value('equipe_recev', equipe.equipe_recev) }}">
+                         <select name="equipe_recev" required="required" selected="{{ set_value('equipe_recev', match.equipe_recev) }}">
                             {% for equipe in equipes %}
-                                <option value="{{equipe.id}}" {%if equipe.equipe_resev==equipe.id%} selected="selected" {%endif%}>{{equipe.nom_equipe}}</option>            
+                                <option value="{{equipe.id}}" {%if match.equipe_resev==equipe.id%} selected="selected" {%endif%}>{{equipe.nom_equipe}}</option>            
                             {% endfor %}
                         </select>
                         <div class="erreur">
@@ -117,7 +120,7 @@
  
                 <div class="control-group">
                     <div class="controls">
-                        <button type="submit" class="btn btn-info">Ajouter</button>
+                        <button type="submit" class="btn btn-info">Modifier</button>
                     </div>
                 </div>
                     
