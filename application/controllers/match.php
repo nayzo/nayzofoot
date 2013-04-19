@@ -13,16 +13,39 @@ class Match extends CI_Controller {
         $this->load->model('arbitre_model');
         $this->load->model('joueur_model');
         $this->load->model('classement_model');
+        $this->load->model('match_model', 'matchManager');
         $this->twig->addFunction('getsessionhelper');
     }
 
     public function index() {
         if (!$this->session->userdata('login_in'))
             redirect('/');
-        else {
-                // affichage calendrier de liste des matches 
-             $this->twig->render('match/gestionmatch');
-        }
+        else
+        {
+            $data = array();
+            $str = '';
+            $res = $this->matchManager->get_all();
+            
+            foreach($res as $row)
+            {
+                $str .= '{title: ';
+                $str .= '\''. $row->categorie .'\'';
+                $str .= ', start: new Date(';
+                $str .= date('Y', strtotime($row->date_match));
+                $str .= ', ';
+                $str .= date('m', strtotime($row->date_match)) - 1;
+                $str .= ', ';
+                $str .= date('d', strtotime($row->date_match));
+                $str .= '), url: ';
+                $str .= '\'' . base_url() . 'match/voir/' . $row->id . '\'';
+                $str .= '}, ';
+            }
+            
+            $data['val'] = substr($str, 0, strlen($str) - 2);
+            
+            // affichage calendrier de liste des matches 
+            $this->twig->render('match/gestionmatch', $data);
+         }
     }
 
     public function ajout() {
