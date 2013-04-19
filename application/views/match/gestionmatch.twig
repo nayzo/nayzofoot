@@ -11,6 +11,7 @@
 {% endblock link_css %}
 
 {% block container%}
+<section class="cal">
     <div class="span12 well"> 
         <h4>Gestion des Matchs </h4>
         
@@ -20,13 +21,13 @@
         <hr />
         
         <div id='calendar'></div>
-        
+        </section>
         
 {% endblock container%}
         
 {% block script %}
 <script src='{{ cal_js_url('jquery-ui-1.10.2.custom.min') }}'></script>
-<script src='{{ cal_js_url('fullcalendar') }}'></script>
+<script src='{{ cal_js_url('fullcalendar_fr') }}'></script>
 
 <script>
 

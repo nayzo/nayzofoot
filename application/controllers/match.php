@@ -41,6 +41,7 @@ class Match extends CI_Controller {
                 $str .= date('i', strtotime($row->heur_match));
                 $str .= '), url: ';
                 $str .= '\'' . base_url() . 'match/voir/' . $row->id . '\'';
+                $str .= ', allDay: false';
                 $str .= '}, ';
             }
             
