@@ -3,13 +3,13 @@
 {% block title %} {{parent()}} - Voir Equipe{% endblock title %}
 
 {% block container%}
-    <div class="span12 well"> 
-        <h4>Info Equipe </h4>
+    <div class="span11 well"> 
+        <h4>Détails Equipe </h4>
         <hr>
         <div class="span4">
             <p> <img src="{{base_url()}}uploads/{{equipe.logo}}" alt="" class="img-polaroid span3" style="height: 220px;"></p>
         </div>
-        <div class="span7">
+        <div class="span5">
             <p><strong>Nom : </strong>{{equipe.nom_equipe}}</p>
             <p><strong>Entreneur : </strong>{{equipe.entreneur}}</p>
             <p><strong>Date de Création : </strong>{{equipe.date_creation}}</p>
@@ -23,13 +23,12 @@
         <h4>Liste des joueurs Pour cette equipe </h4>
         <hr>
         {% for joueur in joueurs %}
-            <div class="span3">
-                <p><strong>Nom : </strong>{{joueur.nom}}</p>
-                <p><strong>Poste : </strong>{{joueur.post}}</p> 
-                <hr>
-           </div>
+        <ul class="span3 unstyled">
+            <li><p> <img src="{{base_url()}}uploads/{{joueur.photo}}" alt="" class="img-polaroid" style="height: 60px;"></p></li>
+            <li><p><strong>Nom : </strong>{{joueur.nom}}</p></li>
+            <li><p><strong>Poste : </strong>{{joueur.post}}</p></li> 
+        </ul>
         {% endfor %}
-         
         </div>
     </div>
 {% endblock container%}

@@ -3,7 +3,7 @@
 {% block title %} {{parent()}} - Modifier equipe{% endblock title %}
 
 {% block container%}
-    <div class="span12 well"> 
+    <div class="span11 well"> 
         <h4 class="text-center">Modifier une Equipe </h4>
         <hr>
          <form action='/equipe/modifier/{{equipe.id}}' method="POST" class="form-horizontal offset3" enctype="multipart/form-data">
