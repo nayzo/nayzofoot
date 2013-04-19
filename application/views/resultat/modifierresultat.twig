@@ -20,36 +20,48 @@
                    <input type="number" name="sendvalbutrecev" class="span2" id="nbbutrecev" value="0"/>
                    <input id="clickrecev" type="button" class="btn" value="Ajouter">
                    <div id="recevappend">
-                       <div class="blockreciv">
-                            <label>Nom du joueur et heure de marquage</label>
-                          {% for resultat in resultats %} 
+                       <label>Nom du joueur et heure de marquage</label>
+                    {% for key, resultat in resultats %} 
+                       <div class="blockreciv">                           
+                          
                             {%if resultat.equipe == equiperecev.id%}
                             <select name="recevjoueur[]" class="span2">
                              {% for joueur in jreqrecevs %}
                                     <option value="{{joueur.id}}" {%if resultat.joueur == joueur.id%} selected{%endif%}> {{joueur.nom}} </option>        
                              {% endfor %}
                              </select> 
-                            <input type="time" name="recevtime[]" class="span1" value="{{resultat.date_but}}">  
-                              {%endif%}
-                          {% endfor %}
+                            <input type="time" name="recevtime[]" class="span1" value="{{resultat.date_but}}"> 
+                                <script> $('#nbbutrecev').val({{loop.index}});</script>
+                              {%endif%}                          
                        </div>
+                    {% endfor %}
                    </div>
                </div>
                
-               {#     {% for resultat in resultats %}
-                                    {%if resultat.equipe == equiperecev.id%}
-                                  <option value="{{resultat.joueur}}"> {{resultat.nom}} </option> 
-                                  {%endif%}
-                             {% endfor %}
-                 #}   
-                    
+   
               <div class="span5">
                    <p><strong>Equipe Visiteur :</strong> {{equipevisit.nom_equipe}}</p>
                    <hr>
                    <label>Nombre de But</label>
                    <input type="number" name="sendvalbutvisit" class="span2" id="nbbutvisit" value="0"/>
                    <input id="clickvisit" type="button" class="btn" value="Ajouter">
-                   <div id="visitappend"></div>
+                   <div id="visitappend">
+                       <label>Nom du joueur et heure de marquage</label>
+                    {% for key, resultat in resultats %} 
+                       <div class="blockvisit">                           
+                          
+                            {%if resultat.equipe == equipevisit.id%}
+                            <select name="visitjoueur[]" class="span2">
+                             {% for joueur in jreqvisits %}
+                                    <option value="{{joueur.id}}" {%if resultat.joueur == joueur.id%} selected{%endif%}> {{joueur.nom}} </option>        
+                             {% endfor %}
+                             </select> 
+                            <input type="time" name="visittime[]" class="span1" value="{{resultat.date_but}}"> 
+                                <script> $('#nbbutvisit').val({{loop.index}});</script>
+                              {%endif%}                          
+                       </div>
+                    {% endfor %}
+                   </div>
                </div>
                     <div class="span11"><hr></div>
                     <div class="span3 offset4" style="margin-top: 30px">
@@ -65,6 +77,7 @@
 {%block script%}
 <script language="javascript">
 $(document).ready(function(){
+    
     $('#clickrecev').on('click', function()
     {
             var res = $('#nbbutrecev').val();
