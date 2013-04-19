@@ -13,7 +13,6 @@
                 </div>
                 
                <div class="span5 offset1">
-                   
                    <p><strong>Equipe Receveur :</strong> {{equiperecev.nom_equipe}}</p>
                    <hr>
                    
@@ -92,7 +91,7 @@ $(document).ready(function(){
                             valeur += '<div class="blockvisit">' ;
                             valeur += '<label>Nom du joueur et temp de marquage<label>' ;
                             valeur += '<select name="visitjoueur[]" class="span2">';
-                             {% for joueur in jreqrecevs %}
+                             {% for joueur in jreqvisits %}
                                  valeur += '<option value="{{joueur.id}}"> {{joueur.nom}} </option>';           
                              {% endfor %}
                              valeur += '</select> '; 
