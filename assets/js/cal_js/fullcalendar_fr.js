@@ -4741,6 +4741,7 @@ function DayEventRenderer() {
 	
 	
 	function daySegHTML(segs) { // also sets seg.left and seg.outerWidth
+                var maDate = new Date();
 		var rtl = opt('isRTL');
 		var i;
 		var segCnt=segs.length;
@@ -4757,11 +4758,29 @@ function DayEventRenderer() {
 		var right;
 		var skinCss;
 		var html = '';
+                
+                //seg = segs[0];
+                //event = seg.event;
+                
+                //return event.start.toLocaleString();
+                
+                
 		// calculate desired position/dimensions, create html
 		for (i=0; i<segCnt; i++) {
 			seg = segs[i];
 			event = seg.event;
-			classes = ['fc-event', 'fc-event-hori'];
+			//classes = ['fc-event', 'fc-event-hori'];
+                        classes = ['fc-event-hori'];
+                        
+                        /**/
+                        if(maDate < event.start) {
+                            classes.push('fc-event-red');
+                        }
+                        else {
+                            classes.push('fc-event');
+                        }
+                        /**/
+                        
 			if (isEventDraggable(event)) {
 				classes.push('fc-event-draggable');
 			}

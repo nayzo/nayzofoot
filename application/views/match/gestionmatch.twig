@@ -4,9 +4,9 @@
 
 {% block link_css %}
 {{ parent() }}
-<link href='{{ cal_css_url('theme') }}' rel='stylesheet' />
 <link href='{{ cal_css_url('fullcalendar') }}' rel='stylesheet' />
 <link href='{{ cal_css_url('fullcalendar.print') }}' rel='stylesheet' media='print' />
+<link href='{{ cal_css_url('theme') }}' rel='stylesheet' />
 <link href='{{ cal_css_url('new') }}' rel='stylesheet' />
 {% endblock link_css %}
 
