@@ -73,10 +73,12 @@ class Match_model extends CI_Model {
         $this->db->delete('match');
     }
     
-    public function get_match_resultats($id){
-        $this->db->select('*')
-                ->from('resultatmatch')
-                ->where('match', $id);
+    public function get_match_resultats($id)
+    {
+        $this->db->select('*');
+        $this->db->from('resultatmatch');
+        $this->db->join('joueur', 'joueur.id = resultatmatch.joueur')
+                 ->where('resultatmatch.match', $id);
         $query = $this->db->get();
         return $query->result();
     }
