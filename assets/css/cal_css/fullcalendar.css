@@ -258,13 +258,20 @@ html .fc,
 	font-size: .85em;
 	cursor: default;
 	}
+        
+.fc-event-red {
+	border: 1px solid rgb(199, 10, 10); /* default BORDER color */
+	background-color: rgb(199, 10, 10); /* default BACKGROUND color */
+	color: #fff;               /* default TEXT color */
+	font-size: .85em;
+	cursor: default;
+	}
 
-a.fc-event {
+a.fc-event, a.fc-event-red {
 	text-decoration: none;
 	}
 	
-a.fc-event,
-.fc-event-draggable {
+a.fc-event, a.fc-event-red, .fc-event-draggable {
 	cursor: pointer;
 	}
 	
