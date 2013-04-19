@@ -221,7 +221,8 @@ class Match extends CI_Controller {
                 $data['equipevisit'] = $this->equipe_model->get_equipe($data['match']->equipe_visit)->row();
                 $data['jreqrecevs'] = $this->joueur_model->get_joueur_by_equipe($data['match']->equipe_recev);
                 $data['jreqvisits'] = $this->joueur_model->get_joueur_by_equipe($data['match']->equipe_visit);
-                $this->twig->render('resultat/ajoutresultat', $data);
+                $data['resultats'] = $this->match_model->get_match_resultats($idmatch);
+                $this->twig->render('resultat/modifierresultat', $data);
             }
             else 
             {
