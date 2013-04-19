@@ -4044,7 +4044,18 @@ function AgendaEventRenderer() {
 		var html = "<";
 		var url = event.url;
 		var skinCss = getSkinCss(event, opt);
-		var classes = ['fc-event', 'fc-event-vert'];
+		//var classes = ['fc-event', 'fc-event-vert'];
+                var classes = ['fc-event-vert'];
+                
+                /**/
+                if (event.joue) {
+			classes.push('fc-event');
+		}
+                else {
+                    classes.push('fc-event-green');
+                }
+                /**/
+                
 		if (isEventDraggable(event)) {
 			classes.push('fc-event-draggable');
 		}
@@ -4783,7 +4794,7 @@ function DayEventRenderer() {
                             classes.push('fc-event');
                         }
                         else {
-                            classes.push('fc-event-red');
+                            classes.push('fc-event-green');
                         }
                         /**/
                         
