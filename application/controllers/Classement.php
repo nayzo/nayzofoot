@@ -121,7 +121,7 @@ class Classement extends CI_Controller {
     
     function coupeliguefeminin()
     {
-        $ligue = 'Football Féminin';
+        $ligue = 'Football Feminin';
         $data['ligue'] = $ligue;
         $data['classement'] = $this->equipe_model->list_equies_ligue_coupe($ligue);
         $this->twig->render('classement/coupe', $data);

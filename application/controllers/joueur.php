@@ -108,7 +108,7 @@ class Joueur extends CI_Controller {
             if(!$id) redirect('/');
             $data['joueur'] = $this->joueur_model->get_joueur($id)->row();
             if(!$data['joueur']) redirect('/');
-            $data['equipe'] = $this->equipe_model->get_equipe($id)->row();
+            $data['equipe'] = $this->equipe_model->get_equipe($data['joueur']->equipe)->row();
             $this->twig->render('joueur/voirjoueur', $data);
         }
     }
