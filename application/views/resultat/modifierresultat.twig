@@ -81,14 +81,21 @@ $(document).ready(function(){
     $('#clickrecev').on('click', function()
     {
             var res = $('#nbbutrecev').val();
-            if(res < 0)
+            if(res == 0)
+            {
+                //$('.blockreciv').remove();   visitappend
+                $('#recevappend').html('');
+            }
+            else if(res < 0)
             {
                 alert('le nombre de but doit être supèrieur à zero');
                 $('#nbbutrecev').val(0);
+                $('#recevappend').html('');
             }
             else if( res > 0)
             {
-                    $('.blockreciv').remove();  
+                    //$('.blockreciv').remove();  
+                    $('#recevappend').html('');
                     var valeur = '';
                     for(i=1; i<=res; i++)
                     {
@@ -111,14 +118,21 @@ $(document).ready(function(){
     $('#clickvisit').on('click', function()
     {
             var res = $('#nbbutvisit').val();
-            if(res < 0)
+            if(res == 0)
+            {
+               // $('.nbbutvisit').remove();  
+               $('#visitappend').html('');
+            }
+            else if(res < 0)
             {
                 alert('le nombre de but doit être supèrieur à zero');
                 $('#nbbutvisit').val(0);
+                $('#visitappend').html('');
             }
             else if( res > 0)
             {
-                    $('.blockvisit').remove();  
+                   // $('.blockvisit').remove();  
+                   $('#visitappend').html('');
                     var valeur = '';
                     for(i=1; i<=res; i++)
                     {

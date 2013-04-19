@@ -227,6 +227,8 @@ class Match extends CI_Controller {
             }
             else 
             {
+                // suppression des resultats de la BD
+                $this->mutch_model->supprimer_resultat_match($idmatch);
                 // partie equipe receveur
                 $recevjoueurs = $this->input->post('recevjoueur');
                 if($recevjoueurs)
@@ -259,44 +261,102 @@ class Match extends CI_Controller {
                     $datavisit['date_but'] = $visittimes[$i];
                     $this->match_model->add_resultat_match($datavisit);
                 }
+                //update classement
+                $resequimatch_rec = $data['match']->resultat_equipe_recev;
+                $resequimatch_vis = $data['match']->resultat_equipe_visit;
+        if($data['match']->categorie == 'championnat')
+        {            
+                if($resequimatch_vis > $resequimatch_rec)
+                {
+                    if($counttablvisit < $counttablrecev)
+                    {
+                        $this->classement_model->add_point_championnat($data['match']->equipe_visit, -3);
+                        $this->classement_model->add_point_championnat($data['match']->equipe_recev, 3); 
+                    }
+                    else if($counttablvisit == $counttablrecev)
+                    {
+                        $this->classement_model->add_point_championnat($data['match']->equipe_visit, -2);
+                        $this->classement_model->add_point_championnat($data['match']->equipe_recev, 1);  
+                    }
+                }
+                else if($resequimatch_vis < $resequimatch_rec)
+                {
+                    if($counttablvisit > $counttablrecev)
+                    {
+                        $this->classement_model->add_point_championnat($data['match']->equipe_visit, 3);
+                        $this->classement_model->add_point_championnat($data['match']->equipe_recev, -3); 
+                    }
+                    else if($counttablvisit == $counttablrecev)
+                    {
+                        $this->classement_model->add_point_championnat($data['match']->equipe_visit, 1);
+                        $this->classement_model->add_point_championnat($data['match']->equipe_recev, -2);  
+                    }
+                }
+                else if($resequimatch_vis == $resequimatch_rec)
+                {
+                    if($counttablvisit > $counttablrecev)
+                    {
+                        $this->classement_model->add_point_championnat($data['match']->equipe_visit, 2);
+                        $this->classement_model->add_point_championnat($data['match']->equipe_recev, -1); 
+                    }
+                    else if($counttablvisit < $counttablrecev)
+                    {
+                        $this->classement_model->add_point_championnat($data['match']->equipe_visit, -1);
+                        $this->classement_model->add_point_championnat($data['match']->equipe_recev, 2);  
+                    }
+                }
+                
+        }
+        else if($data['match']->categorie == 'coupe')
+        {
+                if($resequimatch_vis > $resequimatch_rec)
+                {
+                    if($counttablvisit < $counttablrecev)
+                    {
+                        $this->classement_model->add_point_coupe($data['match']->equipe_visit, -3);
+                        $this->classement_model->add_point_coupe($data['match']->equipe_recev, 3); 
+                    }
+                    else if($counttablvisit == $counttablrecev)
+                    {
+                        $this->classement_model->add_point_coupe($data['match']->equipe_visit, -2);
+                        $this->classement_model->add_point_coupe($data['match']->equipe_recev, 1);  
+                    }
+                }
+                else if($resequimatch_vis < $resequimatch_rec)
+                {
+                    if($counttablvisit > $counttablrecev)
+                    {
+                        $this->classement_model->add_point_coupe($data['match']->equipe_visit, 3);
+                        $this->classement_model->add_point_coupe($data['match']->equipe_recev, -3); 
+                    }
+                    else if($counttablvisit == $counttablrecev)
+                    {
+                        $this->classement_model->add_point_coupe($data['match']->equipe_visit, 1);
+                        $this->classement_model->add_point_coupe($data['match']->equipe_recev, -2);  
+                    }
+                }
+                else if($resequimatch_vis == $resequimatch_rec)
+                {
+                    if($counttablvisit > $counttablrecev)
+                    {
+                        $this->classement_model->add_point_coupe($data['match']->equipe_visit, 2);
+                        $this->classement_model->add_point_coupe($data['match']->equipe_recev, -1); 
+                    }
+                    else if($counttablvisit < $counttablrecev)
+                    {
+                        $this->classement_model->add_point_coupe($data['match']->equipe_visit, -1);
+                        $this->classement_model->add_point_coupe($data['match']->equipe_recev, 2);  
+                    }
+                } 
+        }
+                // update resultat de table match
                 $tabres['id'] = $idmatch;
                 $tabres['recev'] = $counttablrecev;
                 $tabres['visit'] = $counttablvisit;
+
                 $this->match_model->update_match_resultat_equipe($tabres);
-                //update classement
-                if($data['match']->categorie == 'championnat')
-                {
-                    if($counttablrecev == $counttablvisit)
-                    {
-                        $this->classement_model->add_point_championnat($data['match']->equipe_visit, 1);
-                        $this->classement_model->add_point_championnat($data['match']->equipe_recev, 1);
-                    }
-                    else if($counttablrecev < $counttablvisit)
-                    {
-                        $this->classement_model->add_point_championnat($data['match']->equipe_visit, 3);
-                    }
-                    else
-                    {
-                        $this->classement_model->add_point_championnat($data['match']->equipe_recev, 3); 
-                    }
-                }
-                else if($data['match']->categorie == 'coupe')
-                {
-                    if($counttablrecev == $counttablvisit)
-                    {
-                        $this->classement_model->add_point_coupe($data['match']->equipe_visit, 1);
-                        $this->classement_model->add_point_coupe($data['match']->equipe_recev, 1);
-                    }
-                    else if($counttablrecev < $counttablvisit)
-                    {
-                        $this->classement_model->add_point_coupe($data['match']->equipe_visit, 3);
-                    }
-                    else
-                    {
-                        $this->classement_model->add_point_coupe($data['match']->equipe_recev, 3); 
-                    }
-                }
-                redirect('/');
+                
+                redirect("/match/voir/$idmatch");
             }
         }
     }

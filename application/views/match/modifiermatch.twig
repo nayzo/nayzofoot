@@ -45,7 +45,7 @@
                 <div class="control-group">
                     <label class="control-label" for="categorie">Catégorie <span class="required">*</span></label>
                     <div class="controls">
-                       <select name="categorie" required="required" selected="{{ set_value('categorie', match.categorie) }}">
+                       <select name="categorie" required="required" disabled>
                             <option value="championnat" {%if match.categorie=='championnat'%} selected="selected" {%endif%}>championnat</option>
                             <option value="coupe" {%if match.categorie=='coupe'%} selected="selected" {%endif%}>coupe</option>
                         </select>

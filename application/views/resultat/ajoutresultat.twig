@@ -47,7 +47,11 @@ $(document).ready(function(){
     $('#clickrecev').on('click', function()
     {
             var res = $('#nbbutrecev').val();
-            if(res < 0)
+            if(res == 0)
+            {
+                $('.blockreciv').remove();  
+            }
+            else if(res < 0)
             {
                 alert('le nombre de but doit être supèrieur à zero');
                 $('#nbbutrecev').val(0);
@@ -77,7 +81,11 @@ $(document).ready(function(){
     $('#clickvisit').on('click', function()
     {
             var res = $('#nbbutvisit').val();
-            if(res < 0)
+            if(res == 0)
+            {
+                $('.blockvisit').remove();  
+            }
+            else if(res < 0)
             {
                 alert('le nombre de but doit être supèrieur à zero');
                 $('#nbbutvisit').val(0);
