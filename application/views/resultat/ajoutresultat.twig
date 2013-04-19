@@ -49,22 +49,22 @@ $(document).ready(function(){
             var res = $('#nbbutrecev').val();
             if(res == 0)
             {
-                $('.blockreciv').remove();  
+                $('#recevappend').html('');
             }
             else if(res < 0)
             {
                 alert('le nombre de but doit être supèrieur à zero');
                 $('#nbbutrecev').val(0);
+                $('#recevappend').html('');
             }
             else if( res > 0)
             {
-                    $('.blockreciv').remove();  
-                    var valeur = '';
+                    $('#recevappend').html('');
+                    var valeur = '<label>Nom du joueur et heure de marquage</label>' ;
                     for(i=1; i<=res; i++)
                     {
                        
                             valeur += '<div class="blockreciv">' ;
-                            valeur += '<label>Nom du joueur et heure de marquage</label>' ;
                             valeur += '<select name="recevjoueur[]" class="span2">';
                              {% for joueur in jreqrecevs %}
                                   valeur += '<option value="{{joueur.id}}"> {{joueur.nom}} </option>';           
@@ -83,21 +83,21 @@ $(document).ready(function(){
             var res = $('#nbbutvisit').val();
             if(res == 0)
             {
-                $('.blockvisit').remove();  
+                $('#visitappend').html('');
             }
             else if(res < 0)
             {
                 alert('le nombre de but doit être supèrieur à zero');
                 $('#nbbutvisit').val(0);
+                $('#visitappend').html('');
             }
             else if( res > 0)
             {
-                    $('.blockvisit').remove();  
-                    var valeur = '';
+                    $('#visitappend').html('');
+                    var valeur = '<label>Nom du joueur et heure de marquage</label>' ;
                     for(i=1; i<=res; i++)
                     {
-                            valeur += '<div class="blockvisit">' ;
-                            valeur += '<label>Nom du joueur et heure de marquage</label>' ;
+                            valeur += '<div class="blockvisit">' ;                    
                             valeur += '<select name="visitjoueur[]" class="span2">';
                              {% for joueur in jreqvisits %}
                                  valeur += '<option value="{{joueur.id}}"> {{joueur.nom}} </option>';           

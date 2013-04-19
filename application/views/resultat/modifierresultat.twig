@@ -21,7 +21,7 @@
                    <input id="clickrecev" type="button" class="btn" value="Ajouter">
                    <div id="recevappend">
                        <label>Nom du joueur et heure de marquage</label>
-                    {% for key, resultat in resultats %} 
+                    {% for resultat in resultats %} 
                        <div class="blockreciv">                           
                           
                             {%if resultat.equipe == equiperecev.id%}
@@ -47,7 +47,7 @@
                    <input id="clickvisit" type="button" class="btn" value="Ajouter">
                    <div id="visitappend">
                        <label>Nom du joueur et heure de marquage</label>
-                    {% for key, resultat in resultats %} 
+                    {% for resultat in resultats %} 
                        <div class="blockvisit">                           
                           
                             {%if resultat.equipe == equipevisit.id%}
@@ -96,12 +96,10 @@ $(document).ready(function(){
             {
                     //$('.blockreciv').remove();  
                     $('#recevappend').html('');
-                    var valeur = '';
+                    var valeur = '<label>Nom du joueur et heure de marquage</label>' ;
                     for(i=1; i<=res; i++)
-                    {
-                       
-                            valeur += '<div class="blockreciv">' ;
-                            valeur += '<label>Nom du joueur et heure de marquage</label>' ;
+                    {                       
+                            valeur += '<div class="blockreciv">' ;                            
                             valeur += '<select name="recevjoueur[]" class="span2">';
                              {% for joueur in jreqrecevs %}
                                   valeur += '<option value="{{joueur.id}}"> {{joueur.nom}} </option>';           
@@ -133,11 +131,10 @@ $(document).ready(function(){
             {
                    // $('.blockvisit').remove();  
                    $('#visitappend').html('');
-                    var valeur = '';
+                    var valeur = '<label>Nom du joueur et heure de marquage</label>' ;
                     for(i=1; i<=res; i++)
                     {
                             valeur += '<div class="blockvisit">' ;
-                            valeur += '<label>Nom du joueur et heure de marquage</label>' ;
                             valeur += '<select name="visitjoueur[]" class="span2">';
                              {% for joueur in jreqvisits %}
                                  valeur += '<option value="{{joueur.id}}"> {{joueur.nom}} </option>';           

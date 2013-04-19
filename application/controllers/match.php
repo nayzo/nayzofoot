@@ -65,7 +65,7 @@ class Match extends CI_Controller {
                 $this->twig->render('match/ajoutmatch', $data);
             } else {
                 $this->match_model->add_match();
-                redirect('/equipe');
+                redirect('/match');
             }
         }
     }
