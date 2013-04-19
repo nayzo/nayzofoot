@@ -1,0 +1,57 @@
+{% extends "layout.twig" %}
+
+{% block title %} {{parent()}} - Gestion des Matchs{% endblock title %}
+
+{% block link_css %}
+{{ parent() }}
+<link href='{{ cal_css_url('theme') }}' rel='stylesheet' />
+<link href='{{ cal_css_url('fullcalendar') }}' rel='stylesheet' />
+<link href='{{ cal_css_url('fullcalendar.print') }}' rel='stylesheet' media='print' />
+<link href='{{ cal_css_url('new') }}' rel='stylesheet' />
+{% endblock link_css %}
+
+{% block container%}
+    <div class="span12 well"> 
+        <h4>Gestion des Matchs </h4>
+        <hr>
+        <!--
+       <div class="btn-toolbar">
+            <a href="/joueur/ajout" class="btn pull-right"><i class="icon-plus-sign"></i> <strong>Ajouter un Match</strong></a>
+       </div> -->
+        
+        <div id='calendar'></div>
+        
+        
+{% endblock container%}
+        
+{% block script %}
+<script src='{{ cal_js_url('jquery-1.9.1.min') }}'></script>
+<script src='{{ cal_js_url('jquery-ui-1.10.2.custom.min') }}'></script>
+<script src='{{ cal_js_url('fullcalendar.min') }}'></script>
+
+<script>
+
+	$(document).ready(function() {
+	
+		var date = new Date();
+		var d = date.getDate();
+		var m = date.getMonth();
+		var y = date.getFullYear();
+		
+		$('#calendar').fullCalendar({
+			theme: true,
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			editable: true,
+			events: [{{ val }}]
+		});
+		
+	});
+
+</script>
+{% endblock script %}
+
+

@@ -5,9 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title%}FOOTBALL {%endblock title%}</title>
         <!--stylesheet-->
+        {% block link_css %}
        	<link href="{{base_url()}}assets/css/style.css" rel="stylesheet" type="text/css"  />
        	<link href="{{base_url()}}assets/css/bootstrap.css" rel="stylesheet" type="text/css"  />
         <link href="{{base_url()}}assets/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
+        {% endblock link_css %}
     </head>
     <body>
         {% block nav%}
@@ -78,10 +80,11 @@
           {% block container%}{% endblock container%}
         </section>
         
-        {#---SCRIPT---#} 
+        {#---SCRIPT---#}
+       {% block script %}
        <script src="{{base_url()}}assets/js/jquery-1.9.1.min.js"></script>
        <script src="{{base_url()}}assets/js/bootstrap.js"></script>
        <script src="{{base_url()}}assets/js/foot.js"></script>
-       {%block script%}{%endblock script%}
+       {% endblock script %}
     </body>
 </html>
