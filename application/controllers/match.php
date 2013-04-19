@@ -13,7 +13,6 @@ class Match extends CI_Controller {
         $this->load->model('arbitre_model');
         $this->load->model('joueur_model');
         $this->load->model('classement_model');
-        $this->load->model('match_model', 'matchManager');
         $this->twig->addFunction('getsessionhelper');
     }
 
@@ -24,7 +23,7 @@ class Match extends CI_Controller {
         {
             $data = array();
             $str = '';
-            $res = $this->matchManager->get_all();
+            $res = $this->match_model->get_all();
             
             foreach($res as $row)
             {
@@ -36,6 +35,10 @@ class Match extends CI_Controller {
                 $str .= date('m', strtotime($row->date_match)) - 1;
                 $str .= ', ';
                 $str .= date('d', strtotime($row->date_match));
+                $str .= ', ';
+                $str .= date('H', strtotime($row->heur_match));
+                $str .= ', ';
+                $str .= date('i', strtotime($row->heur_match));
                 $str .= '), url: ';
                 $str .= '\'' . base_url() . 'match/voir/' . $row->id . '\'';
                 $str .= '}, ';
