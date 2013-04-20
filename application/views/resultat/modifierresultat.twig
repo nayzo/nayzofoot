@@ -1,79 +1,125 @@
 {% extends "layout.twig" %}
 
 {% block title %} {{parent()}} - Modifier Resultat Match{% endblock title %}
-
+{% block navbar%}
+    <div class="navbar">
+        <div class="navbar-inner">
+           <ul class="nav">
+             <li><a href="/saison">Gestion Saison</a></li>
+             <li class="divider-vertical"></li>
+             <li><a href="/equipe">Gestion Equipe</a></li>
+             <li class="divider-vertical"></li>
+             <li><a href="/joueur">Gestion Joueurs</a></li>
+             <li class="divider-vertical"></li>
+             <li class="active"><a href="/match">Gestion Match</a></li>
+             <li class="divider-vertical"></li>
+             <li><a href="/arbitre">Gestion Arbitre</a></li>
+             <li class="divider-vertical"></li>
+             <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Championnat <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/classement/champligueun">Football Pro ligue 1</a>
+                        <li><a href="/classement/champliguedeux">Football Pro ligue 2</a>
+                        <li><a href="/classement/champligueamateur">Football Amateur</a>
+                        <li><a href="/classement/champliguefeminin">Football Féminin</a>
+                        <li><a href="/classement/champliguefutsal">Futsal</a>
+                    </ul>
+             </li>
+             <li class="divider-vertical"></li>
+             <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coupe <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/classement/coupeligueun">Football Pro ligue 1</a>
+                    <li><a href="/classement/coupeliguedeux">Football Pro ligue 2</a>
+                    <li><a href="/classement/coupeligueamateur">Football Amateur</a>
+                    <li><a href="/classement/coupeliguefeminin">Football Féminin</a>
+                    <li><a href="/classement/coupeliguefutsal">Futsal</a>
+                </ul>
+             </li>
+           </ul>
+        </div>
+    </div>
+{% endblock navbar%}
 {% block container%}
-    <div class="span11 well"> 
-        <h4 class="text-center">Modifier Resultat Match</h4>
-        <hr>
-         <form action='/match/modifresultat/{{match.id}}' method="POST" class="form-horizontal" >
-            <fieldset>
-                <div class="control-group">
-                    <div class="error span5">{{ validation_errors() }}</div>
-                </div>
-                
-               <div class="span5 offset1">
-                   <p><strong>Equipe Receveur :</strong> {{equiperecev.nom_equipe}}</p>
-                   <hr>
-                   
-                   <label>Nombre de But</label>
-                   <input type="number" name="sendvalbutrecev" class="span2" id="nbbutrecev" value="0"/>
-                   <input id="clickrecev" type="button" class="btn" value="Ajouter">
-                   <div id="recevappend">
-                       <label>Nom du joueur et heure de marquage</label>
-                       {% set compteurrecev = 0 %}
-                    {% for resultat in resultats %} 
-                       <div class="blockreciv">                           
-                          
-                            {%if resultat.equipe == equiperecev.id%}
-                                {% set compteurrecev = compteurrecev + 1 %}
-                            <select name="recevjoueur[]" class="span2">
-                             {% for joueur in jreqrecevs %}
-                                    <option value="{{joueur.id}}" {%if resultat.joueur == joueur.id%} selected{%endif%}> {{joueur.nom}} </option>        
-                             {% endfor %}
-                             </select> 
-                            <input type="time" name="recevtime[]" class="span1" value="{{resultat.date_but}}"> 
-                                <script> $('#nbbutrecev').val({{compteurrecev}});</script>
-                              {%endif%}                          
+    <div class="well">
+        <div class="row">
+            <div class="span11">
+                <h3 class="text-center">Modifier une Résultat d'un Match</h3>
+                <hr>
+                <form action='/match/modifresultat/{{match.id}}' method="POST" class="form-horizontal" >
+                <fieldset>
+                    <div class="control-group">
+                        <div class="error span5">{{ validation_errors() }}</div>
+                    </div>
+
+                    <div class="span5 well">
+                       <p><img src="{{base_url()}}uploads/{{equiperecev.logo}}" alt="" class="img-polaroid img-size"></p>    
+                       <p class="text-center"><strong>Equipe Receveur :</strong> {{equiperecev.nom_equipe}}</p>
+                       <hr>
+                       <div class="offset1">
+                           <label>Nombre de But</label>
+                           <input type="number" name="sendvalbutrecev" class="span2" id="nbbutrecev" value="0"/>
+                           <input id="clickrecev" type="button" class="btn" value="Ajouter">
+                           <div id="recevappend">
+                               <label>Nom du joueur et heure de marquage</label>
+                               {% set compteurrecev = 0 %}
+                               {% for resultat in resultats %} 
+                               <div class="blockreciv">   
+                                    {%if resultat.equipe == equiperecev.id%}
+                                        {% set compteurrecev = compteurrecev + 1 %}
+                                    <select name="recevjoueur[]" class="span2">
+                                     {% for joueur in jreqrecevs %}
+                                            <option value="{{joueur.id}}" {%if resultat.joueur == joueur.id%} selected{%endif%}> {{joueur.nom}} </option>        
+                                     {% endfor %}
+                                     </select> 
+                                    <input type="time" name="recevtime[]" class="span1" value="{{resultat.date_but}}"> 
+                                        <script> $('#nbbutrecev').val({{compteurrecev}});</script>
+                                      {%endif%}                          
+                               </div>
+                              {% endfor %}
+                           </div>
                        </div>
-                    {% endfor %}
                    </div>
-               </div>
-               
-   
-              <div class="span5">
-                   <p><strong>Equipe Visiteur :</strong> {{equipevisit.nom_equipe}}</p>
-                   <hr>
-                   <label>Nombre de But</label>
-                   <input type="number" name="sendvalbutvisit" class="span2" id="nbbutvisit" value="0"/>
-                   <input id="clickvisit" type="button" class="btn" value="Ajouter">
-                   <div id="visitappend">
-                       <label>Nom du joueur et heure de marquage</label>
-                       {% set compteurrecev = 0 %}
-                    {% for resultat in resultats %} 
-                       <div class="blockvisit">                           
-                          
-                            {%if resultat.equipe == equipevisit.id%}
-                                 {% set compteurrecev = compteurrecev + 1 %}
-                            <select name="visitjoueur[]" class="span2">
-                             {% for joueur in jreqvisits %}
-                                    <option value="{{joueur.id}}" {%if resultat.joueur == joueur.id%} selected{%endif%}> {{joueur.nom}} </option>        
+
+                    <div class="span5 well">
+                       <p><img src="{{base_url()}}uploads/{{equipevisit.logo}}" alt="" class="img-polaroid img-size"></p>    
+                       <p class="text-center"><strong>Equipe Visiteur :</strong> {{equipevisit.nom_equipe}}</p>
+                       <hr>
+                       <div class="offset1">
+                            <label>Nombre de But</label>
+                            <input type="number" name="sendvalbutvisit" class="span2" id="nbbutvisit" value="0"/>
+                            <input id="clickvisit" type="button" class="btn" value="Ajouter">
+                            <div id="visitappend">
+                                <label>Nom du joueur et heure de marquage</label>
+                                {% set compteurrecev = 0 %}
+                             {% for resultat in resultats %} 
+                                <div class="blockvisit">                           
+
+                                     {%if resultat.equipe == equipevisit.id%}
+                                          {% set compteurrecev = compteurrecev + 1 %}
+                                     <select name="visitjoueur[]" class="span2">
+                                      {% for joueur in jreqvisits %}
+                                             <option value="{{joueur.id}}" {%if resultat.joueur == joueur.id%} selected{%endif%}> {{joueur.nom}} </option>        
+                                      {% endfor %}
+                                      </select> 
+                                     <input type="time" name="visittime[]" class="span1" value="{{resultat.date_but}}"> 
+                                         <script> $('#nbbutvisit').val({{compteurrecev}});</script>
+                                       {%endif%}                          
+                                </div>
                              {% endfor %}
-                             </select> 
-                            <input type="time" name="visittime[]" class="span1" value="{{resultat.date_but}}"> 
-                                <script> $('#nbbutvisit').val({{compteurrecev}});</script>
-                              {%endif%}                          
+                            </div>
                        </div>
-                    {% endfor %}
                    </div>
-               </div>
+                    
                     <div class="span11"><hr></div>
+                    
                     <div class="span3 offset4" style="margin-top: 30px">
-                      
-                        <input class="btn btn-block btn-info" type="submit" value="Ajouter Résultat">
-              </div>
-            </fieldset>
-        </form>   
+                        <input class="btn btn-block btn-danger" type="submit" value="Ajouter Résultat">
+                  </div>
+                </fieldset>
+               </form> 
+            </div>
+        </div>
     </div>
 
 {% endblock container%}

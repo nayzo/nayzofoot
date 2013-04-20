@@ -68,7 +68,7 @@ class Saison extends CI_Controller {
             if(getsessionhelper()['saisonid'] == $id)
             {
                 
-                $data['saisonerreur'] =' <div class="error">Impossible de supprimer la saison courante</div>';
+                $data['saisonerreur'] ='<p>Impossible de supprimer la saison courante</p>';
                 $data['saisons'] = $this->saison_model->get_all();
                 $this->twig->render('saison/gestionsaison', $data);
             }

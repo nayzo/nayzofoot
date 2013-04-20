@@ -1,81 +1,126 @@
 {% extends "layout.twig" %}
 
 {% block title %} {{parent()}} - Détail Match{% endblock title %}
-
-{% block container%}
-<div class="span11 well"> 
-    <ul class="nav nav-pills">
-        <li><h3>Détails Match </h3></li>
-        <li class="pull-right"><a href="/match/modifier/{{match.id}}" class="btn"><i class="icon-edit"></i> Modifier match</a></li>
-        <li class="pull-right"><a href="/match/supprimer/{{match.id}}" class="btn deleteadmin"><i class="icon-trash"></i> Supprimer match</a></li>
-      {%if match.resultat_equipe_visit == -1%}
-        <li class="pull-right"><a href="/match/resultat/{{match.id}}" class="btn">Affecter Résultat</a></li>
-      {%endif%}
-    </ul>
-    <hr>
-    <div class="span10"  style="border-bottom: 1px solid #cccccc">
-        <p><strong>Type : </strong>{{match.type}}</p>
-        <p><strong>saison : </strong>{{getsessionhelper()['saison']}}</p>
-        <p><strong>categorie : </strong>{{match.categorie}}</p>
-        <p><strong>Date et heure match : </strong>{{match.date_match}} | {{match.heur_match}}</p>
-        <p><strong>Stade : </strong>{{match.stade}}</p>
-        <p><strong>Arbitre : </strong>{{arbitre.nom}}</p>
-    </div>
-    <div class="span2" style="margin: 20px 0 20px 337px;border-right: 1px solid #cccccc">
-        <p><strong>Equipe Receveur</strong></p>
-        <span>{{equipe_recev.nom_equipe}}</span>
-        <img src="{{base_url()}}uploads/{{equipe_recev.logo}}" alt="" class="img-polaroid" style="height: 50px;width: 50px">
-    </div>
-    <div class="span2" style="margin-top: 20px;">
-        <p><strong>Equipe Visiteur</strong></p>
-        <img src="{{base_url()}}uploads/{{equipe_visit.logo}}" alt="" class="img-polaroid" style="height: 50px;width: 50px">
-        <span>{{equipe_visit.nom_equipe}}</span>
-    </div>
-        {% if match.resultat_equipe_visit != -1 %}
-    <div class="span10">
-        <ul class="nav nav-pills" style="border-bottom: 1px solid #cccccc">
-            <li class="pull-left"><h4>Résultat du Match</h4></li>
-            <li class="pull-right"><a href="/match/modifresultat/{{match.id}}" class="btn"><i class="icon-edit"></i> Modifier Résultat</a></li>
-        </ul>
-    </div>
-
-    <table class="table table-bordered table-striped span4 offset1">
-        <thead>
-            <tr>
-                <td colspan="2"><h5 class="btn btn-danger pull-right">{{match.resultat_equipe_recev}}</h5></td>
-            </tr>
-        </thead>
-        <tbody>
-                {% for resultat in resultats %}
-                    {% if resultat.equipe==match.equipe_recev%}
-                <tr>
-                    <td>{{resultat.nom}}</td>
-                    <td>{{resultat.date_but}}</td>
-                </tr>
-                    {%endif%}
-                {%endfor%}
-            </tbody>
-        </table>
-
-        <table class="table table-bordered table-striped span4" style="margin-left: 1px;">
-            <thead>
-                <tr>
-                    <td colspan="2"><h5 class="btn btn-danger">{{match.resultat_equipe_visit}}</h5></td>
-                </tr>
-            </thead>
-            <tbody>
-                {% for resultat in resultats %}
-                    {% if resultat.equipe==match.equipe_visit%}
-                    <tr>
-                        <td>{{resultat.nom}}</td>
-                        <td>{{resultat.date_but}}</td>
-                    </tr>
-                    {%endif%}
-                {%endfor%}
-                </tbody>
-            </table>
-         {%endif%}
-
+{% block navbar%}
+    <div class="navbar">
+        <div class="navbar-inner">
+           <ul class="nav">
+             <li><a href="/saison">Gestion Saison</a></li>
+             <li class="divider-vertical"></li>
+             <li><a href="/equipe">Gestion Equipe</a></li>
+             <li class="divider-vertical"></li>
+             <li><a href="/joueur">Gestion Joueurs</a></li>
+             <li class="divider-vertical"></li>
+             <li class="active"><a href="/match">Gestion Match</a></li>
+             <li class="divider-vertical"></li>
+             <li><a href="/arbitre">Gestion Arbitre</a></li>
+             <li class="divider-vertical"></li>
+             <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Championnat <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/classement/champligueun">Football Pro ligue 1</a>
+                        <li><a href="/classement/champliguedeux">Football Pro ligue 2</a>
+                        <li><a href="/classement/champligueamateur">Football Amateur</a>
+                        <li><a href="/classement/champliguefeminin">Football Féminin</a>
+                        <li><a href="/classement/champliguefutsal">Futsal</a>
+                    </ul>
+             </li>
+             <li class="divider-vertical"></li>
+             <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coupe <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/classement/coupeligueun">Football Pro ligue 1</a>
+                    <li><a href="/classement/coupeliguedeux">Football Pro ligue 2</a>
+                    <li><a href="/classement/coupeligueamateur">Football Amateur</a>
+                    <li><a href="/classement/coupeliguefeminin">Football Féminin</a>
+                    <li><a href="/classement/coupeliguefutsal">Futsal</a>
+                </ul>
+             </li>
+           </ul>
         </div>
+    </div>
+{% endblock navbar%}
+{% block container%}
+<div class="well">
+    <div class="row">
+        <div class="span11">
+            <ul class="nav nav-pills">
+                <li><h3>Détails Match </h3></li>
+                <li class="pull-right"><a href="/match/modifier/{{match.id}}" class="btn"><i class="icon-edit"></i> Modifier match</a></li>
+                <li class="pull-right"><a href="/match/supprimer/{{match.id}}" class="btn deleteadmin"><i class="icon-trash"></i> Supprimer match</a></li>
+              {%if match.resultat_equipe_visit == -1%}
+                <li class="pull-right"><a href="/match/resultat/{{match.id}}" class="btn"><i class="icon-check"></i> Affecter Résultat</a></li>
+              {%endif%}
+            </ul>
+            <hr>
+            <div class="span10"  style="border-bottom: 1px solid #cccccc">
+                <div class="span4">
+                    <p><strong>Type : </strong>{{match.type}}</p>
+                    <p><strong>saison : </strong>{{getsessionhelper()['saison']}}</p>
+                    <p><strong>categorie : </strong>{{match.categorie}}</p>
+                </div>
+                <div class="span4">
+                    <p><strong>Date et heure match : </strong>{{match.date_match}} | {{match.heur_match}}</p>
+                    <p><strong>Stade : </strong>{{match.stade}}</p>
+                    <p><strong>Arbitre : </strong>{{arbitre.nom}}</p>
+                </div>
+            </div>
+            <div class="span4 offset1" style="margin-top: 20px;border-right: 1px solid #cccccc">
+                <p><img src="{{base_url()}}uploads/{{equipe_recev.logo}}" alt="" class="img-polaroid img-size"></p>    
+                <p class="text-center"><strong>Equipe Receveur :</strong> {{equipe_recev.nom_equipe}}</p>
+            </div>
+            <div class="span4" style="margin-top: 20px;">
+                <p><img src="{{base_url()}}uploads/{{equipe_visit.logo}}" alt="" class="img-polaroid img-size"></p>    
+                <p class="text-center"><strong>Equipe Visiteur :</strong> {{equipe_visit.nom_equipe}}</p>
+            </div>
+             
+
+            {% if match.resultat_equipe_visit != -1 %}
+                <div class="span10">
+                    <ul class="nav nav-pills" style="border-bottom: 1px solid #cccccc">
+                        <li class="pull-left"><h4>Résultat du Match</h4></li>
+                        <li class="pull-right"><a href="/match/modifresultat/{{match.id}}" class="btn"><i class="icon-edit"></i> Modifier Résultat</a></li>
+                    </ul>
+                </div>
+
+                <table class="table table-bordered table-striped span4 offset1">
+                    <thead>
+                        <tr>
+                            <td colspan="2"><h5 class="btn btn-danger pull-right">{{match.resultat_equipe_recev}}</h5></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for resultat in resultats %}
+                            {% if resultat.equipe==match.equipe_recev%}
+                        <tr>
+                            <td>{{resultat.nom}}</td>
+                            <td>{{resultat.date_but}}</td>
+                        </tr>
+                            {%endif%}
+                        {%endfor%}
+                    </tbody>
+                </table>
+
+                <table class="table table-bordered table-striped span4" style="margin-left: 1px;">
+                    <thead>
+                        <tr>
+                            <td colspan="2"><h5 class="btn btn-danger">{{match.resultat_equipe_visit}}</h5></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for resultat in resultats %}
+                        {% if resultat.equipe==match.equipe_visit%}
+                        <tr>
+                            <td>{{resultat.nom}}</td>
+                            <td>{{resultat.date_but}}</td>
+                        </tr>
+                        {%endif%}
+                    {%endfor%}
+                    </tbody>
+                 </table>
+            {%endif%}
+        </div>
+    </div>
+</div>
 {% endblock container%}
 

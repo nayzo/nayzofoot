@@ -1,118 +1,138 @@
 {% extends "layout.twig" %}
 
 {% block title %} {{parent()}} - Ajouter Equipe {% endblock title %}
-
+{% block navbar%}
+    <div class="navbar">
+        <div class="navbar-inner">
+            <ul class="nav">
+                 <li><a href="/saison">Gestion Saison</a></li>
+                 <li class="divider-vertical"></li>
+                 <li class="active"><a href="/equipe">Gestion Equipe</a></li>
+                 <li class="divider-vertical"></li>
+                 <li><a href="/joueur">Gestion Joueurs</a></li>
+                 <li class="divider-vertical"></li>
+                 <li><a href="/match">Gestion Match</a></li>
+                 <li class="divider-vertical"></li>
+                 <li><a href="/arbitre">Gestion Arbitre</a></li>
+                 <li class="divider-vertical"></li>
+                 <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Championnat <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/classement/champligueun">Football Pro ligue 1</a>
+                            <li><a href="/classement/champliguedeux">Football Pro ligue 2</a>
+                            <li><a href="/classement/champligueamateur">Football Amateur</a>
+                            <li><a href="/classement/champliguefeminin">Football Féminin</a>
+                            <li><a href="/classement/champliguefutsal">Futsal</a>
+                        </ul>
+                 </li>
+                 <li class="divider-vertical"></li>
+                 <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coupe <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/classement/coupeligueun">Football Pro ligue 1</a>
+                        <li><a href="/classement/coupeliguedeux">Football Pro ligue 2</a>
+                        <li><a href="/classement/coupeligueamateur">Football Amateur</a>
+                        <li><a href="/classement/coupeliguefeminin">Football Féminin</a>
+                        <li><a href="/classement/coupeliguefutsal">Futsal</a>
+                    </ul>
+                 </li>
+             </ul>
+        </div>
+    </div>
+{% endblock navbar%}
 {% block container%}
-    <div class="span11 well"> 
-        <h4 class="text-center">Ajouter une Equipe </h4>
-        <hr>
-         <form action='/equipe/ajout' method="POST" class="form-horizontal offset3" enctype="multipart/form-data">
-            <fieldset>
-                <div class="control-group">
-                    <label class="control-label" for="nom_equipe">Nom <span class="required">*</span></label>
-                    <div class="controls">
-                        <input type="text" name="nom_equipe" class="span3" required="required"/>
-                        <div class="erreur">
-                            {{ form_error('nom_equipe') }}         
-                        </div>
-                    </div>
-                </div>
+    <div class="well">
+        <div class="row">
+            <div class="span11">
+                <h3 class="text-center">Ajouter une Equipe</h3>
+                <hr>
+                <div class="span10 offset1">
+                    <form action='/equipe/ajout' method="POST" enctype="multipart/form-data">
+                        <div class="span3">
+                            {#Block nom#}  
+                            <label for="nom_equipe">Nom <span class="required">*</span></label>
+                            <input type="text" name="nom_equipe" class="span3" required="required"/>
+                            <div class="erreur">
+                                {{ form_error('nom_equipe') }}         
+                            </div>
 
-                <div class="control-group">
-                    <label class="control-label" for="entreneur">Entreneur <span class="required">*</span></label>
-                    <div class="controls">
-                        <input type="text" name="entreneur" class="span3" required="required"/>
-                        <div class="erreur">
-                            {{ form_error('entreneur') }}         
+                            {#Block Entreneur#} 
+                            <label for="entreneur">Entreneur <span class="required">*</span></label>
+                            <input type="text" name="entreneur" class="span3" required="required"/>
+                            <div class="erreur">
+                                {{ form_error('entreneur') }}         
+                            </div>
+                             
+                            {#Block Date de création#} 
+                            <label for="date_creation">Date de Création</label>
+                            <input type="date" name="date_creation" class="span3"/>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label" for="date_creation">Date de Création</label>
-                    <div class="controls">
-                        <input type="date" name="date_creation" class="span3"/>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label" for="lieu_origin">Lieu d'origine</label>
-                    <div class="controls">
-                        <select name="lieu_origin" class="span3">
-                            <option value="Ariana">Ariana</option>
-                            <option value="Béja">Béja</option>
-                            <option value="Ben arous">Ben Arous</option>
-                            <option value="Bizerte">Bizerte</option>
-                            <option value="Gafsa">Gafsa</option>
-                            <option value="Jendouba">Jendouba</option>
-                            <option value="Kairouan">Kairouan</option>
-                            <option value="Kasserine">Kasserine</option>
-                            <option value="Kébili">Kébili</option>
-                            <option value="Le Kef">Le Kef</option>
-                            <option value="Mahdia">Mahdia</option>
-                            <option value="La Manouba">La Manouba</option>
-                            <option value="Médenine">Médenine</option>
-                            <option value="Monastir">Monastir</option>
-                            <option value="Nabeul">Nabeul</option>
-                            <option value="Sfax">Sfax</option>
-                            <option value="Sidi Bouzid">Sidi Bouzid</option>
-                            <option value="Siliana">Siliana</option>
-                            <option value="Sousse">Sousse</option>
-                            <option value="Tataouine">Tataouine</option>
-                            <option value="Tozeur">Tozeur</option>
-                            <option value="Tunis">Tunis</option>
-                            <option value="Zaghouan">Zaghouan</option>
-                        </select>
-                    </div>
-                </div>
-                
-               <div class="control-group">
-                    <label class="control-label" for="siteweb">Site Web</label>
-                    <div class="controls">
-                        <input type="text" name="siteweb" class="span3"/>
-                    </div>
-                </div>
-                    
-               <div class="control-group">
-                    <label class="control-label" for="stade">Stade</label>
-                    <div class="controls">
-                        <input type="text" name="stade" class="span3"/>
-                    </div>
-                </div>
-                    
-                 <div class="control-group">
-                    <label class="control-label" for="Ligue">Ligue Nationale <span class="required">*</span></label>
-                    <div class="controls">
-                        <select name="ligue" class="span3">
-                            <option value="Football Pro ligue 1">Football Pro ligue 1</option>
-                            <option value="Football Pro ligue 2">Football Pro ligue 2</option>
-                            <option value="Football Amateur">Football Amateur</option>
-                            <option value="Football Feminin">Football Féminin</option>
-                            <option value="Futsal">Futsal</option>
-                        </select>
-                        <div class="erreur">
-                            {{ form_error('ligue') }}         
-                        </div>
-                    </div>
-                </div>
-                    
-               <div class="control-group">
-                    <label class="control-label" for="userfile">Logo</label>
-                    <div class="controls">
-                        <input type="file" name="userfile" class="span3" required="required"/>
+                        <div class="span3">
+                            {#Block Lieu d'origine#} 
+                            <label for="lieu_origin">Lieu d'origine</label>
+                            <select name="lieu_origin" class="span3">
+                                <option value="Ariana">Ariana</option>
+                                <option value="Béja">Béja</option>
+                                <option value="Ben arous">Ben Arous</option>
+                                <option value="Bizerte">Bizerte</option>
+                                <option value="Gafsa">Gafsa</option>
+                                <option value="Jendouba">Jendouba</option>
+                                <option value="Kairouan">Kairouan</option>
+                                <option value="Kasserine">Kasserine</option>
+                                <option value="Kébili">Kébili</option>
+                                <option value="Le Kef">Le Kef</option>
+                                <option value="Mahdia">Mahdia</option>
+                                <option value="La Manouba">La Manouba</option>
+                                <option value="Médenine">Médenine</option>
+                                <option value="Monastir">Monastir</option>
+                                <option value="Nabeul">Nabeul</option>
+                                <option value="Sfax">Sfax</option>
+                                <option value="Sidi Bouzid">Sidi Bouzid</option>
+                                <option value="Siliana">Siliana</option>
+                                <option value="Sousse">Sousse</option>
+                                <option value="Tataouine">Tataouine</option>
+                                <option value="Tozeur">Tozeur</option>
+                                <option value="Tunis">Tunis</option>
+                                <option value="Zaghouan">Zaghouan</option>
+                            </select>
+
+                            {#Block site web#} 
+                            <label for="siteweb">Site Web</label>
+                            <input type="text" name="siteweb" class="span3"/>
                         
-                    </div>
-                    <div class="erreur">
-                          {{error}}
+                            {#Block Lieu d'origine#} 
+                            <label for="stade">Stade</label>
+                            <input type="text" name="stade" class="span3"/>
                         </div>
+                        <div class="span3">
+                            {#Block Ligue#} 
+                            <label for="Ligue">Ligue Nationale <span class="required">*</span></label>
+                            <select name="ligue" class="span3">
+                                <option value="Football Pro ligue 1">Football Pro ligue 1</option>
+                                <option value="Football Pro ligue 2">Football Pro ligue 2</option>
+                                <option value="Football Amateur">Football Amateur</option>
+                                <option value="Football Feminin">Football Féminin</option>
+                                <option value="Futsal">Futsal</option>
+                            </select>
+                            <div class="erreur">
+                                {{ form_error('ligue') }}         
+                            </div>
+
+                            {#Block Logo#} 
+                            <label for="userfile">Logo</label>
+                            <input type="file" name="userfile" class="span3" required="required"/>
+                            <div class="erreur">
+                                 {{error}}
+                            </div>
+                        </div>
+                       <div class="span10">
+                            <hr>
+                            <button type="submit" class="btn btn-danger btn-block offset3 span2">Ajouter</button>
+                        </div>
+                        
+                    </form>
                 </div>
-                
-                <div class="control-group">
-                    <div class="controls">
-                        <button type="submit" class="btn btn-info">Ajouter</button>
-                    </div>
-                </div>
-            </fieldset>
-        </form>   
+            </div>
+        </div>
     </div>
 {% endblock container%}

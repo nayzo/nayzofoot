@@ -1,125 +1,144 @@
 {% extends "layout.twig" %}
 
 {% block title %} {{parent()}} - Ajouter un Match{% endblock title %}
-
+{% block navbar%}
+    <div class="navbar">
+        <div class="navbar-inner">
+           <ul class="nav">
+             <li><a href="/saison">Gestion Saison</a></li>
+             <li class="divider-vertical"></li>
+             <li><a href="/equipe">Gestion Equipe</a></li>
+             <li class="divider-vertical"></li>
+             <li><a href="/joueur">Gestion Joueurs</a></li>
+             <li class="divider-vertical"></li>
+             <li class="active"><a href="/match">Gestion Match</a></li>
+             <li class="divider-vertical"></li>
+             <li><a href="/arbitre">Gestion Arbitre</a></li>
+             <li class="divider-vertical"></li>
+             <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Championnat <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/classement/champligueun">Football Pro ligue 1</a>
+                        <li><a href="/classement/champliguedeux">Football Pro ligue 2</a>
+                        <li><a href="/classement/champligueamateur">Football Amateur</a>
+                        <li><a href="/classement/champliguefeminin">Football Féminin</a>
+                        <li><a href="/classement/champliguefutsal">Futsal</a>
+                    </ul>
+             </li>
+             <li class="divider-vertical"></li>
+             <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coupe <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/classement/coupeligueun">Football Pro ligue 1</a>
+                    <li><a href="/classement/coupeliguedeux">Football Pro ligue 2</a>
+                    <li><a href="/classement/coupeligueamateur">Football Amateur</a>
+                    <li><a href="/classement/coupeliguefeminin">Football Féminin</a>
+                    <li><a href="/classement/coupeliguefutsal">Futsal</a>
+                </ul>
+             </li>
+           </ul>
+        </div>
+    </div>
+{% endblock navbar%}
 {% block container%}
-    <div class="span12 well"> 
-        <h4 class="text-center">Ajouter un Match </h4>
-        <hr>
-         <form action='/match/ajout' method="POST" class="form-horizontal offset3">
-            <fieldset>
-                <div class="control-group">
-                    <label class="control-label" for="type">Type <span class="required">*</span></label>
-                    <div class="controls">
-                        <select name="type" required="required">
-                            <option value="Demi-finale">Demi-finale</option>
-                            <option value="Finale">Finale</option>
-                            <option value="Amical">Amical</option>
-                            <option value="Derbi">Derbi</option>
-                        </select>
-                        <div class="erreur">
-                            {{ form_error('type') }}         
-                        </div>
-                    </div>
-                </div>
-                    
-                <div class="control-group">
-                    <label class="control-label" for="saison">Saison <span class="required">*</span></label>
-                    <div class="controls">
-                        <select name="saison" required="required">
-                            {% for saison in saisons%}
-                                <option value="{{saison.id}}">{{saison.saison}}</option>            
-                            {% endfor %}
-                        </select>
-                        <div class="erreur">
-                            {{ form_error('saison') }}         
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label" for="categorie">Catégorie <span class="required">*</span></label>
-                    <div class="controls">
-                       <select name="categorie" required="required">
-                            <option value="championnat">championnat</option>
-                            <option value="coupe">coupe</option>
-                        </select>
-                        <div class="erreur">
-                            {{ form_error('categorie') }}         
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label" for="date_match">Date et temps match <span class="required">*</span></label>
-                    <div class="controls">
-                        <input type="date" name="date_match" required="required" class="span2">
-                        <input type="time" name="heur_match" required="required" class="span1">
-                        <div class="erreur">
-                            {{ form_error('date_match') }}         
-                        </div>
-                    </div>
-                </div>
-                    
-               <div class="control-group">
-                    <label class="control-label" for="stade">Stade <span class="required">*</span></label>
-                    <div class="controls">
-                        <input type="text" name="stade" required="required">
-                        <div class="erreur">
-                            {{ form_error('stade') }}         
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label" for="arbitre">Arbitre <span class="required">*</span></label>
-                    <div class="controls">
-                        <select name="arbitre" required="required">
-                        {% for arbitre in arbitres %}
-                            <option value="{{arbitre.id}}">{{arbitre.nom}}</option>            
-                        {% endfor %}
+    <div class="well">
+        <div class="row">
+            <div class="span11">
+                <h3 class="text-center">Ajouter un Match</h3>
+                <hr>
+                <div class="span10 offset1">
+                    <form action='/match/ajout' method="POST">
+                        <div class="span3">
+                           {#block type#}
+                            <label for="type">Type <span class="required">*</span></label>
+                            <select name="type" required="required">
+                                <option value="Demi-finale">Demi-finale</option>
+                                <option value="Finale">Finale</option>
+                                <option value="Amical">Amical</option>
+                                <option value="Derbi">Derbi</option>
                             </select>
-                        <div class="erreur">
-                            {{ form_error('arbitre') }}         
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label" for="equipe_visit">Equipe Visiteur <span class="required">*</span></label>
-                    <div class="controls">
-                         <select name="equipe_visit" required="required">
-                            {% for equipe in equipes %}
-                                <option value="{{equipe.id}}">{{equipe.nom_equipe}}</option>            
+                            <div class="erreur">
+                                {{ form_error('type') }}         
+                            </div>
+                            
+                            {#block saison#}
+                            <label for="saison">Saison <span class="required">*</span></label>
+                            <select name="saison" required="required">
+                                {% for saison in saisons%}
+                                    <option value="{{saison.id}}">{{saison.saison}}</option>            
+                                {% endfor %}
+                            </select>
+                            <div class="erreur">
+                                {{ form_error('saison') }}         
+                            </div>
+
+                           {#block Catégorie#}
+                           <label for="categorie">Catégorie <span class="required">*</span></label>
+                           <select name="categorie" required="required">
+                                <option value="championnat">championnat</option>
+                                <option value="coupe">coupe</option>
+                            </select>
+                            <div class="erreur">
+                                {{ form_error('categorie') }}         
+                            </div>
+                       </div>
+                       <div class="span3">
+                            {#block date et heur#}
+                            <label class="control-label" for="date_match">Date et heure match <span class="required">*</span></label>
+                            <input type="date" name="date_match" required="required" class="span2">
+                            <input type="time" name="heur_match" required="required" class="span1">
+                            <div class="erreur">
+                                {{ form_error('date_match') }}         
+                            </div>
+
+                            {#block satde#}
+                            <label for="stade">Stade <span class="required">*</span></label>
+                            <input type="text" name="stade" required="required">
+                            <div class="erreur">
+                                {{ form_error('stade') }}         
+                            </div>
+
+                            {#block arbitre#}
+                            <label class="control-label" for="arbitre">Arbitre <span class="required">*</span></label>
+                            <select name="arbitre" required="required">
+                            {% for arbitre in arbitres %}
+                                <option value="{{arbitre.id}}">{{arbitre.nom}}</option>            
                             {% endfor %}
-                        </select>
-                        <div class="erreur">
-                            {{ form_error('equipe_visit') }}         
+                                </select>
+                            <div class="erreur">
+                                {{ form_error('arbitre') }}         
+                            </div>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label" for="equipe_recev">Equipe Receveur <span class="required">*</span></label>
-                    <div class="controls">
-                         <select name="equipe_recev" required="required">
-                            {% for equipe in equipes %}
-                                <option value="{{equipe.id}}">{{equipe.nom_equipe}}</option>            
-                            {% endfor %}
-                        </select>
-                        <div class="erreur">
-                            {{ form_error('equipe_recev') }}         
+                        <div class="span3">
+                            {#block equipe visiteur#}
+                            <label for="equipe_visit">Equipe Visiteur <span class="required">*</span></label>
+                            <select name="equipe_visit" required="required">
+                                {% for equipe in equipes %}
+                                    <option value="{{equipe.id}}">{{equipe.nom_equipe}}</option>            
+                                {% endfor %}
+                            </select>
+                            <div class="erreur">
+                                {{ form_error('equipe_visit') }}         
+                            </div>
+
+                            {#block equipe receveur#}
+                            <label for="equipe_recev">Equipe Receveur <span class="required">*</span></label>
+                            <select name="equipe_recev" required="required">
+                                {% for equipe in equipes %}
+                                    <option value="{{equipe.id}}">{{equipe.nom_equipe}}</option>            
+                                {% endfor %}
+                            </select>
+                            <div class="erreur">
+                                {{ form_error('equipe_recev') }}         
+                            </div>
                         </div>
-                    </div>
+                        <div class="span10">
+                            <hr>
+                            <button type="submit" class="btn btn-danger btn-block offset3 span2">Ajouter</button>
+                        </div>
+                    </form>
                 </div>
- 
-                <div class="control-group">
-                    <div class="controls">
-                        <button type="submit" class="btn btn-info">Ajouter</button>
-                    </div>
-                </div>
-                    
-            </fieldset>
-        </form>   
+            </div>
+        </div>
     </div>
 {% endblock container%}
