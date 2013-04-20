@@ -1,29 +1,72 @@
 {% extends "layout.twig" %}
 
 {% block title %} {{parent()}} - Modifier Saison{% endblock title %}
-
+{% block navbar%}
+    <div class="navbar">
+        <div class="navbar-inner">
+                  <ul class="nav">
+                     <li class="active"><a href="/saison">Gestion Saison</a></li>
+                     <li class="divider-vertical"></li>
+                     <li><a href="/equipe">Gestion Equipe</a></li>
+                     <li class="divider-vertical"></li>
+                     <li><a href="/joueur">Gestion Joueurs</a></li>
+                     <li class="divider-vertical"></li>
+                     <li><a href="/match">Gestion Match</a></li>
+                     <li class="divider-vertical"></li>
+                     <li><a href="/arbitre">Gestion Arbitre</a></li>
+                     <li class="divider-vertical"></li>
+                     <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Championnat <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/classement/champligueun">Football Pro ligue 1</a>
+                                <li><a href="/classement/champliguedeux">Football Pro ligue 2</a>
+                                <li><a href="/classement/champligueamateur">Football Amateur</a>
+                                <li><a href="/classement/champliguefeminin">Football Féminin</a>
+                                <li><a href="/classement/champliguefutsal">Futsal</a>
+                            </ul>
+                     </li>
+                     <li class="divider-vertical"></li>
+                     <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coupe <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/classement/coupeligueun">Football Pro ligue 1</a>
+                            <li><a href="/classement/coupeliguedeux">Football Pro ligue 2</a>
+                            <li><a href="/classement/coupeligueamateur">Football Amateur</a>
+                            <li><a href="/classement/coupeliguefeminin">Football Féminin</a>
+                            <li><a href="/classement/coupeliguefutsal">Futsal</a>
+                        </ul>
+                     </li>
+                  </ul>
+                </div>
+    </div>
+{% endblock navbar%}
 {% block container%}
-    <div class="span11 well"> 
-        <h4 class="text-center">Modifier une Saison </h4>
-        <hr>
-         <form action='/saison/modifier/{{saison.id}}' method="POST" class="form-horizontal offset3" >
-            <fieldset>
-                
-                <div class="control-group">
-                    <label class="control-label" for="saison">Saison</label>
-                    <div class="controls">
-                        <input type="text" name="saison" class="span3" required="required"  value="{{ set_value('saison', saison.saison) }}"/>
-                        <div class="erreur">
-                            {{ form_error('saison') }}         
-                        </div>
-                    </div>
+    <div class="well">
+        <div class="row">
+            <div class="span11">
+                <h3 class="text-center">Modifier une Saison</h3>
+                <hr>
+                <div class="span10 offset2">
+                    <form action='/saison/modifier/{{saison.id}}' method="POST" class="form-horizontal" >
+                        <fieldset>
+                            <div class="control-group">
+                                <label class="control-label" for="saison">Saison</label>
+                                <div class="controls">
+                                    <input type="text" name="saison" class="span3" required="required"  value="{{ set_value('saison', saison.saison) }}"/>
+                                    <div class="erreur">
+                                        {{ form_error('saison') }}         
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <button type="submit" class="btn btn-danger">Modifier</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>   
                 </div>
-                <div class="control-group">
-                    <div class="controls">
-                        <button type="submit" class="btn btn-info">Modifier</button>
-                    </div>
-                </div>
-            </fieldset>
-        </form>   
+            </div>
+        </div>
     </div>
 {% endblock container%}

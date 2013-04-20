@@ -1,38 +1,80 @@
 {% extends "layout.twig" %}
 
 {% block title %} {{parent()}} - Gestion des Equipes{% endblock title %}
-
+{% block navbar%}
+    <div class="navbar">
+        <div class="navbar-inner">
+            <ul class="nav">
+                 <li><a href="/saison">Gestion Saison</a></li>
+                 <li class="divider-vertical"></li>
+                 <li class="active"><a href="/equipe">Gestion Equipe</a></li>
+                 <li class="divider-vertical"></li>
+                 <li><a href="/joueur">Gestion Joueurs</a></li>
+                 <li class="divider-vertical"></li>
+                 <li><a href="/match">Gestion Match</a></li>
+                 <li class="divider-vertical"></li>
+                 <li><a href="/arbitre">Gestion Arbitre</a></li>
+                 <li class="divider-vertical"></li>
+                 <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Championnat <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/classement/champligueun">Football Pro ligue 1</a>
+                            <li><a href="/classement/champliguedeux">Football Pro ligue 2</a>
+                            <li><a href="/classement/champligueamateur">Football Amateur</a>
+                            <li><a href="/classement/champliguefeminin">Football Féminin</a>
+                            <li><a href="/classement/champliguefutsal">Futsal</a>
+                        </ul>
+                 </li>
+                 <li class="divider-vertical"></li>
+                 <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coupe <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/classement/coupeligueun">Football Pro ligue 1</a>
+                        <li><a href="/classement/coupeliguedeux">Football Pro ligue 2</a>
+                        <li><a href="/classement/coupeligueamateur">Football Amateur</a>
+                        <li><a href="/classement/coupeliguefeminin">Football Féminin</a>
+                        <li><a href="/classement/coupeliguefutsal">Futsal</a>
+                    </ul>
+                 </li>
+             </ul>
+        </div>
+    </div>
+{% endblock navbar%}
 {% block container%}
-    <div class="span11 well"> 
-        <h4>Gestion des Equipes </h4>
-        <hr>
-       <div class="btn-toolbar">
-            <a href="/equipe/ajout" class="btn pull-right"><i class="icon-plus-sign"></i> <strong>Ajouter une Equipe</strong></a>
-       </div>
-        
-        <table class="table table-bordered table-hover">
-                <tr>
-                  <th>Logo</th>
-                  <th>Nom</th>
-                  <th>Entreneur</th>
-                  <th>Ligue Nationale</th>
-                  <th>Action</th>
-                </tr>
-                 {% for equipe in equipes %}
-                <tr>
-                  <td> <img src="{{base_url()}}uploads/{{equipe.logo}}" alt="" class="img-polaroid span1" style="height: 60px;"></td>
-                  <td>{{equipe.nom_equipe}}</td>
-                  <td>{{equipe.entreneur}}</td>
-                  <td>{{equipe.ligue}}</td>
-                  <td>
-                      <a href="/equipe/voir/{{equipe.id}}" title="voir" class="btn"><i class="icon-eye-open"></i></a>
-                      <a href="/equipe/modifier/{{equipe.id}}" title="Modifier" class="btn"><i class="icon-edit"></i></a> 
-                      <a href="/equipe/supprimer/{{equipe.id}}" title="Supprimer" class="btn deleteadmin"><i class="icon-trash"></i></a>
-                  </td>
-                </tr>
-         
-              {% endfor %}
-            </table>
+    <div class="well">
+        <div class="row">
+            <div class="span11">
+                <h3 class="text-center">Gestion des Equipes</h3>
+                <hr>
+                <div class="btn-toolbar">
+                    <a href="/equipe/ajout" class="btn pull-right"><i class="icon-plus-sign"></i> <strong>Ajouter une Equipe</strong></a>
+                </div>
+                
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <th>Logo</th>
+                        <th>Nom</th>
+                        <th>Entreneur</th>
+                        <th>Ligue Nationale</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for equipe in equipes %}
+                        <tr>
+                            <td> <img src="{{base_url()}}uploads/{{equipe.logo}}" alt="" class="img-polaroid span1" style="height: 60px;"></td>
+                            <td>{{equipe.nom_equipe}}</td>
+                            <td>{{equipe.entreneur}}</td>
+                            <td>{{equipe.ligue}}</td>
+                            <td>
+                                <a href="/equipe/voir/{{equipe.id}}" title="voir" class="btn"><i class="icon-eye-open"></i></a>
+                                <a href="/equipe/modifier/{{equipe.id}}" title="Modifier" class="btn"><i class="icon-edit"></i></a> 
+                                <a href="/equipe/supprimer/{{equipe.id}}" title="Supprimer" class="btn deleteadmin"><i class="icon-trash"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
 {% endblock container%}
 
 

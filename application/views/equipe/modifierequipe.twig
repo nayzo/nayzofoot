@@ -1,49 +1,82 @@
 {% extends "layout.twig" %}
 
 {% block title %} {{parent()}} - Modifier equipe{% endblock title %}
-
+{% block navbar%}
+    <div class="navbar">
+        <div class="navbar-inner">
+            <ul class="nav">
+                 <li><a href="/saison">Gestion Saison</a></li>
+                 <li class="divider-vertical"></li>
+                 <li class="active"><a href="/equipe">Gestion Equipe</a></li>
+                 <li class="divider-vertical"></li>
+                 <li><a href="/joueur">Gestion Joueurs</a></li>
+                 <li class="divider-vertical"></li>
+                 <li><a href="/match">Gestion Match</a></li>
+                 <li class="divider-vertical"></li>
+                 <li><a href="/arbitre">Gestion Arbitre</a></li>
+                 <li class="divider-vertical"></li>
+                 <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Championnat <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/classement/champligueun">Football Pro ligue 1</a>
+                            <li><a href="/classement/champliguedeux">Football Pro ligue 2</a>
+                            <li><a href="/classement/champligueamateur">Football Amateur</a>
+                            <li><a href="/classement/champliguefeminin">Football Féminin</a>
+                            <li><a href="/classement/champliguefutsal">Futsal</a>
+                        </ul>
+                 </li>
+                 <li class="divider-vertical"></li>
+                 <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coupe <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/classement/coupeligueun">Football Pro ligue 1</a>
+                        <li><a href="/classement/coupeliguedeux">Football Pro ligue 2</a>
+                        <li><a href="/classement/coupeligueamateur">Football Amateur</a>
+                        <li><a href="/classement/coupeliguefeminin">Football Féminin</a>
+                        <li><a href="/classement/coupeliguefutsal">Futsal</a>
+                    </ul>
+                 </li>
+             </ul>
+        </div>
+    </div>
+{% endblock navbar%}
 {% block container%}
-    <div class="span11 well"> 
-        <h4 class="text-center">Modifier une Equipe </h4>
-        <hr>
-         <form action='/equipe/modifier/{{equipe.id}}' method="POST" class="form-horizontal offset3" enctype="multipart/form-data">
-            <fieldset>
-                 <div class="control-group">
-                   <label class="control-label" for="photo" >Logo</label>
-                   <div class="controls">
-                       <img src="{{base_url()}}uploads/{{equipe.logo}}" class="img-polaroid span3" alt ="photo" style="margin-left: 0px; height: 220px;">                              
-                   </div>
+    <div class="well">
+        <div class="row">
+            <div class="span11">
+                <h3 class="text-center">Modifier une Equipe</h3>
+                <hr>
+                <div class="span10 modif-line">
+                    <p class="offset4 span3"><img src="{{base_url()}}uploads/{{equipe.logo}}" class="img-polaroid img-modif" alt=""></p>
+                    <hr>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="nom_equipe">Nom <span class="required">*</span></label>
-                    <div class="controls">
-                        <input type="text" name="nom_equipe" class="span3" required="required" value="{{ set_value('nom_equipe', equipe.nom_equipe) }}"/>
-                        <div class="erreur">
-                            {{ form_error('nom_equipe') }}         
-                        </div>
-                    </div>
-                </div>
+                
+                <div class="span10 offset1">
+                    <form action='/equipe/modifier/{{equipe.id}}' method="POST" enctype="multipart/form-data">
+                        <div class="span3">
+                            {#Block nom#}       
+                            <label for="nom_equipe">Nom <span class="required">*</span></label>
+                            <input type="text" name="nom_equipe" class="span3" required="required" value="{{ set_value('nom_equipe', equipe.nom_equipe) }}"/>
+                            <div class="erreur">
+                                {{ form_error('nom_equipe') }}         
+                            </div>
 
-                <div class="control-group">
-                    <label class="control-label" for="entreneur">Entreneur <span class="required">*</span></label>
-                    <div class="controls">
-                        <input type="text" name="entreneur" class="span3" required="required" value="{{ set_value('entreneur', equipe.entreneur) }}"/>
-                        <div class="erreur">
-                            {{ form_error('entreneur') }}         
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label" for="date_creation">Date de Création</label>
-                    <div class="controls">
-                        <input type="date" name="date_creation" class="span3" value="{{ set_value('date_creation', equipe.date_creation) }}"/>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label" for="lieu_origin">Lieu d'origine</label>
-                    <div class="controls">
+                            {#Block Entreneur#} 
+                            <label for="entreneur">Entreneur <span class="required">*</span></label>
+                            <input type="text" name="entreneur" class="span3" required="required" value="{{ set_value('entreneur', equipe.entreneur) }}"/>
+                            <div class="erreur">
+                                {{ form_error('entreneur') }}         
+                            </div>
+
+                            {#Block Date de création#} 
+                            <label for="date_creation">Date de Création</label>
+                            <input type="date" name="date_creation" class="span3" value="{{ set_value('date_creation', equipe.date_creation) }}"/>
+                        
+                            
+                      </div>
+                        <div class="span3">
+                        {#Block Lieu d'origine#} 
+                        <label for="lieu_origin">Lieu d'origine</label>
                         <select name="lieu_origin" class="span3" selected="{{ set_value('lieu_origin', equipe.lieu_origin) }}">          
                             <option value="Ariana" {%if equipe.lieu_origin=='Ariana'%} selected="selected" {%endif%}>Ariana</option>
                             <option value="Béja" {%if equipe.lieu_origin=='Béja'%} selected="selected" {%endif%}>Béja</option>
@@ -69,26 +102,18 @@
                             <option value="Tunis" {%if equipe.lieu_origin=='Tunis'%} selected="selected" {%endif%}>Tunis</option>
                             <option value="Zaghouan" {%if equipe.lieu_origin=='Zaghouan'%} selected="selected" {%endif%}>Zaghouan</option>
                         </select>
-                    </div>
-                </div>
-                
-               <div class="control-group">
-                    <label class="control-label" for="siteweb">Site Web</label>
-                    <div class="controls">
+                            
+                        {#Block Site web#} 
+                        <label for="siteweb">Site Web</label>
                         <input type="text" name="siteweb" class="span3" value="{{ set_value('siteweb', equipe.siteweb) }}"/>
-                    </div>
-                </div>
-                    
-               <div class="control-group">
-                    <label class="control-label" for="stade">Stade</label>
-                    <div class="controls">
+
+                        {#Block Stade#}
+                        <label for="stade">Stade</label>
                         <input type="text" name="stade" class="span3" value="{{ set_value('stade', equipe.stade) }}"/>
-                    </div>
-                </div>
-                    
-                 <div class="control-group">
-                    <label class="control-label" for="Ligue">Ligue Nationale <span class="required">*</span></label>
-                    <div class="controls">
+                          </div>
+                        <div class="span3">
+                        {#Block ligue#}
+                        <label for="Ligue">Ligue Nationale <span class="required">*</span></label>
                         <select name="ligue" class="span3" selected="{{ set_value('ligue', equipe.ligue) }}" required="required">
                             <option value="Football Pro ligue 1" {%if equipe.ligue=='Football Pro ligue 1'%} selected="selected" {%endif%}>Football Pro ligue 1</option>
                             <option value="Football Pro ligue 2" {%if equipe.ligue=='Football Pro ligue 2'%} selected="selected" {%endif%}>Football Pro ligue 2</option>
@@ -99,26 +124,21 @@
                         <div class="erreur">
                             {{ form_error('ligue') }}         
                         </div>
-                    </div>
-                </div>
                     
-               <div class="control-group">
-                    <label class="control-label" for="userfile">Logo</label>
-                    <div class="controls">
+                        {#Block logo#}
+                        <label for="userfile">Logo</label>
                         <input type="file" name="userfile" class="span3"/>
-                        
-                    </div>
-                    <div class="erreur">
-                          {{error}}
+                        <div class="erreur">
+                            {{error}}
+                         </div>
                         </div>
+                        <div class="span10">
+                            <hr>
+                            <button type="submit" class="btn btn-danger btn-block offset3 span2">Modifier</button>
+                        </div>
+                    </form>   
                 </div>
-
-                <div class="control-group">
-                    <div class="controls">
-                        <button type="submit" class="btn btn-info">Modifier</button>
-                    </div>
-                </div>
-            </fieldset>
-        </form>   
+            </div>
+        </div>
     </div>
 {% endblock container%}

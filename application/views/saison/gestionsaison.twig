@@ -1,38 +1,79 @@
 {% extends "layout.twig" %}
 
 {% block title %} {{parent()}} - Gestion des Saisons{% endblock title %}
-
-{% block container%}
-<div class="span11 well"> 
-    <h4>Gestion des Saisons</h4>
-    <hr>
-    <div class="btn-toolbar">
-        <a href="/saison/ajout" class="btn pull-right"><i class="icon-plus-sign"></i> <strong>Ajouter une saison</strong></a>
+{% block navbar%}
+    <div class="navbar">
+        <div class="navbar-inner">
+                  <ul class="nav">
+                     <li class="active"><a href="/saison">Gestion Saison</a></li>
+                     <li class="divider-vertical"></li>
+                     <li><a href="/equipe">Gestion Equipe</a></li>
+                     <li class="divider-vertical"></li>
+                     <li><a href="/joueur">Gestion Joueurs</a></li>
+                     <li class="divider-vertical"></li>
+                     <li><a href="/match">Gestion Match</a></li>
+                     <li class="divider-vertical"></li>
+                     <li><a href="/arbitre">Gestion Arbitre</a></li>
+                     <li class="divider-vertical"></li>
+                     <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Championnat <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/classement/champligueun">Football Pro ligue 1</a>
+                                <li><a href="/classement/champliguedeux">Football Pro ligue 2</a>
+                                <li><a href="/classement/champligueamateur">Football Amateur</a>
+                                <li><a href="/classement/champliguefeminin">Football Féminin</a>
+                                <li><a href="/classement/champliguefutsal">Futsal</a>
+                            </ul>
+                     </li>
+                     <li class="divider-vertical"></li>
+                     <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coupe <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/classement/coupeligueun">Football Pro ligue 1</a>
+                            <li><a href="/classement/coupeliguedeux">Football Pro ligue 2</a>
+                            <li><a href="/classement/coupeligueamateur">Football Amateur</a>
+                            <li><a href="/classement/coupeliguefeminin">Football Féminin</a>
+                            <li><a href="/classement/coupeliguefutsal">Futsal</a>
+                        </ul>
+                     </li>
+                  </ul>
+                </div>
     </div>
-    {{ saisonerreur }}
-    <table class="table table-bordered table-hover">
-        <tr>
-            <th>Saison</th>
-            <th>Saison courante</th>
-            <th>Action</th>
-        </tr>
-                 {% for saison in saisons %}
-        <tr>
-            <td>{{saison.saison}}</td>
-            <td>
-                      {% if saison.saison_courant == 1 %}
-                    <img src="{{base_url()}}assets/img/active.png" alt="actives"/>
-                      {% endif %} 
-                </td>
-                <td>
-                    <a href="/saison/activer/{{saison.id}}" title="Activer saison courant" class="btn"><i class="icon-ok"></i></a>
-                    <a href="/saison/modifier/{{saison.id}}" title="Modifier" class="btn"><i class="icon-edit"></i></a> 
-                    <a href="/saison/supprimer/{{saison.id}}" title="Supprimer" class="btn deleteadmin"><i class="icon-trash"></i></a>
-                </td>
-            </tr>
-
-              {% endfor %}
-        </table>
-</div>
+{% endblock navbar%}
+{% block container%}
+<div class="well">
+        <div class="row">
+            <div class="span11">
+                <h3 class="text-center">Gestion des Saisons</h3>
+                <hr>
+                <div class="btn-toolbar">
+                    <a href="/saison/ajout" class="btn pull-right"><i class="icon-plus-sign"></i> <strong>Ajouter une saison</strong></a>
+                </div>
+                <div class="error">{{ saisonerreur }}</div>
+                <table class="table table-bordered table-hover">
+                    <tr>
+                        <th>Saison</th>
+                        <th>Saison courante</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for saison in saisons %}
+                    <tr>
+                        <td>{{saison.saison}}</td>
+                        <td>
+                          {% if saison.saison_courant == 1 %}
+                            <img src="{{base_url()}}assets/img/active.png" alt="actives"/>
+                          {% endif %} 
+                        </td>
+                        <td>
+                            <a href="/saison/activer/{{saison.id}}" title="Activer saison courant" class="btn"><i class="icon-ok"></i></a>
+                            <a href="/saison/modifier/{{saison.id}}" title="Modifier" class="btn"><i class="icon-edit"></i></a> 
+                            <a href="/saison/supprimer/{{saison.id}}" title="Supprimer" class="btn deleteadmin"><i class="icon-trash"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
 {% endblock container%}
 
