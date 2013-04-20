@@ -3,14 +3,29 @@
 {% block title %} {{parent()}} - Classement Coupe{% endblock title %}
 
 {% block container%}
-    <div class="span12 well"> 
-        <h4 class="text-center">Classement Coupe</h4>
-         {{ligue}}
+    <div class="span11 well"> 
+        <h3 class="text-center">Classement Coupe</h3>
+        <h4 class="text-center">{{ligue}}</h4>
         <hr>
-        <br>
-        {% for class in classement %}
-            {{class.nom_equipe}} | {{class.nb_point_coupe}} 
-            <br> 
-        {% endfor %}
+        
+        <table class="table table-bordered table-striped span7 offset2 table-condensed">
+            <thead>
+                <tr>
+                    <th><h5>logo Equipe</h5></th>
+                    <th><h5>Nom Equipe</h5></th>
+                    <th><h5>Nombre de Points</h5></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for class in classement %}
+                        <tr>
+                            <td><img src="{{base_url()}}uploads/{{class.logo}}" alt="" class="img-polaroid" style="height: 50px;width: 50px"></td>
+                            <td>{{class.nom_equipe}}</td>
+                            <td>{{class.nb_point_coupe}}</td>
+                        </tr>
+                {%endfor%}
+              </tbody>
+            </table>
+     
     </div>
 {% endblock container%}

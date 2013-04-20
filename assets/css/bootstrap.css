@@ -231,7 +231,7 @@ body {
 }
 
 a {
-  color: #0088cc;
+  color: rgb(184, 5, 5);
   text-decoration: none;
 }
 
@@ -2017,7 +2017,7 @@ table {
 
 .table th {
   font-weight: bold;
-  background-color: rgb(4, 76, 124);
+  background-color: #9F111B;
   color: white;
 }
 

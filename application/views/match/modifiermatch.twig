@@ -3,13 +3,13 @@
 {% block title %} {{parent()}} - Modifier un Match{% endblock title %}
 
 {% block container%}
-    <div class="well"> 
+    <div class="span11 well"> 
          <ul class="nav nav-pills">
             <li><h4>Modifier un Match </h4></li>
-            <li class="pull-right"><a href="/match/voir/{{match.id}}" class="btn">Voir match</a></li>
-            <li class="pull-right"><a href="/match/supprimer/{{match.id}}" class="btn deleteadmin">Supprimer match</a></li>
+            <li class="pull-right"><a href="/match/voir/{{match.id}}" class="btn"><i class="icon-eye-open"></i> Voir match</a></li>
+            <li class="pull-right"><a href="/match/supprimer/{{match.id}}" class="btn deleteadmin"><i class="icon-trash"></i>Supprimer match</a></li>
             {%if match.resultat_equipe_visit == -1%}
-            <li class="pull-right"><a href="/match/resultat/{{match.id}}" class="btn">Affecter Résultat</a></li>
+            <li class="pull-right"><a href="/match/resultat/{{match.id}}" class="btn"><i class="icon-check"></i>Affecter Résultat</a></li>
             {%endif%}
         </ul>
         <hr>

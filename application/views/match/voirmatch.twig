@@ -3,64 +3,79 @@
 {% block title %} {{parent()}} - Détail Match{% endblock title %}
 
 {% block container%}
-    <div class="span11 well"> 
-        <ul class="nav nav-pills">
-            <li><h4>Détail Match </h4></li>
-            <li class="pull-right"><a href="/match/modifier/{{match.id}}" class="btn">Modifier match</a></li>
-            <li class="pull-right"><a href="/match/supprimer/{{match.id}}" class="btn deleteadmin">Supprimer match</a></li>
-            {%if match.resultat_equipe_visit == -1%}
-            <li class="pull-right"><a href="/match/resultat/{{match.id}}" class="btn">Affecter Résultat</a></li>
-            {%endif%}
-        </ul>
-        <hr>
-        <div class="span10"  style="border-bottom: 1px solid #cccccc">
+<div class="span11 well"> 
+    <ul class="nav nav-pills">
+        <li><h3>Détails Match </h3></li>
+        <li class="pull-right"><a href="/match/modifier/{{match.id}}" class="btn"><i class="icon-edit"></i> Modifier match</a></li>
+        <li class="pull-right"><a href="/match/supprimer/{{match.id}}" class="btn deleteadmin"><i class="icon-trash"></i> Supprimer match</a></li>
+      {%if match.resultat_equipe_visit == -1%}
+        <li class="pull-right"><a href="/match/resultat/{{match.id}}" class="btn">Affecter Résultat</a></li>
+      {%endif%}
+    </ul>
+    <hr>
+    <div class="span10"  style="border-bottom: 1px solid #cccccc">
         <p><strong>Type : </strong>{{match.type}}</p>
         <p><strong>saison : </strong>{{getsessionhelper()['saison']}}</p>
         <p><strong>categorie : </strong>{{match.categorie}}</p>
         <p><strong>Date et heure match : </strong>{{match.date_match}} | {{match.heur_match}}</p>
         <p><strong>Stade : </strong>{{match.stade}}</p>
         <p><strong>Arbitre : </strong>{{arbitre.nom}}</p>
-        </div>
-        <div class="span2 offset3" style="margin-top: 20px;border-right: 1px solid #cccccc">
-            <strong>Equipe Receveur</strong><p>{{equipe_recev.nom_equipe}}</p>
-            <p><img src="{{base_url()}}uploads/{{equipe_recev.logo}}" alt="" class="img-polaroid" style="height: 100px;"></p>
-        </div>
-        <div class="span2" style="margin-top: 20px;">
-             <strong>Equipe Visiteur</strong><p>{{equipe_visit.nom_equipe}}</p>
-            <p><img src="{{base_url()}}uploads/{{equipe_visit.logo}}" alt="" class="img-polaroid" style="height: 100px;"></p>
-        </div>
+    </div>
+    <div class="span2" style="margin: 20px 0 20px 337px;border-right: 1px solid #cccccc">
+        <p><strong>Equipe Receveur</strong></p>
+        <span>{{equipe_recev.nom_equipe}}</span>
+        <img src="{{base_url()}}uploads/{{equipe_recev.logo}}" alt="" class="img-polaroid" style="height: 50px;width: 50px">
+    </div>
+    <div class="span2" style="margin-top: 20px;">
+        <p><strong>Equipe Visiteur</strong></p>
+        <img src="{{base_url()}}uploads/{{equipe_visit.logo}}" alt="" class="img-polaroid" style="height: 50px;width: 50px">
+        <span>{{equipe_visit.nom_equipe}}</span>
+    </div>
         {% if match.resultat_equipe_visit != -1 %}
-        <div class="span10">
-            <h4>Résultat du Match</h4>
-            <hr>
-            
-            <li class="pull-right"><a href="/match/modifresultat/{{match.id}}" class="btn">Modifier Résultat</a></li>
+    <div class="span10">
+        <ul class="nav nav-pills" style="border-bottom: 1px solid #cccccc">
+            <li class="pull-left"><h4>Résultat du Match</h4></li>
+            <li class="pull-right"><a href="/match/modifresultat/{{match.id}}" class="btn"><i class="icon-edit"></i> Modifier Résultat</a></li>
+        </ul>
+    </div>
 
-            <p>Nombre de but</p>
-        </div>
-        <div class="span10">
-            <div class="span2 offset3" style="margin-top: 20px;border-right: 1px solid #cccccc">
-                <p class="text-center">{{match.resultat_equipe_recev}}</p>
+    <table class="table table-bordered table-striped span4 offset1">
+        <thead>
+            <tr>
+                <td colspan="2"><h5 class="btn btn-danger pull-right">{{match.resultat_equipe_recev}}</h5></td>
+            </tr>
+        </thead>
+        <tbody>
                 {% for resultat in resultats %}
                     {% if resultat.equipe==match.equipe_recev%}
-                        <p>{{resultat.nom}}</p>
-                        <p>{{resultat.date_but}}</p>
+                <tr>
+                    <td>{{resultat.nom}}</td>
+                    <td>{{resultat.date_but}}</td>
+                </tr>
                     {%endif%}
                 {%endfor%}
-            </div>
-            <div class="span2" style="margin-top: 20px;">
-                <p class="text-center">{{match.resultat_equipe_visit}}</p>
+            </tbody>
+        </table>
+
+        <table class="table table-bordered table-striped span4" style="margin-left: 1px;">
+            <thead>
+                <tr>
+                    <td colspan="2"><h5 class="btn btn-danger">{{match.resultat_equipe_visit}}</h5></td>
+                </tr>
+            </thead>
+            <tbody>
                 {% for resultat in resultats %}
                     {% if resultat.equipe==match.equipe_visit%}
-                        <p>{{resultat.nom}}</p>
-                        <p>{{resultat.date_but}}</p>
+                    <tr>
+                        <td>{{resultat.nom}}</td>
+                        <td>{{resultat.date_but}}</td>
+                    </tr>
                     {%endif%}
                 {%endfor%}
-            </div>
+                </tbody>
+            </table>
+         {%endif%}
+
         </div>
-        {%endif%}
-        
-        
-    </div>
 {% endblock container%}
 
