@@ -1,25 +1,66 @@
 {% extends "layout.twig" %}
 
 {% block title %} {{parent()}} - Détails Joueurs{% endblock title %}
-
-{% block container%}
-    <div class="span11 well"> 
-        <h4>Détails Joueurs </h4>
-        <hr>
-        <div class="span4">
-            <p> <img src="{{base_url()}}uploads/{{joueur.photo}}" alt="" class="img-polaroid span3" style="height: 220px;"></p>
-        </div>
-        <div class="span6">
-        <p><strong>Nom : </strong>{{joueur.nom}}</p>
-        <p><strong>Date de naissance : </strong>{{joueur.date_naissance}}</p>
-        <p><strong>Poste : </strong>{{joueur.post}}</p>
-        <p><strong>Ville : </strong>{{joueur.ville}}</p>
-        <p><strong>Taille: </strong>{{joueur.taille}}</p>
-        <p><strong>Poid : </strong>{{joueur.poids}}</p>
-        <p><strong>date d'affectation : </strong>{{joueur.date_affectation}}</p>
-        <p><strong>Equipe : {{equipe.nom_equipe}}</strong></p>
+{% block navbar%}
+    <div class="navbar">
+        <div class="navbar-inner">
+            <ul class="nav">
+                <li><a href="/saison">Gestion Saison</a></li>
+                <li class="divider-vertical"></li>
+                <li><a href="/equipe">Gestion Equipe</a></li>
+                <li class="divider-vertical"></li>
+                <li class="active"><a href="/joueur">Gestion Joueurs</a></li>
+                <li class="divider-vertical"></li>
+                <li><a href="/match">Gestion Match</a></li>
+                <li class="divider-vertical"></li>
+                <li><a href="/arbitre">Gestion Arbitre</a></li>
+                <li class="divider-vertical"></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Championnat <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/classement/champligueun">Football Pro ligue 1</a>
+                        <li><a href="/classement/champliguedeux">Football Pro ligue 2</a>
+                        <li><a href="/classement/champligueamateur">Football Amateur</a>
+                        <li><a href="/classement/champliguefeminin">Football Féminin</a>
+                        <li><a href="/classement/champliguefutsal">Futsal</a>
+                    </ul>
+                </li>
+                <li class="divider-vertical"></li>
+                <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coupe <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/classement/coupeligueun">Football Pro ligue 1</a>
+                    <li><a href="/classement/coupeliguedeux">Football Pro ligue 2</a>
+                    <li><a href="/classement/coupeligueamateur">Football Amateur</a>
+                    <li><a href="/classement/coupeliguefeminin">Football Féminin</a>
+                    <li><a href="/classement/coupeliguefutsal">Futsal</a>
+                </ul>
+                </li>
+           </ul>
         </div>
     </div>
-  
+{% endblock navbar%}
+{% block container%}
+    <div class="well">
+        <div class="row">
+            <div class="span11">
+                <h3 class="text-center">Détails d'un Joueur</h3>
+                <hr>
+                <div class="span4">
+                    <p> <img src="{{base_url()}}uploads/{{joueur.photo}}" alt="" class="img-polaroid span3" style="height: 220px;"></p>
+                </div>
+                <div class="span6">
+                    <p><strong>Nom : </strong>{{joueur.nom}}</p>
+                    <p><strong>Date de naissance : </strong>{{joueur.date_naissance}}</p>
+                    <p><strong>Poste : </strong>{{joueur.post}}</p>
+                    <p><strong>Ville : </strong>{{joueur.ville}}</p>
+                    <p><strong>Taille: </strong>{{joueur.taille}}</p>
+                    <p><strong>Poid : </strong>{{joueur.poids}}</p>
+                    <p><strong>date d'affectation : </strong>{{joueur.date_affectation}}</p>
+                    <p><strong>Equipe : {{equipe.nom_equipe}}</strong></p>
+                </div>
+             </div>
+        </div>
+    </div>
 {% endblock container%}
 

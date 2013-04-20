@@ -1,35 +1,78 @@
 {% extends "layout.twig" %}
 
 {% block title %} {{parent()}} - Voir Equipe{% endblock title %}
-
+{% block navbar%}
+    <div class="navbar">
+        <div class="navbar-inner">
+            <ul class="nav">
+                 <li><a href="/saison">Gestion Saison</a></li>
+                 <li class="divider-vertical"></li>
+                 <li class="active"><a href="/equipe">Gestion Equipe</a></li>
+                 <li class="divider-vertical"></li>
+                 <li><a href="/joueur">Gestion Joueurs</a></li>
+                 <li class="divider-vertical"></li>
+                 <li><a href="/match">Gestion Match</a></li>
+                 <li class="divider-vertical"></li>
+                 <li><a href="/arbitre">Gestion Arbitre</a></li>
+                 <li class="divider-vertical"></li>
+                 <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Championnat <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/classement/champligueun">Football Pro ligue 1</a>
+                            <li><a href="/classement/champliguedeux">Football Pro ligue 2</a>
+                            <li><a href="/classement/champligueamateur">Football Amateur</a>
+                            <li><a href="/classement/champliguefeminin">Football Féminin</a>
+                            <li><a href="/classement/champliguefutsal">Futsal</a>
+                        </ul>
+                 </li>
+                 <li class="divider-vertical"></li>
+                 <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coupe <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/classement/coupeligueun">Football Pro ligue 1</a>
+                        <li><a href="/classement/coupeliguedeux">Football Pro ligue 2</a>
+                        <li><a href="/classement/coupeligueamateur">Football Amateur</a>
+                        <li><a href="/classement/coupeliguefeminin">Football Féminin</a>
+                        <li><a href="/classement/coupeliguefutsal">Futsal</a>
+                    </ul>
+                 </li>
+             </ul>
+        </div>
+    </div>
+{% endblock navbar%}
 {% block container%}
-    <div class="span11 well"> 
-        <h4>Détails Equipe </h4>
-        <hr>
-        <div class="span4">
-            <p> <img src="{{base_url()}}uploads/{{equipe.logo}}" alt="" class="img-polaroid span3" style="height: 220px;"></p>
-        </div>
-        <div class="span5">
-            <p><strong>Nom : </strong>{{equipe.nom_equipe}}</p>
-            <p><strong>Entreneur : </strong>{{equipe.entreneur}}</p>
-            <p><strong>Date de Création : </strong>{{equipe.date_creation}}</p>
-            <p><strong>lieu d'origin : </strong>{{equipe.lieu_origin}}</p>
-            <p><strong>Site Web : </strong>{{equipe.siteweb}}</p>
-            <p><strong>Stade : </strong>{{equipe.stade}}</p>
-            <p><strong>Ligue Nationale : </strong>{{equipe.ligue}}</p>
-        </div>
+    <div class="well">
+        <div class="row">
+            <div class="span11">
+                <h3 class="text-center">Détails d'une Equipe</h3>
+                <hr>
+                <div class="span4">
+                    <p> <img src="{{base_url()}}uploads/{{equipe.logo}}" alt="" class="img-polaroid span3" style="height: 220px;"></p>
+                </div>
+                
+                <div class="span5">
+                    <p><strong>Nom : </strong>{{equipe.nom_equipe}}</p>
+                    <p><strong>Entreneur : </strong>{{equipe.entreneur}}</p>
+                    <p><strong>Date de Création : </strong>{{equipe.date_creation}}</p>
+                    <p><strong>lieu d'origin : </strong>{{equipe.lieu_origin}}</p>
+                    <p><strong>Site Web : </strong>{{equipe.siteweb}}</p>
+                    <p><strong>Stade : </strong>{{equipe.stade}}</p>
+                    <p><strong>Ligue Nationale : </strong>{{equipe.ligue}}</p>
+                </div>
         
-        <div class="span12">
-        <h4>Liste des joueurs Pour cette equipe </h4>
-        <hr>
-        {% for joueur in joueurs %}
-        <ul class="span3 unstyled">
-            <li><p> <img src="{{base_url()}}uploads/{{joueur.photo}}" alt="" class="img-polaroid" style="height: 60px;"></p></li>
-            <li><p><strong>Nom : </strong>{{joueur.nom}}</p></li>
-            <li><p><strong>Poste : </strong>{{joueur.post}}</p></li> 
-        </ul>
-        {% endfor %}
-        </div>
+                <div class="span10">
+                    <h4>Liste des joueurs Pour cette equipe </h4>
+                    <hr>
+                    {% for joueur in joueurs %}
+                        <ul class="span3 unstyled">
+                            <li><p> <img src="{{base_url()}}uploads/{{joueur.photo}}" alt="" class="img-polaroid" style="height: 60px;"></p></li>
+                            <li><p><strong>Nom : </strong>{{joueur.nom}}</p></li>
+                            <li><p><strong>Poste : </strong>{{joueur.post}}</p></li> 
+                        </ul>
+                    {% endfor %}
+                </div>
+            </div>
+       </div>
     </div>
 {% endblock container%}
 

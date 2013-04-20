@@ -1,10 +1,77 @@
 {% extends "layout.twig" %}
 
-{% block title %} {{parent()}} - Home{% endblock title %}
-
+{% block title %} {{parent()}} - Page D'acceuil{% endblock title %}
+ {% block nav%}
+            <nav class="navbar navbar-fixed-top navbar-inverse">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li class="active"><a href="/"><i class="icon-home icon-white"></i> Acceuil</a></li>
+                        </ul>
+                        <ul class="nav pull-right">
+                            <li><a href="">Saison {{ getsessionhelper()['saison'] }} </a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i> {{ getsessionhelper()['login'] }} <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/backend/changepass"><i class="icon-lock"></i> Changer mot de passe</a></li>
+                                    <li><a href="/backend/logout"><i class="icon-off"></i> Se déconnecter</a></li>
+                                </ul>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        {%endblock nav%}
+{% block navbar%}
+    <div class="navbar">
+        <div class="navbar-inner">
+            <ul class="nav">
+                 <li><a href="/saison">Gestion Saison</a></li>
+                 <li class="divider-vertical"></li>
+                 <li><a href="/equipe">Gestion Equipe</a></li>
+                 <li class="divider-vertical"></li>
+                 <li><a href="/joueur">Gestion Joueurs</a></li>
+                 <li class="divider-vertical"></li>
+                 <li><a href="/match">Gestion Match</a></li>
+                 <li class="divider-vertical"></li>
+                 <li><a href="/arbitre">Gestion Arbitre</a></li>
+                 <li class="divider-vertical"></li>
+                 <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Championnat <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/classement/champligueun">Football Pro ligue 1</a>
+                        <li><a href="/classement/champliguedeux">Football Pro ligue 2</a>
+                        <li><a href="/classement/champligueamateur">Football Amateur</a>
+                        <li><a href="/classement/champliguefeminin">Football Féminin</a>
+                        <li><a href="/classement/champliguefutsal">Futsal</a>
+                    </ul>
+                 </li>
+                 <li class="divider-vertical"></li>
+                 <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coupe <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/classement/coupeligueun">Football Pro ligue 1</a>
+                        <li><a href="/classement/coupeliguedeux">Football Pro ligue 2</a>
+                        <li><a href="/classement/coupeligueamateur">Football Amateur</a>
+                        <li><a href="/classement/coupeliguefeminin">Football Féminin</a>
+                        <li><a href="/classement/coupeliguefutsal">Futsal</a>
+                    </ul>
+                 </li>
+              </ul>
+        </div>
+    </div>
+{% endblock navbar%}
 {% block container%}
-<div class="span8 offset2"> 
-    <div class="slider-shadow">
+<div class="span9 offset1 well"> 
+  
         <div id="myCarousel" class="carousel slide">
         <div class="carousel-inner" style="height: 350px">
             <div class="active item"><img src="{{base_url()}}assets/img/slider/slider1.jpg" alt="" style="height: 350px; width: 100%"/></div>
@@ -18,6 +85,6 @@
         <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
         <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
     </div>
-    </div>
+   
 </div>
 {% endblock container%}

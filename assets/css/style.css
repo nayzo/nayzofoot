@@ -27,3 +27,8 @@ p strong {color: rgb(184, 5, 5);}
     color: #b94a48;
 }
 .blockreciv, .blockvisit{margin: 18px 0px 18px 0px;}
+
+.img-size{height: 50px;width: 50px;margin-left: 45%;}
+.contain{margin-top:50px;margin-bottom: 20px}
+.img-modif{width: 158px; height: 158px}
+.modif-line{border-bottom:  1px solid #eeeeee;margin-bottom: 20px}

@@ -1,131 +1,148 @@
 {% extends "layout.twig" %}
 
 {% block title %} {{parent()}} - Modifier Joueur{% endblock title %}
-
+{% block navbar%}
+    <div class="navbar">
+        <div class="navbar-inner">
+            <ul class="nav">
+                <li><a href="/saison">Gestion Saison</a></li>
+                <li class="divider-vertical"></li>
+                <li><a href="/equipe">Gestion Equipe</a></li>
+                <li class="divider-vertical"></li>
+                <li class="active"><a href="/joueur">Gestion Joueurs</a></li>
+                <li class="divider-vertical"></li>
+                <li><a href="/match">Gestion Match</a></li>
+                <li class="divider-vertical"></li>
+                <li><a href="/arbitre">Gestion Arbitre</a></li>
+                <li class="divider-vertical"></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Championnat <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/classement/champligueun">Football Pro ligue 1</a>
+                        <li><a href="/classement/champliguedeux">Football Pro ligue 2</a>
+                        <li><a href="/classement/champligueamateur">Football Amateur</a>
+                        <li><a href="/classement/champliguefeminin">Football Féminin</a>
+                        <li><a href="/classement/champliguefutsal">Futsal</a>
+                    </ul>
+                </li>
+                <li class="divider-vertical"></li>
+                <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coupe <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/classement/coupeligueun">Football Pro ligue 1</a>
+                    <li><a href="/classement/coupeliguedeux">Football Pro ligue 2</a>
+                    <li><a href="/classement/coupeligueamateur">Football Amateur</a>
+                    <li><a href="/classement/coupeliguefeminin">Football Féminin</a>
+                    <li><a href="/classement/coupeliguefutsal">Futsal</a>
+                </ul>
+                </li>
+           </ul>
+        </div>
+    </div>
+{% endblock navbar%}
 {% block container%}
-    <div class="span11 well"> 
-        <h4 class="text-center">Modifier un Joueur </h4>
-        <hr>
-         <form action='/joueur/modifier/{{joueur.id}}' method="POST" class="form-horizontal offset2" enctype="multipart/form-data">
-            <fieldset>
-                <div class="control-group">
-                   <label class="control-label" for="photo" >Photo</label>
-                   <div class="controls">
-                       <img src="{{base_url()}}uploads/{{joueur.photo}}" class="img-polaroid span3"  alt ="photo" style="margin-left: 0px; height: 220px;">                              
-                   </div>
+    <div class="well">
+        <div class="row">
+            <div class="span11">
+                <h3 class="text-center">Modifier un Joueur</h3>
+                <hr>
+                <div class="span11 modif-line">
+                    <p class="offset4 span3"><img src="{{base_url()}}uploads/{{joueur.photo}}" class="img-polaroid img-modif" alt=""></p>
                 </div>
-                <div class="control-group">
-                    <label class="control-label" for="nom">Nom <span class="required">*</span></label>
-                    <div class="controls">
-                        <input type="text" name="nom" class="span3" required="required" value="{{ set_value('nom', joueur.nom) }}"/>
-                        <div class="erreur">
-                            {{ form_error('nom') }}         
-                        </div>
-                    </div>
+                <div class="span10 offset1">
+                    <form action='/joueur/modifier/{{joueur.id}}' method="POST" enctype="multipart/form-data">
+                            <div class="span3">
+                                {#block nom#}
+                                <label for="nom">Nom <span class="required">*</span></label>
+                                <input type="text" name="nom" class="span3" required="required" value="{{ set_value('nom', joueur.nom) }}"/>
+                                <div class="erreur">
+                                    {{ form_error('nom') }}         
+                                </div>
+
+                                {#block date#}
+                                <label for="date_naissance">Date de Naissance</label>
+                                <input type="date" name="date_naissance" class="span3" value="{{ set_value('date_naissance', joueur.date_naissance) }}"/>
+                              
+                                {#block poste#}
+                                 <label for="post">Poste</label>
+                                 <select name="post" class="span3" selected="{{ set_value('post', joueur.post) }}">
+                                    <option value="gardien" {%if joueur.post=='gardien'%} selected="selected" {%endif%}>gardien</option>
+                                    <option value="arrière latéral" {%if joueur.post=='arrière latéral'%} selected="selected" {%endif%}>arrière latéral</option>
+                                    <option value="libéro" {%if joueur.post=='libéro'%} selected="selected" {%endif%}>libéro</option>
+                                    <option value="milieu défensif" {%if joueur.post=='milieu défensif'%} selected="selected" {%endif%}>milieu défensif</option>
+                                    <option value="milieu offensif" {%if joueur.post=='milieu offensif'%} selected="selected" {%endif%}>milieu offensif</option>
+                                    <option value="deuxème attaquant" {%if joueur.post=='deuxème attaquant'%} selected="selected" {%endif%}>deuxème attaquant</option>
+                                    <option value="avant-centre" {%if joueur.post=='avant-centre'%} selected="selected" {%endif%}>avant-centre</option>
+                                    <option value="remplaçant" {%if joueur.post=='remplaçant'%} selected="selected" {%endif%}>remplaçant</option>                               
+                                 </select>
+                            </div>
+                            
+                            <div class="span3">
+                                {#block ville#}
+                                <label for="ville">Ville</label>
+                                <select name="ville" class="span3" selected="{{ set_value('ville', joueur.ville) }}">          
+                                        <option value="Ariana" {%if joueur.ville=='Ariana'%} selected="selected" {%endif%}>Ariana</option>
+                                        <option value="Béja" {%if joueur.ville=='Béja'%} selected="selected" {%endif%}>Béja</option>
+                                        <option value="Ben arous" {%if joueur.ville=='Ben arous'%} selected="selected" {%endif%}>Ben Arous</option>
+                                        <option value="Bizerte" {%if joueur.ville=='Bizerte'%} selected="selected" {%endif%}>Bizerte</option>
+                                        <option value="Gafsa" {%if joueur.ville=='Gafsa'%} selected="selected" {%endif%}>Gafsa</option>
+                                        <option value="Jendouba" {%if joueur.ville=='Jendouba'%} selected="selected" {%endif%}>Jendouba</option>
+                                        <option value="Kairouan" {%if joueur.ville=='Kairouan'%} selected="selected" {%endif%}>Kairouan</option>
+                                        <option value="Kasserine" {%if joueur.villen=='Kasserine'%} selected="selected" {%endif%}>Kasserine</option>
+                                        <option value="Kébili" {%if joueur.ville=='Kébili'%} selected="selected" {%endif%}>Kébili</option>
+                                        <option value="Le Kef" {%if joueur.ville=='le Kef'%} selected="selected" {%endif%}>Le Kef</option>
+                                        <option value="Mahdia" {%if joueur.ville=='Mahdia'%} selected="selected" {%endif%}>Mahdia</option>
+                                        <option value="La Manouba" {%if joueur.ville=='la Manouba'%} selected="selected" {%endif%}>La Manouba</option>
+                                        <option value="Médenine" {%if joueur.ville=='Médenine'%} selected="selected" {%endif%}>Médenine</option>
+                                        <option value="Monastir" {%if joueur.ville=='Monastir'%} selected="selected" {%endif%}>Monastir</option>
+                                        <option value="Nabeul" {%if joueur.ville=='Ain Draham'%} selected="selected" {%endif%}>Nabeul</option>
+                                        <option value="Sfax" {%if joueur.ville=='Sfax'%} selected="selected" {%endif%}>Sfax</option>
+                                        <option value="Sidi Bouzid" {%if joueur.ville=='Sidi Bouzid'%} selected="selected" {%endif%}>Sidi Bouzid</option>
+                                        <option value="Siliana" {%if joueur.ville=='Siliana'%} selected="selected" {%endif%}>Siliana</option>
+                                        <option value="Sousse" {%if joueur.ville=='Sousse'%} selected="selected" {%endif%}>Sousse</option>
+                                        <option value="Tataouine" {%if joueur.ville=='Tataouine'%} selected="selected" {%endif%}>Tataouine</option>
+                                        <option value="Tozeur" {%if joueur.ville=='Tozeur'%} selected="selected" {%endif%}>Tozeur</option>
+                                        <option value="Tunis" {%if joueur.ville=='Tunis'%} selected="selected" {%endif%}>Tunis</option>
+                                        <option value="Zaghouan" {%if joueur.ville=='Zaghouan'%} selected="selected" {%endif%}>Zaghouan</option>
+                                    </select>
+                                
+                                {#block taille#}
+                                <label for="taille">Taille</label>
+                                <input type="text" name="taille" class="span3" value="{{ set_value('taille', joueur.taille) }}"/>
+                              
+                                {#block Poids#}
+                                <label for="poids">Poids</label>
+                                <input type="text" name="poids" class="span3" value="{{ set_value('poids', joueur.poids) }}"/>
+                            </div>
+                            
+                            <div class="span3">   
+                                {#block date affectation#}
+                                <label for="date_affectation">Date D'affectation</label>
+                                <input type="date" name="date_affectation" class="span3" value="{{ set_value('date_affectation', joueur.date_affectation) }}"/>
+                             
+                                {#block equipe#}
+                                <label for="equipe">Equipe <span class="required">*</span></label>
+                                <select name="equipe" class="span3" required="required">
+                                    {% for equipe in equipes %}
+                                        <option value="{{equipe.id}}"  {%if equipe.id==joueur.equipe%} selected="selected" {%endif%}>{{equipe.nom_equipe}}</option>
+                                    {% endfor %}
+                                </select>
+                                
+                                {#block photo#}
+                                <label for="userfile">Photo</label>
+                                <input type="file" name="userfile" class="span3"/>
+                                <div class="erreur">
+                                  {{error}}
+                                </div>   
+                           </div>
+                            
+                            <div class="span10">
+                                <hr>
+                                <button type="submit" class="btn btn-danger btn-block offset3 span2">Modifier</button>
+                            </div>
+                    </form> 
                 </div>
-                
-                <div class="control-group">
-                    <label class="control-label" for="date_naissance">Date de Naissance</label>
-                    <div class="controls">
-                        <input type="date" name="date_naissance" class="span3" value="{{ set_value('date_naissance', joueur.date_naissance) }}"/>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label" for="post">Poste</label>
-                    <div class="controls">
-                         <select name="post" class="span3" selected="{{ set_value('post', joueur.post) }}">
-                                <option value="gardien" {%if joueur.post=='gardien'%} selected="selected" {%endif%}>gardien</option>
-                                <option value="arrière latéral" {%if joueur.post=='arrière latéral'%} selected="selected" {%endif%}>arrière latéral</option>
-                                <option value="libéro" {%if joueur.post=='libéro'%} selected="selected" {%endif%}>libéro</option>
-                                <option value="milieu défensif" {%if joueur.post=='milieu défensif'%} selected="selected" {%endif%}>milieu défensif</option>
-                                <option value="milieu offensif" {%if joueur.post=='milieu offensif'%} selected="selected" {%endif%}>milieu offensif</option>
-                                <option value="deuxème attaquant" {%if joueur.post=='deuxème attaquant'%} selected="selected" {%endif%}>deuxème attaquant</option>
-                                <option value="avant-centre" {%if joueur.post=='avant-centre'%} selected="selected" {%endif%}>avant-centre</option>
-                                <option value="remplaçant" {%if joueur.post=='remplaçant'%} selected="selected" {%endif%}>remplaçant</option>                               
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label" for="ville">Ville</label>
-                    <div class="controls">
-                        <select name="ville" class="span3" selected="{{ set_value('ville', joueur.ville) }}">          
-                            <option value="Ariana" {%if joueur.ville=='Ariana'%} selected="selected" {%endif%}>Ariana</option>
-                            <option value="Béja" {%if joueur.ville=='Béja'%} selected="selected" {%endif%}>Béja</option>
-                            <option value="Ben arous" {%if joueur.ville=='Ben arous'%} selected="selected" {%endif%}>Ben Arous</option>
-                            <option value="Bizerte" {%if joueur.ville=='Bizerte'%} selected="selected" {%endif%}>Bizerte</option>
-                            <option value="Gafsa" {%if joueur.ville=='Gafsa'%} selected="selected" {%endif%}>Gafsa</option>
-                            <option value="Jendouba" {%if joueur.ville=='Jendouba'%} selected="selected" {%endif%}>Jendouba</option>
-                            <option value="Kairouan" {%if joueur.ville=='Kairouan'%} selected="selected" {%endif%}>Kairouan</option>
-                            <option value="Kasserine" {%if joueur.villen=='Kasserine'%} selected="selected" {%endif%}>Kasserine</option>
-                            <option value="Kébili" {%if joueur.ville=='Kébili'%} selected="selected" {%endif%}>Kébili</option>
-                            <option value="Le Kef" {%if joueur.ville=='le Kef'%} selected="selected" {%endif%}>Le Kef</option>
-                            <option value="Mahdia" {%if joueur.ville=='Mahdia'%} selected="selected" {%endif%}>Mahdia</option>
-                            <option value="La Manouba" {%if joueur.ville=='la Manouba'%} selected="selected" {%endif%}>La Manouba</option>
-                            <option value="Médenine" {%if joueur.ville=='Médenine'%} selected="selected" {%endif%}>Médenine</option>
-                            <option value="Monastir" {%if joueur.ville=='Monastir'%} selected="selected" {%endif%}>Monastir</option>
-                            <option value="Nabeul" {%if joueur.ville=='Ain Draham'%} selected="selected" {%endif%}>Nabeul</option>
-                            <option value="Sfax" {%if joueur.ville=='Sfax'%} selected="selected" {%endif%}>Sfax</option>
-                            <option value="Sidi Bouzid" {%if joueur.ville=='Sidi Bouzid'%} selected="selected" {%endif%}>Sidi Bouzid</option>
-                            <option value="Siliana" {%if joueur.ville=='Siliana'%} selected="selected" {%endif%}>Siliana</option>
-                            <option value="Sousse" {%if joueur.ville=='Sousse'%} selected="selected" {%endif%}>Sousse</option>
-                            <option value="Tataouine" {%if joueur.ville=='Tataouine'%} selected="selected" {%endif%}>Tataouine</option>
-                            <option value="Tozeur" {%if joueur.ville=='Tozeur'%} selected="selected" {%endif%}>Tozeur</option>
-                            <option value="Tunis" {%if joueur.ville=='Tunis'%} selected="selected" {%endif%}>Tunis</option>
-                            <option value="Zaghouan" {%if joueur.ville=='Zaghouan'%} selected="selected" {%endif%}>Zaghouan</option>
-                        </select>
-                    </div>
-                </div>
-                
-               <div class="control-group">
-                    <label class="control-label" for="taille">Taille</label>
-                    <div class="controls">
-                        <input type="text" name="taille" class="span3" value="{{ set_value('taille', joueur.taille) }}"/>
-                    </div>
-                </div>
-                    
-                <div class="control-group">
-                    <label class="control-label" for="poids">Poid</label>
-                    <div class="controls">
-                        <input type="text" name="poids" class="span3" value="{{ set_value('poids', joueur.poids) }}"/>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label" for="date_affectation">Date D'affectation</label>
-                    <div class="controls">
-                        <input type="date" name="date_affectation" class="span3" value="{{ set_value('date_affectation', joueur.date_affectation) }}"/>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label" for="equipe">Equipe <span class="required">*</span></label>
-                    <div class="controls">
-                        <select name="equipe" class="span3" required="required">
-                            {% for equipe in equipes %}
-                                <option value="{{equipe.id}}"  {%if equipe.id==joueur.equipe%} selected="selected" {%endif%}>{{equipe.nom_equipe}}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label" for="userfile">Photo</label>
-                    <div class="controls">
-                        <input type="file" name="userfile" class="span3"/>
-                        <div class="erreur">
-                          {{error}}
-                        </div>
-                    </div>
-                </div>   
-                
-                <div class="control-group">
-                    <div class="controls">
-                        <button type="submit" class="btn btn-info">Modifier</button>
-                    </div>
-                </div>
-            </fieldset>
-        </form>   
+            </div>
+        </div>
     </div>
 {% endblock container %}

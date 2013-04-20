@@ -1,22 +1,63 @@
 {% extends "layout.twig" %}
 
 {% block title %} {{parent()}} - Classement Coupe{% endblock title %}
-
+{% block navbar%}
+    <div class="navbar">
+        <div class="navbar-inner">
+            <ul class="nav">
+                <li><a href="/saison">Gestion Saison</a></li>
+                <li class="divider-vertical"></li>
+                <li><a href="/equipe">Gestion Equipe</a></li>
+                <li class="divider-vertical"></li>
+                <li><a href="/joueur">Gestion Joueurs</a></li>
+                <li class="divider-vertical"></li>
+                <li><a href="/match">Gestion Match</a></li>
+                <li class="divider-vertical"></li>
+                <li><a href="/arbitre">Gestion Arbitre</a></li>
+                <li class="divider-vertical"></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Championnat <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/classement/champligueun">Football Pro ligue 1</a>
+                        <li><a href="/classement/champliguedeux">Football Pro ligue 2</a>
+                        <li><a href="/classement/champligueamateur">Football Amateur</a>
+                        <li><a href="/classement/champliguefeminin">Football Féminin</a>
+                        <li><a href="/classement/champliguefutsal">Futsal</a>
+                    </ul>
+                </li>
+                <li class="divider-vertical"></li>
+                <li class="active dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coupe <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/classement/coupeligueun">Football Pro ligue 1</a>
+                        <li><a href="/classement/coupeliguedeux">Football Pro ligue 2</a>
+                        <li><a href="/classement/coupeligueamateur">Football Amateur</a>
+                        <li><a href="/classement/coupeliguefeminin">Football Féminin</a>
+                        <li><a href="/classement/coupeliguefutsal">Futsal</a>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock navbar%}
 {% block container%}
-    <div class="span11 well"> 
-        <h3 class="text-center">Classement Coupe</h3>
-        <h4 class="text-center">{{ligue}}</h4>
-        <hr>
-        
-        <table class="table table-bordered table-striped span7 offset2 table-condensed">
-            <thead>
-                <tr>
-                    <th><h5>logo Equipe</h5></th>
-                    <th><h5>Nom Equipe</h5></th>
-                    <th><h5>Nombre de Points</h5></th>
-                </tr>
-            </thead>
-            <tbody>
+    <div class="well">
+        <div class="row">
+            <div class="span11">
+                <h3 class="text-center">Classement Coupe</h3>
+                <h4 class="text-center">{{ligue}}</h4>
+                <hr>
+            </div>
+                
+            <table class="table table-bordered table-striped span7 offset2 table-condensed">
+                <thead>
+                    <tr>
+                        <th><h5>logo Equipe</h5></th>
+                        <th><h5>Nom Equipe</h5></th>
+                        <th><h5>Nombre de Points</h5></th>
+                    </tr>
+                </thead>
+                <tbody>
                 {% for class in classement %}
                         <tr>
                             <td><img src="{{base_url()}}uploads/{{class.logo}}" alt="" class="img-polaroid" style="height: 50px;width: 50px"></td>
@@ -26,6 +67,6 @@
                 {%endfor%}
               </tbody>
             </table>
-     
+        </div>
     </div>
 {% endblock container%}

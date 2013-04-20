@@ -1,130 +1,149 @@
 {% extends "layout.twig" %}
 
 {% block title %} {{parent()}} - Modifier un Match{% endblock title %}
-
+{% block navbar%}
+    <div class="navbar">
+        <div class="navbar-inner">
+           <ul class="nav">
+             <li><a href="/saison">Gestion Saison</a></li>
+             <li class="divider-vertical"></li>
+             <li><a href="/equipe">Gestion Equipe</a></li>
+             <li class="divider-vertical"></li>
+             <li><a href="/joueur">Gestion Joueurs</a></li>
+             <li class="divider-vertical"></li>
+             <li class="active"><a href="/match">Gestion Match</a></li>
+             <li class="divider-vertical"></li>
+             <li><a href="/arbitre">Gestion Arbitre</a></li>
+             <li class="divider-vertical"></li>
+             <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Championnat <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/classement/champligueun">Football Pro ligue 1</a>
+                        <li><a href="/classement/champliguedeux">Football Pro ligue 2</a>
+                        <li><a href="/classement/champligueamateur">Football Amateur</a>
+                        <li><a href="/classement/champliguefeminin">Football Féminin</a>
+                        <li><a href="/classement/champliguefutsal">Futsal</a>
+                    </ul>
+             </li>
+             <li class="divider-vertical"></li>
+             <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coupe <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/classement/coupeligueun">Football Pro ligue 1</a>
+                    <li><a href="/classement/coupeliguedeux">Football Pro ligue 2</a>
+                    <li><a href="/classement/coupeligueamateur">Football Amateur</a>
+                    <li><a href="/classement/coupeliguefeminin">Football Féminin</a>
+                    <li><a href="/classement/coupeliguefutsal">Futsal</a>
+                </ul>
+             </li>
+           </ul>
+        </div>
+    </div>
+{% endblock navbar%}
 {% block container%}
-    <div class="span11 well"> 
-         <ul class="nav nav-pills">
-            <li><h4>Modifier un Match </h4></li>
-            <li class="pull-right"><a href="/match/voir/{{match.id}}" class="btn"><i class="icon-eye-open"></i> Voir match</a></li>
-            <li class="pull-right"><a href="/match/supprimer/{{match.id}}" class="btn deleteadmin"><i class="icon-trash"></i>Supprimer match</a></li>
-            {%if match.resultat_equipe_visit == -1%}
-            <li class="pull-right"><a href="/match/resultat/{{match.id}}" class="btn"><i class="icon-check"></i>Affecter Résultat</a></li>
-            {%endif%}
-        </ul>
-        <hr>
-         <form action='/match/modifier/{{match.id}}' method="POST" class="form-horizontal offset3">
-            <fieldset>
-                <div class="control-group">
-                    <label class="control-label" for="type">Type <span class="required">*</span></label>
-                    <div class="controls">
-                        <select name="type" required="required" selected="{{ set_value('type', match.type) }}">
-                            <option value="semi-final" {%if match.type=='semi-final'%} selected="selected" {%endif%}>semi-final</option>
-                            <option value="final" {%if match.type=='final'%} selected="selected" {%endif%}>final</option>
-                        </select>
-                        <div class="erreur">
-                            {{ form_error('type') }}         
-                        </div>
-                    </div>
-                </div>
-                    
-                <div class="control-group">
-                    <label class="control-label" for="saison">Saison <span class="required">*</span></label>
-                    <div class="controls">
-                        <select name="saison" required="required" selected="{{ set_value('saison', saison.saison) }}">
-                            {% for saison in saisons%}
-                                <option value="{{saison.id}}" {%if saison.saison==saison.id%} selected="selected" {%endif%}>{{saison.saison}}</option>            
-                            {% endfor %}
-                        </select>
-                        <div class="erreur">
-                            {{ form_error('saison') }}         
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label" for="categorie">Catégorie <span class="required">*</span></label>
-                    <div class="controls">
-                       <select name="categorie" required="required" disabled>
-                            <option value="championnat" {%if match.categorie=='championnat'%} selected="selected" {%endif%}>championnat</option>
-                            <option value="coupe" {%if match.categorie=='coupe'%} selected="selected" {%endif%}>coupe</option>
-                        </select>
-                        <div class="erreur">
-                            {{ form_error('categorie') }}         
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label" for="date_match">Date et temps match <span class="required">*</span></label>
-                    <div class="controls">
-                        <input type="date" name="date_match" required="required" class="span2"  value="{{ set_value('date_match', match.date_match) }}">
-                        <input type="time" name="heur_match" required="required" class="span1"  value="{{ set_value('heur_match', match.heur_match) }}">
-                        <div class="erreur">
-                            {{ form_error('date_match') }}         
-                        </div>
-                    </div>
-                </div>
-                    
-               <div class="control-group">
-                    <label class="control-label" for="stade">Stade <span class="required">*</span></label>
-                    <div class="controls">
-                        <input type="text" name="stade" required="required" value="{{ set_value('stade', match.stade) }}">
-                        <div class="erreur">
-                            {{ form_error('stade') }}         
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label" for="arbitre">Arbitre <span class="required">*</span></label>
-                    <div class="controls">
-                        <select name="arbitre" required="required" selected="{{ set_value('arbitre', arbitre.arbitre) }}">
-                        {% for arbitre in arbitres %}
-                            <option value="{{arbitre.id}}" {%if arbitre.arbitre==arbitre.id%} selected="selected" {%endif%}>{{arbitre.nom}}</option>            
-                        {% endfor %}
+    <div class="well"> 
+        <div class="row">
+            <div class="span11">
+                <ul class="nav nav-pills">
+                    <li><h3>Modifier un Match </h3></li>
+                    <li class="pull-right"><a href="/match/voir/{{match.id}}" class="btn"><i class="icon-eye-open"></i> Voir match</a></li>
+                    <li class="pull-right"><a href="/match/supprimer/{{match.id}}" class="btn deleteadmin"><i class="icon-trash"></i>Supprimer match</a></li>
+                    {%if match.resultat_equipe_visit == -1%}
+                    <li class="pull-right"><a href="/match/resultat/{{match.id}}" class="btn"><i class="icon-check"></i>Affecter Résultat</a></li>
+                    {%endif%}
+                </ul>
+                <hr>
+                <div class="span10 offset1">
+                    <form action='/match/modifier/{{match.id}}' method="POST">
+                        <div class="span3">
+                            {#Block Type#}
+                            <label for="type">Type <span class="required">*</span></label>
+                            <select name="type" required="required" selected="{{ set_value('type', match.type) }}">
+                                <option value="semi-final" {%if match.type=='semi-final'%} selected="selected" {%endif%}>semi-final</option>
+                                <option value="final" {%if match.type=='final'%} selected="selected" {%endif%}>final</option>
                             </select>
-                        <div class="erreur">
-                            {{ form_error('arbitre') }}         
+                            <div class="erreur">
+                                {{ form_error('type') }}         
+                            </div>
+                            
+                            {#Block Saison#}
+                            <label for="saison">Saison <span class="required">*</span></label>
+                            <select name="saison" required="required" selected="{{ set_value('saison', saison.saison) }}">
+                                {% for saison in saisons%}
+                                    <option value="{{saison.id}}" {%if saison.saison==saison.id%} selected="selected" {%endif%}>{{saison.saison}}</option>            
+                                {% endfor %}
+                            </select>
+                            <div class="erreur">
+                                {{ form_error('saison') }}         
+                            </div>
+
+                            {#Block Catégorie#}
+                            <label for="categorie">Catégorie <span class="required">*</span></label>
+                            <select name="categorie" required="required" disabled>
+                                 <option value="championnat" {%if match.categorie=='championnat'%} selected="selected" {%endif%}>championnat</option>
+                                 <option value="coupe" {%if match.categorie=='coupe'%} selected="selected" {%endif%}>coupe</option>
+                             </select>
+                             <div class="erreur">
+                                 {{ form_error('categorie') }}         
+                             </div>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label" for="equipe_visit">Equipe Visiteur <span class="required">*</span></label>
-                    <div class="controls">
-                         <select name="equipe_visit" required="required" {%if match.resultat_equipe_visit != -1%}disabled {%endif%}>
-                            {% for equipe in equipes %}
-                                <option value="{{equipe.id}}" {%if match.equipe_visit==equipe.id%} selected {%endif%}>{{equipe.nom_equipe}}</option>            
+                        <div class="span3">
+                            {#Block Date et heure#}
+                            <label class="control-label" for="date_match">Date et heure match <span class="required">*</span></label>
+                            <input type="date" name="date_match" required="required" class="span2"  value="{{ set_value('date_match', match.date_match) }}">
+                            <input type="time" name="heur_match" required="required" class="span1"  value="{{ set_value('heur_match', match.heur_match) }}">
+                            <div class="erreur">
+                                {{ form_error('date_match') }}         
+                            </div>
+                            
+                            {#Block Stade#}
+                            <label class="control-label" for="stade">Stade <span class="required">*</span></label>
+                            <input type="text" name="stade" required="required" value="{{ set_value('stade', match.stade) }}">
+                            <div class="erreur">
+                                {{ form_error('stade') }}         
+                            </div>
+
+                            {#Block arbitre#}
+                            <label class="control-label" for="arbitre">Arbitre <span class="required">*</span></label>
+                            <select name="arbitre" required="required" selected="{{ set_value('arbitre', arbitre.arbitre) }}">
+                            {% for arbitre in arbitres %}
+                                <option value="{{arbitre.id}}" {%if arbitre.arbitre==arbitre.id%} selected="selected" {%endif%}>{{arbitre.nom}}</option>            
                             {% endfor %}
-                        </select>
-                        <div class="erreur">
-                            {{ form_error('equipe_visit') }}         
+                                </select>
+                            <div class="erreur">
+                                {{ form_error('arbitre') }}         
+                            </div>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <label class="control-label" for="equipe_recev">Equipe Receveur <span class="required">*</span></label>
-                    <div class="controls">
-                         <select name="equipe_recev" required="required" {%if match.resultat_equipe_recev != -1%}disabled {%endif%}>
-                            {% for equipe in equipes %}
-                                <option value="{{equipe.id}}" {% if match.equipe_recev == equipe.id %} selected {% endif %} >{{equipe.nom_equipe}}</option>            
-                            {% endfor %}
-                        </select>
-                        <div class="erreur">
-                            {{ form_error('equipe_recev') }}         
+                        <div class="span3">
+                            {#Block Equipe visiteur#}
+                            <label class="control-label" for="equipe_visit">Equipe Visiteur <span class="required">*</span></label>
+                            <select name="equipe_visit" required="required" {%if match.resultat_equipe_visit != -1%}disabled {%endif%}>
+                                {% for equipe in equipes %}
+                                    <option value="{{equipe.id}}" {%if match.equipe_visit==equipe.id%} selected {%endif%}>{{equipe.nom_equipe}}</option>            
+                                {% endfor %}
+                            </select>
+                            <div class="erreur">
+                                {{ form_error('equipe_visit') }}         
+                            </div>
+
+                            {#Block Equipe Receveur#}
+                            <label class="control-label" for="equipe_recev">Equipe Receveur <span class="required">*</span></label>
+                            <select name="equipe_recev" required="required" {%if match.resultat_equipe_recev != -1%}disabled {%endif%}>
+                                {% for equipe in equipes %}
+                                    <option value="{{equipe.id}}" {% if match.equipe_recev == equipe.id %} selected {% endif %} >{{equipe.nom_equipe}}</option>            
+                                {% endfor %}
+                            </select>
+                            <div class="erreur">
+                                {{ form_error('equipe_recev') }}         
+                            </div>
                         </div>
-                    </div>
+                        <div class="span10">
+                            <hr>
+                            <button type="submit" class="btn btn-danger btn-block offset3 span2">Modifier</button>
+                        </div>
+                    </form> 
                 </div>
- 
-                <div class="control-group">
-                    <div class="controls">
-                        <button type="submit" class="btn btn-info">Modifier</button>
-                    </div>
-                </div>
-                    
-            </fieldset>
-        </form>   
+            </div>
+        </div>
     </div>
 {% endblock container%}
