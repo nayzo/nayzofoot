@@ -59,8 +59,12 @@
                             {#Block Type#}
                             <label for="type">Type <span class="required">*</span></label>
                             <select name="type" required="required" selected="{{ set_value('type', match.type) }}">
-                                <option value="semi-final" {%if match.type=='semi-final'%} selected="selected" {%endif%}>semi-final</option>
-                                <option value="final" {%if match.type=='final'%} selected="selected" {%endif%}>final</option>
+                                
+                                <option value="Demi-finale" {%if match.type=='Demi-finale'%} selected="selected" {%endif%}>Demi-finale</option>
+                                <option value="Finale" {%if match.type=='Finale'%} selected="selected" {%endif%}>Finale</option>
+                                <option value="Amical" {%if match.type=='Amical'%} selected="selected" {%endif%}>Amical</option>
+                                <option value="Derbi" {%if match.type=='Derbi'%} selected="selected" {%endif%}>Derbi</option>
+               
                             </select>
                             <div class="erreur">
                                 {{ form_error('type') }}         
