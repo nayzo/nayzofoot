@@ -40,10 +40,11 @@
             <div class="span11">
                 <h3 class="text-center">Changer Mot de passe</h3>
                 <hr>
+                <div class="error span7 offset2 text-center">{{ validation_errors() }}</div>
                 <div class="span10 offset2">
                     <form action='/backend/changepass' method="POST" class="form-horizontal" >
                         <fieldset>
-                            <div class="error">{{ validation_errors() }}</div>
+                           
                             <div class="control-group">
                                 <label class="control-label" for="password">Mot de passe courant</label>
                                 <div class="controls">
