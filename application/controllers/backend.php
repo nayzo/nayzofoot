@@ -26,7 +26,7 @@ class Backend extends CI_Controller {
 
         $req = $this->login_model->login();
         if (!$req) {
-            $this->form_validation->set_message('check_login', 'Invalid Email or password');
+            $this->form_validation->set_message('check_login', 'Email ou mot de passe invalide!');
             return false;
         } else {
              foreach($req as $val){
