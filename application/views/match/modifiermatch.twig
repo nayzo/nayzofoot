@@ -72,13 +72,13 @@
                             
                             {#Block Saison#}
                             <label for="saison">Saison <span class="required">*</span></label>
-                            <select name="saison" required="required" selected="{{ set_value('saison', saison.saison) }}">
+                            <select name="saison" required="required" {%if match.resultat_equipe_visit != -1%}disabled {%endif%}>
                                 {% for saison in saisons%}
-                                    <option value="{{saison.id}}" {%if saison.saison==saison.id%} selected="selected" {%endif%}>{{saison.saison}}</option>            
+                                    <option value="{{saison.id}}" {%if match.saison==saison.id%} selected="selected" {%endif%}>{{saison.saison}}</option>            
                                 {% endfor %}
                             </select>
                             <div class="erreur">
-                                {{ form_error('saison') }}         
+                                {{ form_error('saisons') }}         
                             </div>
 
                             {#Block Catégorie#}

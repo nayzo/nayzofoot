@@ -53,17 +53,17 @@ class Classement_model extends CI_Model {
         $this->db->delete('classement');
     }
     
-    function add_point_championnat($equipe, $val)
+    function add_point_championnat($equipe, $val, $saisin)
     {
-        $this->db->where('saison', getsessionhelper()['saisonid']);
+        $this->db->where('saison', $saisin);
         $this->db->where('equipe', $equipe);
         $this->db->set('nb_point_championnat', "nb_point_championnat+$val", FALSE);
         $this->db->update('classement');
     }
     
-    function add_point_coupe($equipe, $val)
+    function add_point_coupe($equipe, $val, $saisin)
     {
-        $this->db->where('saison', getsessionhelper()['saisonid']);
+        $this->db->where('saison', $saisin);
         $this->db->where('equipe', $equipe);
         $this->db->set('nb_point_coupe', "nb_point_coupe+$val", FALSE);
         $this->db->update('classement');
