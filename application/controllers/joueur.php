@@ -128,6 +128,6 @@ class Joueur extends CI_Controller {
     {
         $photo = $this->joueur_model->get_joueur($id)->row()->photo;
         $path = __DIR__.'/../../uploads/'.$photo;
-        unlink ($path);
+         try { unlink ($path); } catch(Exception $e){}
     }
 }

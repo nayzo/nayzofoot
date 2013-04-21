@@ -89,4 +89,11 @@ class Match_model extends CI_Model {
         $query = $this->db->get();
         return $query->result();
     }
+    
+    function delete_match_by_equipe($id)
+    {
+        $this->db->where(" (equipe_visit = $id OR equipe_recev = $id) ", null, false);
+        //$this->db->where('(name LIKE %name1% OR name LIKE %name2%)', null, false);
+        $this->db->delete('match');
+    }
 }

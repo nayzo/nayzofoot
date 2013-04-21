@@ -10,6 +10,7 @@ class Equipe extends CI_Controller {
         $this->load->model('equipe_model');
         $this->load->model('joueur_model');
         $this->load->model('classement_model');
+        $this->load->model('match_model');
         $this->twig->addFunction('getsessionhelper');
     }
 
@@ -121,6 +122,8 @@ class Equipe extends CI_Controller {
         else {
             if(!$id) redirect('/');
             $this->suppphoto($id);
+            
+            $this->match_model->delete_match_by_equipe($id);
             $this->equipe_model->delete_equipe($id);
             $jouers = $this->joueur_model->get_all_by_equipe($id);
             foreach($jouers as $req)
@@ -138,12 +141,12 @@ class Equipe extends CI_Controller {
          if(!$id) redirect('/');
         $logo = $this->equipe_model->get_equipe($id)->row()->logo;
         $path = __DIR__.'/../../uploads/'.$logo;
-        unlink ($path);
+        try { unlink ($path); } catch(Exception $e){}
     }
     
     public function suppphoto_joueur($photo)
     {
         $path = __DIR__.'/../../uploads/'.$photo;
-        unlink ($path);
+        try { unlink ($path); } catch(Exception $e){}
     }
 }
