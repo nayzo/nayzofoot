@@ -51,21 +51,21 @@
                         <div class="span3">
                             {#Block nom#}  
                             <label for="nom_equipe">Nom <span class="required">*</span></label>
-                            <input type="text" name="nom_equipe" class="span3" required="required"/>
+                            <input type="text" name="nom_equipe" class="span3" required="required" value="{{ set_value('nom') }}"/>
                             <div class="erreur">
                                 {{ form_error('nom_equipe') }}         
                             </div>
 
                             {#Block Entreneur#} 
                             <label for="entreneur">Entreneur <span class="required">*</span></label>
-                            <input type="text" name="entreneur" class="span3" required="required"/>
+                            <input type="text" name="entreneur" class="span3"  placeholder="Nom Complet" required="required" value="{{ set_value('entreneur') }}"/>
                             <div class="erreur">
                                 {{ form_error('entreneur') }}         
                             </div>
                              
                             {#Block Date de création#} 
                             <label for="date_creation">Date de Création</label>
-                            <input type="date" name="date_creation" class="span3"/>
+                            <input type="date" name="date_creation" class="span3" value="{{ set_value('date_creation') }}"/>
                         </div>
                         <div class="span3">
                             {#Block Lieu d'origine#} 
@@ -98,11 +98,11 @@
 
                             {#Block site web#} 
                             <label for="siteweb">Site Web</label>
-                            <input type="text" name="siteweb" class="span3"/>
+                            <input type="text" name="siteweb" class="span3" value="{{ set_value('siteweb') }}"/>
                         
                             {#Block Lieu d'origine#} 
                             <label for="stade">Stade</label>
-                            <input type="text" name="stade" class="span3"/>
+                            <input type="text" name="stade" class="span3" value="{{ set_value('stade') }}"/>
                         </div>
                         <div class="span3">
                             {#Block Ligue#} 
