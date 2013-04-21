@@ -1,15 +1,3 @@
-/*!
- * FullCalendar v1.6.1
- * Docs & License: http://arshaw.com/fullcalendar/
- * (c) 2013 Adam Shaw
- */
-
-/*
- * Use fullcalendar.css for basic styling.
- * For event drag & drop, requires jQuery UI draggable.
- * For event resizing, requires jQuery UI resizable.
- */
- 
 (function($, undefined) {
 
 
@@ -51,7 +39,7 @@ var defaults = {
 	},
 	columnFormat: {
 		month: 'ddd',
-		week: 'ddd M - d',
+		week: 'ddd d - M',
 		day: ''
 	},
 	timeFormat: { // for event elements
@@ -1489,6 +1477,19 @@ function formatDate(date, format, options) {
 }
 
 
+//Function written by Hamza
+function show_time_fr(e) {
+    var dd = new Date(Date.parse(e.start)); //get the full date from e.start
+    var hh = dd.getHours().toString();
+    var mm = dd.getMinutes().toString();
+    
+    if(hh.length < 2) { hh = '0' + hh}
+    if(mm.length < 2) { mm = '0' + mm}
+    
+    return hh + ':' + mm;
+}
+
+
 function formatDates(date1, date2, format, options) {
 	options = options || defaults;
 	var date = date1,
@@ -2770,7 +2771,7 @@ function BasicEventRenderer() {
 	----------------------------------------------------------------------------*/
 	
 	/*ajout de 12 à la fin du nom de la fonction pour desactiver le drag & drop*/
-	function draggableDayEvent12(event, eventElement) {
+	function draggableDayEvent(event, eventElement) {
 		var hoverListener = getHoverListener();
 		var dayDelta;
 		eventElement.draggable({
@@ -2905,7 +2906,7 @@ function AgendaDayView(element, calendar) {
 
 setDefaults({
 	allDaySlot: true,
-	allDayText: 'all-day',
+	allDayText: 'Toute la journée',
 	firstHour: 6,
 	slotMinutes: 30,
 	defaultEventMinutes: 120,
@@ -3208,12 +3209,16 @@ function AgendaView(element, calendar, viewName) {
 		maxd = addMinutes(cloneDate(d), maxMinute);
 		addMinutes(d, minMinute);
 		slotCnt = 0;
+                
+                var hour_count = 0;
+                
 		for (i=0; d < maxd; i++) {
 			minutes = d.getMinutes();
 			s +=
 				"<tr class='fc-slot" + i + ' ' + (!minutes ? '' : 'fc-minor') + "'>" +
 				"<th class='fc-agenda-axis " + headerClass + "'>" +
-				((!slotNormal || !minutes) ? formatDate(d, opt('axisFormat')) : '&nbsp;') +
+				//((!slotNormal || !minutes) ? formatDate(d, opt('axisFormat')) : '&nbsp;') +
+                                ((!slotNormal || !minutes) ? hour_count++ + 'h' : '&nbsp;') +
 				"</th>" +
 				"<td class='" + contentClass + "'>" +
 				"<div style='position:relative'>&nbsp;</div>" +
@@ -3892,7 +3897,7 @@ function AgendaEventRenderer() {
 	// renders events in the 'time slots' at the bottom
 	
 	function renderSlotSegs(segs, modifiedEventId) {
-	
+            
 		var i, segCnt=segs.length, seg,
 			event,
 			classes,
@@ -4031,7 +4036,18 @@ function AgendaEventRenderer() {
 		var html = "<";
 		var url = event.url;
 		var skinCss = getSkinCss(event, opt);
-		var classes = ['fc-event', 'fc-event-vert'];
+		//var classes = ['fc-event', 'fc-event-vert'];
+                var classes = ['fc-event-vert'];
+                
+                /**/
+                if (event.joue) {
+			classes.push('fc-event');
+		}
+                else {
+                    classes.push('fc-event-green');
+                }
+                /**/
+                
 		if (isEventDraggable(event)) {
 			classes.push('fc-event-draggable');
 		}
@@ -4056,7 +4072,7 @@ function AgendaEventRenderer() {
 			">" +
 			"<div class='fc-event-inner'>" +
 			"<div class='fc-event-time'>" +
-			htmlEscape(formatDates(event.start, event.end, opt('timeFormat'))) +
+			show_time_fr(event) +//htmlEscape(formatDates(event.start, event.end, opt('timeFormat'))) +
 			"</div>" +
 			"<div class='fc-event-title'>" +
 			htmlEscape(event.title) +
@@ -4203,7 +4219,7 @@ function AgendaEventRenderer() {
 	// when event starts out IN TIMESLOTS
 	
         /*ajout de 12 à la fin du nom de la fonction pour desactiver le drag & drop*/
-	function draggableSlotEvent12(event, eventElement, timeElement) {
+	function draggableSlotEvent(event, eventElement, timeElement) {
 		var origPosition;
 		var allDay=false;
 		var dayDelta;
@@ -4741,7 +4757,6 @@ function DayEventRenderer() {
 	
 	
 	function daySegHTML(segs) { // also sets seg.left and seg.outerWidth
-                var maDate = new Date();
 		var rtl = opt('isRTL');
 		var i;
 		var segCnt=segs.length;
@@ -4759,12 +4774,6 @@ function DayEventRenderer() {
 		var skinCss;
 		var html = '';
                 
-                //seg = segs[0];
-                //event = seg.event;
-                
-                //return event.start.toLocaleString();
-                
-                
 		// calculate desired position/dimensions, create html
 		for (i=0; i<segCnt; i++) {
 			seg = segs[i];
@@ -4773,11 +4782,11 @@ function DayEventRenderer() {
                         classes = ['fc-event-hori'];
                         
                         /**/
-                        if(maDate < event.start) {
-                            classes.push('fc-event-red');
+                        if(event.joue) {
+                            classes.push('fc-event');
                         }
                         else {
-                            classes.push('fc-event');
+                            classes.push('fc-event-green');
                         }
                         /**/
                         
@@ -4820,8 +4829,8 @@ function DayEventRenderer() {
 			if (!event.allDay && seg.isStart) {
 				html +=
 					"<span class='fc-event-time'>" +
-					htmlEscape(formatDates(event.start, event.end, opt('timeFormat'))) +
-					"</span>";
+					show_time_fr(event) +//htmlEscape(formatDates(event.start, event.end, opt('timeFormat'))) +
+					"</span><br />";
 			}
 			html +=
 				"<span class='fc-event-title'>" + htmlEscape(event.title) + "</span>" +

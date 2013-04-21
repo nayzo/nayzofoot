@@ -27,8 +27,10 @@ class Match extends CI_Controller {
             
             foreach($res as $row)
             {
+                $joue = '';
+                
                 $str .= '{title: ';
-                $str .= '\''. $row->categorie .'\'';
+                $str .= '\''. $this->equipe_model->get_equipe($row->equipe_visit)->row()->nom_equipe . ' VS ' . $this->equipe_model->get_equipe($row->equipe_recev)->row()->nom_equipe .'\'';
                 $str .= ', start: new Date(';
                 $str .= date('Y', strtotime($row->date_match));
                 $str .= ', ';
@@ -42,6 +44,12 @@ class Match extends CI_Controller {
                 $str .= '), url: ';
                 $str .= '\'' . base_url() . 'match/voir/' . $row->id . '\'';
                 $str .= ', allDay: false';
+                
+                if($row->resultat_equipe_visit != -1) {$joue = 'true';} else {$joue = 'false';}
+                //true : match joue -> affichage en bleu
+                //false: match non joue -> affichage en vert
+                
+                $str .= ', joue: ' . $joue;
                 $str .= '}, ';
             }
             

@@ -77,16 +77,16 @@
                 var m = date.getMonth();
                 var y = date.getFullYear();
 		
-                $('#calendar').fullCalendar({
-                        theme: true,
-                        header: {
-                                left: 'prev,next today',
-                                center: 'title',
-                                right: 'month,agendaWeek,agendaDay'
-                        },
-                        editable: true,
-                        events: [{{ val }}]
-                });
+		$('#calendar').fullCalendar({
+			theme: true,
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			editable: false,
+			events: [{{ val }}]
+		});
 		
         });
 
