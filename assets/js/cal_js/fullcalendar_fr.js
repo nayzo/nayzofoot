@@ -1,15 +1,3 @@
-/*!
- * FullCalendar v1.6.1
- * Docs & License: http://arshaw.com/fullcalendar/
- * (c) 2013 Adam Shaw
- */
-
-/*
- * Use fullcalendar.css for basic styling.
- * For event drag & drop, requires jQuery UI draggable.
- * For event resizing, requires jQuery UI resizable.
- */
- 
 (function($, undefined) {
 
 
@@ -2783,7 +2771,7 @@ function BasicEventRenderer() {
 	----------------------------------------------------------------------------*/
 	
 	/*ajout de 12 à la fin du nom de la fonction pour desactiver le drag & drop*/
-	function draggableDayEvent12(event, eventElement) {
+	function draggableDayEvent(event, eventElement) {
 		var hoverListener = getHoverListener();
 		var dayDelta;
 		eventElement.draggable({
@@ -3909,7 +3897,7 @@ function AgendaEventRenderer() {
 	// renders events in the 'time slots' at the bottom
 	
 	function renderSlotSegs(segs, modifiedEventId) {
-	
+            
 		var i, segCnt=segs.length, seg,
 			event,
 			classes,
@@ -4231,7 +4219,7 @@ function AgendaEventRenderer() {
 	// when event starts out IN TIMESLOTS
 	
         /*ajout de 12 à la fin du nom de la fonction pour desactiver le drag & drop*/
-	function draggableSlotEvent12(event, eventElement, timeElement) {
+	function draggableSlotEvent(event, eventElement, timeElement) {
 		var origPosition;
 		var allDay=false;
 		var dayDelta;
