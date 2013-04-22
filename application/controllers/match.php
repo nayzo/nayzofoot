@@ -383,7 +383,45 @@ class Match extends CI_Controller {
         else
         {
             if(!$idmatch) redirect('/');
+            $match = $this->match_model->get_match($idmatch)->row();  
+            if(!$match) redirect('/');
             $this->match_model->supprimer_resultats_match($idmatch);
+            
+            $res_rec = $match->resultat_equipe_recev;
+            $res_vis = $match->resultat_equipe_visit;
+            if($match->categorie == 'championnat')
+            {            
+                    if($res_vis > $res_rec)
+                    {
+                        $this->classement_model->add_point_championnat($match->equipe_visit, -3, $match->saison);
+                    }
+                    else if($res_vis < $res_rec)
+                    {
+                        $this->classement_model->add_point_championnat($match->equipe_recev, -3, $match->saison); 
+                    }
+                    else
+                    {
+                        $this->classement_model->add_point_championnat($match->equipe_visit, -1, $match->saison);
+                        $this->classement_model->add_point_championnat($match->equipe_recev, -1, $match->saison); 
+                    }
+            }
+            else if($match->categorie == 'coupe')    
+            {
+                if($res_vis > $res_rec)
+                    {
+                        $this->classement_model->add_point_coupe($match->equipe_visit, -3, $match->saison);
+                    }
+                    else if($res_vis < $res_rec)
+                    {
+                        $this->classement_model->add_point_coupe($match->equipe_recev, -3, $match->saison); 
+                    }
+                    else
+                    {
+                        $this->classement_model->add_point_coupe($match->equipe_visit, -1, $match->saison);
+                        $this->classement_model->add_point_coupe($match->equipe_recev, -1, $match->saison); 
+                    }
+            }
+
             $this->match_model->supprimer_match($idmatch);
             redirect('/');
         }
