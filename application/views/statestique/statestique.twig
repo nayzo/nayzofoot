@@ -37,7 +37,7 @@
             </ul>
          </li>
          <li class="divider-vertical"></li>
-                 <li class="active"><a href="/backend/statestique">Statistiques</a></li>
+         <li class="active"><a href="/backend/statestique">Statistiques</a></li>
             </ul>
         </div>
     </div>
@@ -48,7 +48,7 @@
             <div class="span11">
                 <h3 class="text-center">Statistique</h3>
                 <hr>
-                <div class="span10 offset2">
+                <div class="span6 offset2 well" style="background-color: rgb(250, 250, 250);box-shadow: 0px 0px 7px rgb(189, 186, 186);">
                     <div id='awesome-graph' class='graph' style='width: 370px; height: 200px;'></div>
                 </div>
             </div>
@@ -95,17 +95,17 @@
 
         // The color of the bar
         color:     function(index) { 
-          return ['#E57536', '#82293B'][index % 2] 
+          return ['rgb(117, 1, 6)', '#82293B'][index % 2] 
         },
 
         // Stacked graphs also pass a stackedIndex parameter
         color:     function(index, stackedIndex) { 
-          return ['#E57536', '#82293B'][stackedIndex % 2] 
+          return ['rgb(117, 1, 6)', '#82293B'][stackedIndex % 2] 
         },
 
         // Alternatively, you can just override the default colors and keep
         // the built in color functions
-        colors: ['#82293B', '#E57536', '#FFBE33'],
+        colors: ['#82293B', 'rgb(117, 1, 6)', '#FFBE33'],
      
         // Legend is optional
         // legend: {
