@@ -5,7 +5,8 @@ class Backend extends CI_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->model('login_model');
-        $this->twig->addFunction('getsessionhelper');
+        $this->load->model('statestique_model');
+        $this->twig->addFunction('getsessionhelper'); 
     }
 
     public function index() {
@@ -79,6 +80,19 @@ class Backend extends CI_Controller {
         $this->session->unset_userdata('login_in');
         $this->session->sess_destroy();
         redirect('/');
+    }
+    
+    function statestique()
+    {
+        if (!$this->session->userdata('login_in'))
+            redirect('/');
+        else 
+        {
+            $data['nbmatch'] = $this->statestique_model->getnbmatches();
+           // echo $data['nbmatch']; return;
+            $data['nbbuts'] = $this->statestique_model->getnbbuts();
+            $this->twig->render('statestique/statestique', $data);
+        }    
     }
 
 }

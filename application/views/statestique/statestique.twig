@@ -1,0 +1,127 @@
+{% extends "layout.twig" %}
+
+{% block title %} {{parent()}} - Statisique{% endblock title %}
+{% block navbar%}
+    <div class="navbar">
+        <div class="navbar-inner">
+            <ul class="nav">
+                <li><a href="/saison">Gestion Saison</a></li>
+                <li class="divider-vertical"></li>
+                <li><a href="/equipe">Gestion Equipe</a></li>
+                <li class="divider-vertical"></li>
+                <li><a href="/joueur">Gestion Joueurs</a></li>
+                <li class="divider-vertical"></li>
+                <li><a href="/match">Gestion Match</a></li>
+                <li class="divider-vertical"></li>
+                <li><a href="/arbitre">Gestion Arbitre</a></li>
+                <li class="divider-vertical"></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Championnat <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/classement/champligueun">Football Pro ligue 1</a>
+                        <li><a href="/classement/champliguedeux">Football Pro ligue 2</a>
+                        <li><a href="/classement/champligueamateur">Football Amateur</a>
+                        <li><a href="/classement/champliguefeminin">Football Féminin</a>
+                        <li><a href="/classement/champliguefutsal">Futsal</a>
+                    </ul>
+                </li>
+                <li class="divider-vertical"></li>
+                <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coupe <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><a href="/classement/coupeligueun">Football Pro ligue 1</a>
+                <li><a href="/classement/coupeliguedeux">Football Pro ligue 2</a>
+                <li><a href="/classement/coupeligueamateur">Football Amateur</a>
+                <li><a href="/classement/coupeliguefeminin">Football Féminin</a>
+                <li><a href="/classement/coupeliguefutsal">Futsal</a>
+            </ul>
+         </li>
+         <li class="divider-vertical"></li>
+                 <li class="active"><a href="/backend/statestique">Statistiques</a></li>
+            </ul>
+        </div>
+    </div>
+{% endblock navbar%}
+{% block container%}
+    <div class="well">
+        <div class="row">
+            <div class="span11">
+                <h3 class="text-center">Statistique</h3>
+                <hr>
+                <div class="span10 offset2">
+                    <div id='awesome-graph' class='graph' style='width: 370px; height: 200px;'></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="{{base_url()}}assets/js/raphael.js"></script>
+    <script type="text/javascript" src="{{base_url()}}assets/js/jquery.enumerable.js"></script>
+    <script type="text/javascript" src="{{base_url()}}assets/js/jquery.tufte-graph.js"></script>
+    <link rel="stylesheet" href="{{base_url()}}assets/css/tufte-graph.css" type="text/css" media="screen" charset="utf-8" />
+
+    <script>
+     $(document).ready(function () {
+        jQuery('#awesome-graph').tufteBar({
+        data: [
+          // First element is the y-value
+          // Other elements are arbitary - they are not used by the lib
+          // but are passed back into callback functions
+          [{{nbmatch}}, {label: 'Nombre Match'}],
+          [{{nbbuts}}, {label: 'Nombre Buts'}],
+          // etc...
+
+          // For stacked graphs, pass an array of non-cumulative y values
+        //S  [[1.5, 1.0, 0.51], {label: '2005'}]
+        ],
+
+        // Any of the following properties can be either static values 
+        // or a function that will be called for each data point. 
+        // For functions, 'this' will be set to the current data element, 
+        // just like jQuery's $.each
+
+        // Bar width in arbitrary units, 1.0 means the bars will be snuggled
+        // up next to each other
+        barWidth: 0.4, 
+
+        // The label on top of the bar - can contain HTML
+        // formatNumber inserts commas as thousands separators in a number
+        barLabel:  function(index) { 
+          return $.tufteBar.formatNumber(this[0]) //+ 'x' 
+        }, 
+
+        // The label on the x-axis - can contain HTML
+        axisLabel: function(index) { return this[1].label }, 
+
+        // The color of the bar
+        color:     function(index) { 
+          return ['#E57536', '#82293B'][index % 2] 
+        },
+
+        // Stacked graphs also pass a stackedIndex parameter
+        color:     function(index, stackedIndex) { 
+          return ['#E57536', '#82293B'][stackedIndex % 2] 
+        },
+
+        // Alternatively, you can just override the default colors and keep
+        // the built in color functions
+        colors: ['#82293B', '#E57536', '#FFBE33'],
+     
+        // Legend is optional
+        // legend: {
+        //   // Data can be an array of any type of object, but the default
+        //   // formatter works with strings
+        //   data: ["North", "East", "West"],
+
+        //   // By default, the colors of the graph are used
+        //   color: function(index) { 
+        //     return ['#E57536', '#82293B'][index % 2] 
+        //   },
+
+        //   // You can customize the element label - can contain HTML
+        //   label: function(index) { return this }
+        // }
+      });
+});
+    </script>
+{% endblock container%}
