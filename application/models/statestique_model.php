@@ -33,4 +33,36 @@ class Statestique_model extends CI_Model {
        }
        return $nb;
     }
+    
+    
+    function getnbcarterouge()
+    {
+        $this->db->select('*')
+                ->from('match')
+                ->where('saison', getsessionhelper()['saisonid'] )
+                ->where('resultat_equipe_visit != ', -1);
+            $query = $this->db->get()->result();
+        $nb = 0;
+       foreach($query as $res)     
+       {
+           $nb += $res->carterouge;
+       }
+       return $nb;
+    }
+    
+    function getnbcartejaune()
+    {
+        $this->db->select('*')
+                ->from('match')
+                ->where('saison', getsessionhelper()['saisonid'] )
+                ->where('resultat_equipe_visit != ', -1);
+            $query = $this->db->get()->result();
+        $nb = 0;
+       foreach($query as $res)     
+       {
+           $nb += $res->cartejaune;
+       }
+       return $nb;
+    }
+    
 }

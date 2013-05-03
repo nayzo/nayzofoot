@@ -89,8 +89,9 @@ class Backend extends CI_Controller {
         else 
         {
             $data['nbmatch'] = $this->statestique_model->getnbmatches();
-           // echo $data['nbmatch']; return;
             $data['nbbuts'] = $this->statestique_model->getnbbuts();
+            $data['nbcarterouge'] = $this->statestique_model->getnbcarterouge();
+            $data['nbcartejaune'] = $this->statestique_model->getnbcartejaune();
             $this->twig->render('statestique/statestique', $data);
         }    
     }
