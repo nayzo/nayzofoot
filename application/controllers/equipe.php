@@ -3,49 +3,59 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Equipe extends CI_Controller {
-
-    public function __construct() {
+class Equipe extends CI_Controller
+{
+    public function __construct()
+    {
         parent::__construct();
         $this->load->model('equipe_model');
         $this->load->model('joueur_model');
         $this->load->model('classement_model');
         $this->load->model('match_model');
+        $this->load->model('stade_model');
+        
         $this->twig->addFunction('getsessionhelper');
     }
 
-    public function index() {
+    public function index()
+    {
         if (!$this->session->userdata('login_in'))
             redirect('/');
-        else {
+        else
+        {
             $data['equipes'] = $this->equipe_model->get_all();
             $this->twig->render('equipe/gestionequipe', $data);
         }
     }
 
-    public function ajout() {
+    public function ajout()
+    {
         if (!$this->session->userdata('login_in'))
             redirect('/');
-        else {
-            $this->form_validation->set_rules('nom_equipe', 'Nom', 'trim|required');
-            $this->form_validation->set_rules('entreneur', 'Entreneur', 'trim|required');
+        else
+        {
+            $data = array();
+            $data['stades'] = $this->stade_model->get_all();
+            
+            $this->form_validation->set_rules('nom_equipe', 'Nom', 'trim|required|xss_clean');
+            $this->form_validation->set_rules('entreneur', 'Entreneur', 'trim|required|xss_clean');
 
-            if ($this->form_validation->run() == FALSE) {
-                $this->twig->render('equipe/ajoutequipe');
-            } 
-            else 
-            {                                    
-                $config['upload_path'] = './uploads/';
+            if ($this->form_validation->run() == FALSE)
+                $this->twig->render('equipe/ajoutequipe', $data);
+            else
+            {
+                $config['upload_path']   = './uploads/';
                 $config['allowed_types'] = 'gif|jpg|png';
-                $config['max_size']	= '100';
-                $config['max_width']  = '1024';
-                $config['max_height']  = '768';
+                $config['max_size']	 = '100';
+                $config['max_width']     = '1024';
+                $config['max_height']    = '768';
                 $config['encrypt_name']  = TRUE;
+                
                 $this->load->library('upload', $config);
                 if ( ! $this->upload->do_upload())
                 {              
-                        $data['error'] = $this->upload->display_errors();
-                        $this->twig->render('equipe/ajoutequipe', $data);
+                    $data['error'] = $this->upload->display_errors();
+                    $this->twig->render('equipe/ajoutequipe', $data);
                 }
                 else
                 {
@@ -53,64 +63,84 @@ class Equipe extends CI_Controller {
                     $this->equipe_model->add_equipe($photo['file_name']);
                     redirect('/equipe');
                 }
-
             }
         }
     }
 
-    public function modifier($id) {
+    public function modifier($id)
+    {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else 
         {
-            if(!$id) redirect('/');
-            $this->form_validation->set_rules('nom_equipe', 'Nom', 'trim|required');
-            $this->form_validation->set_rules('entreneur', 'Entreneur', 'trim|required');
+            if(!$id)
+                redirect('/');
+            
+            $data = array();
+            $data['stades'] = $this->stade_model->get_all();
+            
+            $this->form_validation->set_rules('nom_equipe', 'Nom', 'trim|required|xss_clean');
+            $this->form_validation->set_rules('entreneur', 'Entreneur', 'trim|required|xss_clean');
 
             if ($this->form_validation->run() == FALSE) 
             {
                 $data['equipe'] = $this->equipe_model->get_equipe($id)->row();
-                if(!$data['equipe']) redirect('/');
+                
+                if(!$data['equipe'])
+                    redirect('/');
+                
                 $this->twig->render('equipe/modifierequipe', $data);
             } 
             else 
             {
-                            $config['upload_path'] = './uploads/';
-                            $config['allowed_types'] = 'gif|jpg|png';
-                            $config['max_size']	= '100';
-                            $config['max_width']  = '1024';
-                            $config['max_height']  = '768';
-                            $config['encrypt_name']  = TRUE;
-                            $this->load->library('upload', $config);
-                            
-                            if ( ! $this->upload->do_upload()){}
-                            $photo = $this->upload->data();
-                            $data['photo'] = $photo['file_name']; 
-                            $data['id'] = $id;
-                            if($photo['file_name'])
-                            { 
-                                    $this->suppphoto($id);
-                                    $this->equipe_model->update_equipephoto($data);
-                                    redirect('/equipe');
-                            }
-                            else
-                            {
-                                $this->equipe_model->update_equipe($id);
-                                redirect('/equipe');
-                            }  
+                $config['upload_path'] = './uploads/';
+                $config['allowed_types'] = 'gif|jpg|png';
+                $config['max_size']	= '100';
+                $config['max_width']  = '1024';
+                $config['max_height']  = '768';
+                $config['encrypt_name']  = TRUE;
+                $this->load->library('upload', $config);
+
+                if ( ! $this->upload->do_upload()){}
+                $photo = $this->upload->data();
+                $data['photo'] = $photo['file_name']; 
+                $data['id'] = $id;
+                if($photo['file_name'])
+                { 
+                        $this->suppphoto($id);
+                        $this->equipe_model->update_equipephoto($data);
+                        redirect('/equipe');
+                }
+                else
+                {
+                    $this->equipe_model->update_equipe($id);
+                    redirect('/equipe');
+                }
             }
-  
         }
     }
     
 
-    public function voir($id) {
+    public function voir($id)
+    {
         if (!$this->session->userdata('login_in'))
             redirect('/');
-        else {
-            if(!$id) redirect('/');
-            $data['equipe'] = $this->equipe_model->get_equipe($id)->row();
-            if(!$data['equipe']) redirect('/');
+        else
+        {
+            if(!$id)
+                redirect('/');
+            
+            $equipe = $this->equipe_model->get_equipe($id)->row();
+            
+            if(!$equipe)
+                redirect('/');
+            
+            if($equipe->stade == 0)
+                $equipe->stade = 'Aucun stade';
+            else
+                $equipe->stade = $this->stade_model->get_stade($equipe->stade)->nom;
+            
+            $data['equipe'] = $equipe;
             $data['joueurs'] = $this->joueur_model->get_joueur_by_equipe($id);
             $this->twig->render('equipe/voirequipe', $data);
         }

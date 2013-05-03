@@ -11,16 +11,17 @@ class Equipe_model extends CI_Model {
             return $query->result();
     }
     
-    function add_equipe($photo){
+    public function add_equipe($photo)
+    {
             $data = array(
             'nom_equipe' => $this->input->post('nom_equipe'),
-            'entreneur'    => $this->input->post('entreneur'),           
+            'entreneur'    => $this->input->post('entreneur'),
             'date_creation' => $this->input->post('date_creation'),
             'lieu_origin' => $this->input->post('lieu_origin'),
             'logo' => $photo,
-            'siteweb' => $this->input->post('siteweb'),   
-            'stade' =>  $this->input->post('stade'),   
-            'ligue' => $this->input->post('ligue')   
+            'siteweb' => $this->input->post('siteweb'),
+            'stade' =>  $this->input->post('stade'),
+            'ligue' => $this->input->post('ligue')
         );
 
         $this->db->insert('equipe', $data);

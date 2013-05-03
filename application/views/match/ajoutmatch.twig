@@ -92,16 +92,17 @@
                             <div class="erreur">
                                 {{ form_error('date_match') }}         
                             </div>
-
-                            {#block satde#}
-                            <label for="stade">Stade <span class="required">*</span></label>
-                            <input type="text" name="stade" required="required">
+                            
+                            {#Block Stade#}
+                            <label for="stade">Stade</label>
+                            <select name="stade">
+                            {% for stade in stades %}
+                                    <option value="{{stade.id}}">{{ stade.nom }}</option>
+                            {% endfor %}
+                            </select>
                             <div class="erreur">
                                 {{ form_error('stade') }}         
                             </div>
-
-                            
-                            
                             
                             {#block arbitre#}
                             <label class="control-label" for="arbitre">Arbitre 1 <span class="required">*</span></label>
