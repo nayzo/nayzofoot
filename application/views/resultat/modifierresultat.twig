@@ -15,6 +15,8 @@
              <li class="divider-vertical"></li>
              <li><a href="/arbitre">Gestion Arbitre</a></li>
              <li class="divider-vertical"></li>
+             <li><a href="/stade">Gestion Stade</a></li>
+             <li class="divider-vertical"></li>
              <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Championnat <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -36,8 +38,6 @@
                     <li><a href="/classement/coupeliguefutsal">Futsal</a>
                 </ul>
              </li>
-             <li class="divider-vertical"></li>
-             <li><a href="/backend/statestique">Statistiques</a></li>
            </ul>
         </div>
     </div>
@@ -53,21 +53,19 @@
                     <div class="control-group">
                         <div class="error span5">{{ validation_errors() }}</div>
                     </div>
+                    <div class="span7 well offset2">
+                        {# nb carte rouge #}     
+                         <div class="span3">
+                            <label>Nombre Carte Rouge</label>
+                            <input type="number" name="carterouge" class="span2" id="nbcarterouge"  value="{{ set_value('carterouge', match.carterouge) }}"/>
+                         </div>
 
-                     {# nb carte rouge #}     
-                             <div class="offset1">
-                                <label>Nombre Carte Rouge</label>
-                                <input type="number" name="carterouge" class="span2" id="nbcarterouge" value="{{ set_value('carterouge', match.carterouge) }}"/>
-
-                            </div>
-                            
-                       {# nb carte jaune #}     
-                             <div class="offset1">
-                                <label>Nombre Carte Jaune</label>
-                                <input type="number" name="cartejaune" class="span2" id="nbcartejaune" value="{{ set_value('cartejaune', match.cartejaune) }}"/>
-
-                            </div>         
-                        
+                        {# nb carte jaune #}     
+                         <div class="span3">
+                            <label>Nombre Carte Jaune</label>
+                            <input type="number" name="cartejaune" class="span2" id="nbcartejaune" value="{{ set_value('cartejaune', match.cartejaune) }}"/>
+                        </div>
+                    </div>
                     <div class="span5 well">
                        <p><img src="{{base_url()}}uploads/{{equiperecev.logo}}" alt="" class="img-polaroid img-size"></p>    
                        <p class="text-center"><strong>Equipe Receveur :</strong> {{equiperecev.nom_equipe}}</p>
