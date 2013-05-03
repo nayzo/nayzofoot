@@ -15,6 +15,8 @@
              <li class="divider-vertical"></li>
              <li><a href="/arbitre">Gestion Arbitre</a></li>
              <li class="divider-vertical"></li>
+             <li><a href="/stade">Gestion Stade</a></li>
+             <li class="divider-vertical"></li>
              <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Championnat <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -36,8 +38,6 @@
                     <li><a href="/classement/coupeliguefutsal">Futsal</a>
                 </ul>
              </li>
-             <li class="divider-vertical"></li>
-             <li><a href="/backend/statestique">Statistiques</a></li>
            </ul>
         </div>
     </div>
@@ -83,15 +83,17 @@
                             <div class="erreur">
                                 {{ form_error('categorie') }}         
                             </div>
-                       </div>
-                       <div class="span3">
-                            {#block date et heur#}
+                           
+                           {#block date et heur#}
                             <label class="control-label" for="date_match">Date et heure match <span class="required">*</span></label>
                             <input type="date" name="date_match" required="required" class="span2">
                             <input type="time" name="heur_match" required="required" class="span1">
                             <div class="erreur">
                                 {{ form_error('date_match') }}         
                             </div>
+                       </div>
+                       <div class="span3">
+                            
 
                             {#block satde#}
                             <label for="stade">Stade <span class="required">*</span></label>
@@ -100,9 +102,6 @@
                                 {{ form_error('stade') }}         
                             </div>
 
-                            
-                            
-                            
                             {#block arbitre#}
                             <label class="control-label" for="arbitre">Arbitre 1 <span class="required">*</span></label>
                             <select name="arbitre1" required="required">
@@ -136,6 +135,8 @@
                                 {{ form_error('arbitre3') }}         
                             </div>
                             
+                        </div>
+                        <div class="span3">
                             {#block arbitre#}
                             <label class="control-label" for="arbitre">Arbitre 4<span class="required">*</span></label>
                             <select name="arbitre4" required="required">
@@ -147,8 +148,6 @@
                                 {{ form_error('arbitre4') }}         
                             </div>
                             
-                        </div>
-                        <div class="span3">
                             {#block equipe visiteur#}
                             <label for="equipe_visit">Equipe Visiteur <span class="required">*</span></label>
                             <select name="equipe_visit" required="required">

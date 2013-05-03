@@ -3,44 +3,44 @@
 {% block title %} {{parent()}} - Modifier Stade{% endblock title %}
 {% block navbar%}
 <div class="navbar">
-<div class="navbar-inner">
-                  <ul class="nav">
-                     <li><a href="/saison">Gestion Saison</a></li>
-                     <li class="divider-vertical"></li>
-                     <li><a href="/equipe">Gestion Equipe</a></li>
-                     <li class="divider-vertical"></li>
-                     <li><a href="/joueur">Gestion Joueurs</a></li>
-                     <li class="divider-vertical"></li>
-                     <li><a href="/match">Gestion Match</a></li>
-                     <li class="divider-vertical"></li>
-                     <li class="divider-vertical"><a href="/arbitre">Gestion Arbitre</a></li>
-                     <li class="divider-vertical"></li>
-                     <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Championnat <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="/classement/champligueun">Football Pro ligue 1</a>
-                                <li><a href="/classement/champliguedeux">Football Pro ligue 2</a>
-                                <li><a href="/classement/champligueamateur">Football Amateur</a>
-                                <li><a href="/classement/champliguefeminin">Football Féminin</a>
-                                <li><a href="/classement/champliguefutsal">Futsal</a>
-                            </ul>
-                     </li>
-                     <li class="divider-vertical"></li>
-                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coupe <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="/classement/coupeligueun">Football Pro ligue 1</a>
-                            <li><a href="/classement/coupeliguedeux">Football Pro ligue 2</a>
-                            <li><a href="/classement/coupeligueamateur">Football Amateur</a>
-                            <li><a href="/classement/coupeliguefeminin">Football Féminin</a>
-                            <li><a href="/classement/coupeliguefutsal">Futsal</a>
-                        </ul>
-                     </li>
-                     <li class="divider-vertical"></li>
-                     <li><a href="/backend/statestique">Statistiques</a></li>
-                  </ul>
-                </div>
+    <div class="navbar-inner">
+        <ul class="nav">
+            <li><a href="/saison">Gestion Saison</a></li>
+            <li class="divider-vertical"></li>
+            <li><a href="/equipe">Gestion Equipe</a></li>
+            <li class="divider-vertical"></li>
+            <li><a href="/joueur">Gestion Joueurs</a></li>
+            <li class="divider-vertical"></li>
+            <li><a href="/match">Gestion Match</a></li>
+            <li class="divider-vertical"></li>
+            <li><a href="/arbitre">Gestion Arbitre</a></li>
+            <li class="divider-vertical"></li>
+            <li class="active"><a href="/stade">Gestion Stade</a></li>
+            <li class="divider-vertical"></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Championnat <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/classement/champligueun">Football Pro ligue 1</a>
+                    <li><a href="/classement/champliguedeux">Football Pro ligue 2</a>
+                    <li><a href="/classement/champligueamateur">Football Amateur</a>
+                    <li><a href="/classement/champliguefeminin">Football Féminin</a>
+                    <li><a href="/classement/champliguefutsal">Futsal</a>
+                </ul>
+            </li>
+            <li class="divider-vertical"></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coupe <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/classement/coupeligueun">Football Pro ligue 1</a>
+                    <li><a href="/classement/coupeliguedeux">Football Pro ligue 2</a>
+                    <li><a href="/classement/coupeligueamateur">Football Amateur</a>
+                    <li><a href="/classement/coupeliguefeminin">Football Féminin</a>
+                    <li><a href="/classement/coupeliguefutsal">Futsal</a>
+                </ul>
+            </li>
+        </ul>
     </div>
+</div>
 {% endblock navbar%}
 {% block container%}      
     <div class="well"> 
