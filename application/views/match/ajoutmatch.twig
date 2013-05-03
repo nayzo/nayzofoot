@@ -100,16 +100,53 @@
                                 {{ form_error('stade') }}         
                             </div>
 
+                            
+                            
+                            
                             {#block arbitre#}
-                            <label class="control-label" for="arbitre">Arbitre <span class="required">*</span></label>
-                            <select name="arbitre" required="required">
+                            <label class="control-label" for="arbitre">Arbitre 1 <span class="required">*</span></label>
+                            <select name="arbitre1" required="required">
                             {% for arbitre in arbitres %}
                                 <option value="{{arbitre.id}}">{{arbitre.nom}}</option>            
                             {% endfor %}
-                                </select>
+                            </select>
                             <div class="erreur">
-                                {{ form_error('arbitre') }}         
+                                {{ form_error('arbitre1') }}         
                             </div>
+                            
+                            {#block arbitre#}
+                            <label class="control-label" for="arbitre">Arbitre 2<span class="required">*</span></label>
+                            <select name="arbitre2" required="required">
+                            {% for arbitre in arbitres %}
+                                <option value="{{arbitre.id}}">{{arbitre.nom}}</option>            
+                            {% endfor %}
+                            </select>
+                            <div class="erreur">
+                                {{ form_error('arbitre2') }}         
+                            </div>
+                            
+                            {#block arbitre#}
+                            <label class="control-label" for="arbitre">Arbitre 3<span class="required">*</span></label>
+                            <select name="arbitre3" required="required">
+                            {% for arbitre in arbitres %}
+                                <option value="{{arbitre.id}}">{{arbitre.nom}}</option>            
+                            {% endfor %}
+                            </select>
+                            <div class="erreur">
+                                {{ form_error('arbitre3') }}         
+                            </div>
+                            
+                            {#block arbitre#}
+                            <label class="control-label" for="arbitre">Arbitre 4<span class="required">*</span></label>
+                            <select name="arbitre4" required="required">
+                            {% for arbitre in arbitres %}
+                                <option value="{{arbitre.id}}">{{arbitre.nom}}</option>            
+                            {% endfor %}
+                            </select>
+                            <div class="erreur">
+                                {{ form_error('arbitre4') }}         
+                            </div>
+                            
                         </div>
                         <div class="span3">
                             {#block equipe visiteur#}

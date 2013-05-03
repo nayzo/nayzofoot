@@ -64,7 +64,7 @@ class Match extends CI_Controller {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else {
-            $this->form_validation->set_rules('arbitre', 'Arbitre', 'trim|required');
+            $this->form_validation->set_rules('arbitre1', 'Arbitre', 'trim|required');
 
             if ($this->form_validation->run() == FALSE) {
                 $data['saisons'] = $this->saison_model->get_all();
@@ -83,7 +83,7 @@ class Match extends CI_Controller {
             redirect('/');
         else {
             if(!$id) redirect('/');
-            $this->form_validation->set_rules('arbitre', 'Arbitre', 'trim|required');
+            $this->form_validation->set_rules('arbitre1', 'Arbitre', 'trim|required');
             $data['match'] = $this->match_model->get_match($id)->row();
            if ($this->form_validation->run() == FALSE) {
                
@@ -118,7 +118,10 @@ class Match extends CI_Controller {
             $data['equipe_recev'] = $this->equipe_model->get_equipe($data['match']->equipe_recev)->row();
             $data['equipe_visit'] = $this->equipe_model->get_equipe($data['match']->equipe_visit)->row();
             $data['resultats'] = $this->match_model->get_match_resultats($idmatch);
-            $data['arbitre'] = $this->arbitre_model->get_arbitre($data['match']->arbitre)->row();
+            $data['arbitre1'] = $this->arbitre_model->get_arbitre($data['match']->arbitre1)->row();
+            $data['arbitre2'] = $this->arbitre_model->get_arbitre($data['match']->arbitre2)->row();
+            $data['arbitre3'] = $this->arbitre_model->get_arbitre($data['match']->arbitre3)->row();
+            $data['arbitre4'] = $this->arbitre_model->get_arbitre($data['match']->arbitre4)->row();
             $data['saison'] = $this->saison_model->get_saison($data['match']->saison)->row();
             $this->twig->render('match/voirmatch', $data);
         }
@@ -158,7 +161,7 @@ class Match extends CI_Controller {
                     $datarecev['match'] = $idmatch;
                     $datarecev['equipe'] = $data['match']->equipe_recev;
                     $datarecev['joueur'] = $recevjoueurs[$i];
-                    $datarecev['date_but'] = $recevtimes[$i];
+                    $datarecev['date_but'] = $recevtimes[$i];                                     
                     $this->match_model->add_resultat_match($datarecev);
                 }
                 // partie equipe visiteur
@@ -174,13 +177,14 @@ class Match extends CI_Controller {
                     $datavisit['match'] = $idmatch;
                     $datavisit['equipe'] = $data['match']->equipe_visit;
                     $datavisit['joueur'] = $visitjoueurs[$i];
-                    $datavisit['date_but'] = $visittimes[$i];
+                    $datavisit['date_but'] = $visittimes[$i];                    
                     $this->match_model->add_resultat_match($datavisit);
                 }
                 $tabres['id'] = $idmatch;
                 $tabres['recev'] = $counttablrecev;
                 $tabres['visit'] = $counttablvisit;
                 $this->match_model->update_match_resultat_equipe($tabres);
+                $this->match_model->update_carte_match($idmatch);
                 //update classement
                 if($data['match']->categorie == 'championnat')
                 {
@@ -276,6 +280,7 @@ class Match extends CI_Controller {
                     $datavisit['date_but'] = $visittimes[$i];
                     $this->match_model->add_resultat_match($datavisit);
                 }
+                $this->match_model->update_carte_match($idmatch);
                 //update classement
                 $resequimatch_rec = $data['match']->resultat_equipe_recev;
                 $resequimatch_vis = $data['match']->resultat_equipe_visit;

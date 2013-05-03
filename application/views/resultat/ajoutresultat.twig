@@ -53,6 +53,20 @@
                         <div class="control-group">
                             <div class="error span5">{{ validation_errors() }}</div>
                         </div>
+                            
+                       {# nb carte rouge #}     
+                             <div class="offset1">
+                                <label>Nombre Carte Rouge</label>
+                                <input type="number" name="carterouge" class="span2" id="nbcarterouge" value="0"/>
+
+                            </div>
+                            
+                       {# nb carte jaune #}     
+                             <div class="offset1">
+                                <label>Nombre Carte Jaune</label>
+                                <input type="number" name="cartejaune" class="span2" id="nbcartejaune" value="0"/>
+
+                            </div>     
 
                         <div class="span5 well">
                             <p><img src="{{base_url()}}uploads/{{equiperecev.logo}}" alt="" class="img-polaroid img-size"></p>
@@ -94,6 +108,23 @@
 {%block script%}
 <script language="javascript">
 $(document).ready(function(){
+    $('#nbcarterouge').on('change', function(){
+        if($('#nbcarterouge').val() < 0)
+        {
+                alert('le nombre de carte rouge doit être supèrieur ou égale à zero');
+                $('#nbcarterouge').val(0);
+        }
+    });
+    
+    $('#nbcartejaune').on('change', function(){
+        if($('#nbcartejaune').val() < 0)
+        {
+                alert('le nombre de carte jaune doit être supèrieur ou égale à zero');
+                $('#nbcartejaune').val(0);
+        }
+    });
+    
+    
     $('#clickrecev').on('click', function()
     {
             var res = $('#nbbutrecev').val();
