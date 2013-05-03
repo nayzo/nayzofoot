@@ -53,14 +53,14 @@
                         <div class="span3">
                             {#Block nom#}  
                             <label for="nom_equipe">Nom <span class="required">*</span></label>
-                            <input type="text" name="nom_equipe" class="span3" required="required" value="{{ set_value('nom_equipe') }}"/>
+                            <input type="text" name="nom_equipe" class="span3" placeholder="Nom Complet" required="required" value="{{ set_value('nom_equipe') }}"/>
                             <div class="erreur">
                                 {{ form_error('nom_equipe') }}         
                             </div>
 
                             {#Block Entreneur#} 
                             <label for="entreneur">Entreneur <span class="required">*</span></label>
-                            <input type="text" name="entreneur" class="span3"  placeholder="Nom Complet" required="required" value="{{ set_value('entreneur') }}"/>
+                            <input type="text" name="entreneur" class="span3"  placeholder="Nom Entreneur" required="required" value="{{ set_value('entreneur') }}"/>
                             <div class="erreur">
                                 {{ form_error('entreneur') }}         
                             </div>
@@ -102,9 +102,14 @@
                             <label for="siteweb">Site Web</label>
                             <input type="text" name="siteweb" class="span3" value="{{ set_value('siteweb') }}"/>
                         
-                            {#Block Lieu d'origine#} 
+                            {#Block Stade#}
                             <label for="stade">Stade</label>
-                            <input type="text" name="stade" class="span3" value="{{ set_value('stade') }}"/>
+                            <select name="stade" class="span3">
+                            {% for stade in stades %}
+                                    <option value="{{stade.id}}">{{ stade.nom }}</option>
+                            {% endfor %}
+                            </select>
+                            
                         </div>
                         <div class="span3">
                             {#Block Ligue#} 

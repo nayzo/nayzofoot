@@ -104,8 +104,12 @@
                         <div class="span3">
                             
                             {#Block Stade#}
-                            <label class="control-label" for="stade">Stade <span class="required">*</span></label>
-                            <input type="text" name="stade" required="required" value="{{ set_value('stade', match.stade) }}">
+                            <label for="stade">Stade</label>
+                            <select name="stade">
+                            {% for stade in stades %}
+<option {% if match.stade == stade.id %} selected="selected" {% endif %} value="{{stade.id}}">{{ stade.nom }}</option>
+                            {% endfor %}
+                            </select>
                             <div class="erreur">
                                 {{ form_error('stade') }}         
                             </div>

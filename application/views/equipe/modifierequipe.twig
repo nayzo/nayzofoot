@@ -110,8 +110,13 @@
                         <input type="text" name="siteweb" class="span3" value="{{ set_value('siteweb', equipe.siteweb) }}"/>
 
                         {#Block Stade#}
-                        <label for="stade">Stade</label>
-                        <input type="text" name="stade" class="span3" value="{{ set_value('stade', equipe.stade) }}"/>
+                            <label for="stade">Stade</label>
+                            <select name="stade" class="span3">
+                            {% for stade in stades %}
+<option {% if equipe.stade == stade.id %} selected="selected" {% endif %} value="{{stade.id}}">{{ stade.nom }}</option>
+                            {% endfor %}
+                            </select>
+                            
                           </div>
                         <div class="span3">
                         {#Block ligue#}

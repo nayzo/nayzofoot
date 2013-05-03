@@ -1,22 +1,24 @@
-<?php
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-if (!defined('BASEPATH'))
-    exit('No direct script access allowed');
-
-class Match extends CI_Controller {
-
-    public function __construct() {
+class Match extends CI_Controller
+{
+    public function __construct()
+    {
         parent::__construct();
+        
         $this->load->model('equipe_model');
         $this->load->model('match_model');
         $this->load->model('saison_model');
         $this->load->model('arbitre_model');
         $this->load->model('joueur_model');
         $this->load->model('classement_model');
+        $this->load->model('stade_model');
+        
         $this->twig->addFunction('getsessionhelper');
     }
 
-    public function index() {
+    public function index()
+    {
         if (!$this->session->userdata('login_in'))
             redirect('/');
         else
@@ -60,37 +62,54 @@ class Match extends CI_Controller {
          }
     }
 
-    public function ajout() {
+    public function ajout()
+    {
         if (!$this->session->userdata('login_in'))
             redirect('/');
-        else {
-            $this->form_validation->set_rules('arbitre1', 'Arbitre', 'trim|required');
+        else
+        {
+            $this->form_validation->set_rules('arbitre1', 'Arbitre', 'trim|required|xss_clean');
 
-            if ($this->form_validation->run() == FALSE) {
-                $data['saisons'] = $this->saison_model->get_all();
-                $data['equipes'] = $this->equipe_model->get_all();
+            if ($this->form_validation->run() == FALSE)
+            {
+                $data['saisons']  = $this->saison_model->get_all();
+                $data['equipes']  = $this->equipe_model->get_all();
                 $data['arbitres'] = $this->arbitre_model->get_all();
+                $data['stades']   = $this->stade_model->get_all();
                 $this->twig->render('match/ajoutmatch', $data);
-            } else {
+            }
+            else
+            {
                 $this->match_model->add_match();
                 redirect('/match');
             }
         }
     }
 
-    public function modifier($id) {
+    public function modifier($id)
+    {
         if (!$this->session->userdata('login_in'))
             redirect('/');
-        else {
-            if(!$id) redirect('/');
+        else
+        {
+            if(!$id)
+                redirect('/');
+            
+            $data = array();
+            $data['stades'] = $this->stade_model->get_all();
+            $data['match']  = $this->match_model->get_match($id)->row();
+            
             $this->form_validation->set_rules('arbitre1', 'Arbitre', 'trim|required');
-            $data['match'] = $this->match_model->get_match($id)->row();
-           if ($this->form_validation->run() == FALSE) {
-               
+            
+            if ($this->form_validation->run() == FALSE)
+            {
                 $data['saisons'] = $this->saison_model->get_all();
                 $data['equipes'] = $this->equipe_model->get_all();
                 $data['arbitres'] = $this->arbitre_model->get_all();                
-                if(!$data['match']) redirect('/');
+                
+                if(!$data['match'])
+                    redirect('/');
+                
                 $this->twig->render('match/modifiermatch', $data);
             } 
             else 
@@ -112,9 +131,20 @@ class Match extends CI_Controller {
             redirect('/');
         else
         {
-            if(!$idmatch) redirect('/');
-            $data['match'] = $this->match_model->get_match($idmatch)->row();
-            if(!$data['match']) redirect('/');
+            if(!$idmatch)
+                redirect('/');
+            
+            $match = $this->match_model->get_match($idmatch)->row();
+            
+            if(!$match)
+                redirect('/');
+            
+            if($match->stade == 0)
+                $match->stade = 'Aucun stade';
+            else
+                $match->stade = $this->stade_model->get_stade($match->stade)->nom;
+            
+            $data['match'] = $match;
             $data['equipe_recev'] = $this->equipe_model->get_equipe($data['match']->equipe_recev)->row();
             $data['equipe_visit'] = $this->equipe_model->get_equipe($data['match']->equipe_visit)->row();
             $data['resultats'] = $this->match_model->get_match_resultats($idmatch);
@@ -123,6 +153,7 @@ class Match extends CI_Controller {
             $data['arbitre3'] = $this->arbitre_model->get_arbitre($data['match']->arbitre3)->row();
             $data['arbitre4'] = $this->arbitre_model->get_arbitre($data['match']->arbitre4)->row();
             $data['saison'] = $this->saison_model->get_saison($data['match']->saison)->row();
+            
             $this->twig->render('match/voirmatch', $data);
         }
     }
