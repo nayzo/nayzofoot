@@ -59,7 +59,10 @@ class Match_model extends CI_Model {
             'date_match' => $this->input->post('date_match'),
             'heur_match' => $this->input->post('heur_match'),        
             'stade' => $this->input->post('stade'),   
-            'arbitre' =>  $this->input->post('arbitre')  
+            'arbitre1' =>  $this->input->post('arbitre1'),   
+            'arbitre2' =>  $this->input->post('arbitre2'),   
+            'arbitre3' =>  $this->input->post('arbitre3'),   
+            'arbitre4' =>  $this->input->post('arbitre4')
             //'equipe_visit' => $this->input->post('equipe_visit'),
             //'equipe_recev' => $this->input->post('equipe_recev')       
         );

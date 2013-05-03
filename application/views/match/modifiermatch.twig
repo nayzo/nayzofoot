@@ -115,7 +115,7 @@
                             <label class="control-label" for="arbitre">Arbitre 1<span class="required">*</span></label>
                             <select name="arbitre1" required="required">
                             {% for arbitre in arbitres %}
-                                <option value="{{arbitre.id}}" {%if arbitre.arbitre1==arbitre.id%} selected="selected" {%endif%}>{{arbitre.nom}}</option>            
+                                <option value="{{arbitre.id}}" {%if match.arbitre1==arbitre.id%} selected="selected" {%endif%}>{{arbitre.nom}}</option>            
                             {% endfor %}
                                 </select>
                             <div class="erreur">
@@ -126,7 +126,7 @@
                             <label class="control-label" for="arbitre">Arbitre 2<span class="required">*</span></label>
                             <select name="arbitre2" required="required">
                             {% for arbitre in arbitres %}
-                                <option value="{{arbitre.id}}" {%if arbitre.arbitre2==arbitre.id%} selected="selected" {%endif%}>{{arbitre.nom}}</option>            
+                                <option value="{{arbitre.id}}" {%if match.arbitre2==arbitre.id%} selected="selected" {%endif%}>{{arbitre.nom}}</option>            
                             {% endfor %}
                                 </select>
                             <div class="erreur">
@@ -137,7 +137,7 @@
                             <label class="control-label" for="arbitre">Arbitre 3<span class="required">*</span></label>
                             <select name="arbitre3" required="required">
                             {% for arbitre in arbitres %}
-                                <option value="{{arbitre.id}}" {%if arbitre.arbitre3==arbitre.id%} selected="selected" {%endif%}>{{arbitre.nom}}</option>            
+                                <option value="{{arbitre.id}}" {%if match.arbitre3==arbitre.id%} selected="selected" {%endif%}>{{arbitre.nom}}</option>            
                             {% endfor %}
                                 </select>
                             <div class="erreur">
@@ -148,7 +148,7 @@
                             <label class="control-label" for="arbitre">Arbitre 4<span class="required">*</span></label>
                             <select name="arbitre4" required="required">
                             {% for arbitre in arbitres %}
-                                <option value="{{arbitre.id}}" {%if arbitre.arbitre4==arbitre.id%} selected="selected" {%endif%}>{{arbitre.nom}}</option>            
+                                <option value="{{arbitre.id}}" {%if match.arbitre4==arbitre.id%} selected="selected" {%endif%}>{{arbitre.nom}}</option>            
                             {% endfor %}
                                 </select>
                             <div class="erreur">
