@@ -1,9 +1,9 @@
 {% extends "layout.twig" %}
 
-{% block title %} {{parent()}} - Gestion des Stades{% endblock title %}
+{% block title %} {{parent()}} - Modifier Stade{% endblock title %}
 {% block navbar%}
-    <div class="navbar">
-        <div class="navbar-inner">
+<div class="navbar">
+<div class="navbar-inner">
                   <ul class="nav">
                      <li><a href="/saison">Gestion Saison</a></li>
                      <li class="divider-vertical"></li>
@@ -13,7 +13,7 @@
                      <li class="divider-vertical"></li>
                      <li><a href="/match">Gestion Match</a></li>
                      <li class="divider-vertical"></li>
-                     <li class="active"><a href="/arbitre">Gestion Arbitre</a></li>
+                     <li class="divider-vertical"><a href="/arbitre">Gestion Arbitre</a></li>
                      <li class="divider-vertical"></li>
                      <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Championnat <b class="caret"></b></a>
@@ -42,35 +42,41 @@
                 </div>
     </div>
 {% endblock navbar%}
-{% block container%}
-    <div class="well">
+{% block container%}      
+    <div class="well"> 
         <div class="row">
             <div class="span11">
-                <h3 class="text-center">Gestion des Stades</h3>
+                <h3 class="text-center">Modifier un stade</h3>
                 <hr>
-                <div class="btn-toolbar">
-                    <a href="/stade/ajout" class="btn pull-right"><i class="icon-plus-sign"></i> <strong>Ajouter un stade</strong></a>
-                </div>
-                <table class="table table-bordered table-hover">
-                    <tr>
-                        <th>Nom</th>
-                        <th>Description</th>
-                        <th>Action</th>
-                    </tr>
-                    {% for stade in stades %}
-                        <tr>
-                            <td>{{stad.nom}}</td>
-                            <td>{{stade.ville}}</td>
-                            <td>{{stade.capacite}}</td>
-                            <td>
-                                <a href="/stade/modifier/{{stade.id}}" title="Modifier" class="btn"><i class="icon-edit"></i></a> 
-                                <a href="/stade/supprimer/{{stade.id}}" title="Supprimer" class="btn deleteadmin"><i class="icon-trash"></i></a>
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            </div>
-        </div>
-    </div>
-{% endblock container%}
+                <div class="span10 offset2">
+                    <form action='/stade/modifier/{{stade.id}}' method="POST" class="form-horizontal">
+                        <fieldset>
+                            <div class="control-group">
+                                <label class="control-label" for="nom">Nom <span class="required">*</span></label>
+                                <div class="controls">
+                                    <input type="text" name="nom" class="span3" required="required" value="{{ set_value('nom', stade.nom) }}"/>
+                                    <div class="erreur">
+                                        {{ form_error('nom') }}         
+                                    </div>
+                                </div>
+                            </div>
 
+                            <div class="control-group">
+                                <label class="control-label" for="description">Description</label>
+                                <div class="controls">
+                                    <textarea name="description" class="span3">{{ set_value('description', stade.description) }}</textarea>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <div class="controls">
+                                    <button type="submit" class="btn btn-danger">Modifier</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form> 
+                </div>
+           </div>
+        </div>
+     </div>
+{% endblock container%}
