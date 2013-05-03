@@ -1,0 +1,77 @@
+{% extends "layout.twig" %}
+
+{% block title %} {{parent()}} - Gestion des Stades{% endblock title %}
+{% block navbar%}
+<div class="navbar">
+    <div class="navbar-inner">
+        <ul class="nav">
+            <li><a href="/saison">Gestion Saison</a></li>
+            <li class="divider-vertical"></li>
+            <li><a href="/equipe">Gestion Equipe</a></li>
+            <li class="divider-vertical"></li>
+            <li><a href="/joueur">Gestion Joueurs</a></li>
+            <li class="divider-vertical"></li>
+            <li><a href="/match">Gestion Match</a></li>
+            <li class="divider-vertical"></li>
+            <li class="divider-vertical"><a href="/arbitre">Gestion Arbitre</a></li>
+            <li class="divider-vertical"></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Championnat <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/classement/champligueun">Football Pro ligue 1</a>
+                    <li><a href="/classement/champliguedeux">Football Pro ligue 2</a>
+                    <li><a href="/classement/champligueamateur">Football Amateur</a>
+                    <li><a href="/classement/champliguefeminin">Football Féminin</a>
+                    <li><a href="/classement/champliguefutsal">Futsal</a>
+                </ul>
+            </li>
+            <li class="divider-vertical"></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coupe <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="/classement/coupeligueun">Football Pro ligue 1</a>
+                    <li><a href="/classement/coupeliguedeux">Football Pro ligue 2</a>
+                    <li><a href="/classement/coupeligueamateur">Football Amateur</a>
+                    <li><a href="/classement/coupeliguefeminin">Football Féminin</a>
+                    <li><a href="/classement/coupeliguefutsal">Futsal</a>
+                </ul>
+            </li>
+            <li class="divider-vertical"></li>
+            <li><a href="/backend/statestique">Statistiques</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock navbar%}
+{% block container%}
+<div class="well">
+    <div class="row">
+        <div class="span11">
+            <h3 class="text-center">Gestion des Stades</h3>
+            <hr>
+            <div class="btn-toolbar">
+                <a href="/stade/ajout" class="btn pull-right"><i class="icon-plus-sign"></i> <strong>Ajouter un stade</strong></a>
+            </div>
+            <table class="table table-bordered table-hover">
+                <tr>
+                    <th>Nom</th>
+                    <th>Ville</th>
+                    <th>Capacité</th>
+                    <th>Action</th>
+                </tr>
+                    {% for stade in stades %}
+                <tr>
+                    <td>{{stade.nom}}</td>
+                    <td>{{stade.ville}}</td>
+                    <td>{{stade.capacite}}</td>
+                    <td>
+                        <a href="/stade/modifier/{{stade.id}}" title="Modifier" class="btn"><i class="icon-edit"></i></a> 
+                        <a href="/stade/supprimer/{{stade.id}}" title="Supprimer" class="btn deleteadmin"><i class="icon-trash"></i></a>
+                    </td>
+                </tr>
+                    {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock container%}
+

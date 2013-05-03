@@ -1,0 +1,95 @@
+{% extends "layout.twig" %}
+
+{% block title %} {{parent()}} - Modifier Stade{% endblock title %}
+{% block navbar%}
+<div class="navbar">
+<div class="navbar-inner">
+                  <ul class="nav">
+                     <li><a href="/saison">Gestion Saison</a></li>
+                     <li class="divider-vertical"></li>
+                     <li><a href="/equipe">Gestion Equipe</a></li>
+                     <li class="divider-vertical"></li>
+                     <li><a href="/joueur">Gestion Joueurs</a></li>
+                     <li class="divider-vertical"></li>
+                     <li><a href="/match">Gestion Match</a></li>
+                     <li class="divider-vertical"></li>
+                     <li class="divider-vertical"><a href="/arbitre">Gestion Arbitre</a></li>
+                     <li class="divider-vertical"></li>
+                     <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Championnat <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/classement/champligueun">Football Pro ligue 1</a>
+                                <li><a href="/classement/champliguedeux">Football Pro ligue 2</a>
+                                <li><a href="/classement/champligueamateur">Football Amateur</a>
+                                <li><a href="/classement/champliguefeminin">Football Féminin</a>
+                                <li><a href="/classement/champliguefutsal">Futsal</a>
+                            </ul>
+                     </li>
+                     <li class="divider-vertical"></li>
+                     <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coupe <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/classement/coupeligueun">Football Pro ligue 1</a>
+                            <li><a href="/classement/coupeliguedeux">Football Pro ligue 2</a>
+                            <li><a href="/classement/coupeligueamateur">Football Amateur</a>
+                            <li><a href="/classement/coupeliguefeminin">Football Féminin</a>
+                            <li><a href="/classement/coupeliguefutsal">Futsal</a>
+                        </ul>
+                     </li>
+                     <li class="divider-vertical"></li>
+                     <li><a href="/backend/statestique">Statistiques</a></li>
+                  </ul>
+                </div>
+    </div>
+{% endblock navbar%}
+{% block container%}      
+    <div class="well"> 
+        <div class="row">
+            <div class="span11">
+                <h3 class="text-center">Modifier un stade</h3>
+                <hr>
+                <div class="span10 offset2">
+                    <form action='/stade/modifier/{{stade.id}}' method="POST" class="form-horizontal">
+                        <fieldset>
+                            <div class="control-group">
+                            <label class="control-label" for="nom">Nom <span class="required">*</span></label>
+                            <div class="controls">
+                                <input type="text" name="nom" value="{{set_value('nom', stade.nom)}}" placeholder="Nom du stade" class="span3" required="required"/>
+                                <div class="erreur">
+                                        {{ form_error('nom') }}         
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group">
+                            <label class="control-label" for="ville">Ville <span class="required">*</span></label>
+                            <div class="controls">
+                                <input type="text" name="ville" value="{{set_value('ville', stade.ville)}}" placeholder="Ville" class="span3" required="required"/>
+                                <div class="erreur">
+                                        {{ form_error('ville') }}         
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group">
+                            <label class="control-label" for="capacite">Capacité <span class="required">*</span></label>
+                            <div class="controls">
+                                <input type="text" name="capacite" value="{{set_value('capacite', stade.capacite)}}" placeholder="capacité du stade" class="span3" required="required"/>
+                                <div class="erreur">
+                                        {{ form_error('capacite') }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <div class="controls">
+                                    <button type="submit" class="btn btn-danger">Modifier</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form> 
+                </div>
+           </div>
+        </div>
+     </div>
+{% endblock container%}
