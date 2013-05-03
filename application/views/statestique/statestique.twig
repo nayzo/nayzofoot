@@ -1,6 +1,36 @@
 {% extends "layout.twig" %}
 
 {% block title %} {{parent()}} - Statisique{% endblock title %}
+ {% block nav%}
+            <nav class="navbar navbar-fixed-top navbar-inverse">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li><a href="/"><i class="icon-home icon-white"></i> Acceuil</a></li>
+                            <li class="active"><a href="/backend/statestique"><i class="icon-signal icon-white"></i> Statistiques</a></li>
+                        </ul>
+                        <ul class="nav pull-right">
+                            <li><a href="">Saison {{ getsessionhelper()['saison'] }} </a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i> {{ getsessionhelper()['login'] }} <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/backend/changepass"><i class="icon-lock"></i> Changer mot de passe</a></li>
+                                    <li><a href="/backend/logout"><i class="icon-off"></i> Se déconnecter</a></li>
+                                </ul>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        {%endblock nav%}
 {% block navbar%}
     <div class="navbar">
         <div class="navbar-inner">
@@ -15,6 +45,8 @@
                 <li class="divider-vertical"></li>
                 <li><a href="/arbitre">Gestion Arbitre</a></li>
                 <li class="divider-vertical"></li>
+                <li><a href="/stade">Gestion Stade</a></li>
+                <li class="divider-vertical"></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Championnat <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -27,17 +59,15 @@
                 </li>
                 <li class="divider-vertical"></li>
                 <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coupe <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-                <li><a href="/classement/coupeligueun">Football Pro ligue 1</a>
-                <li><a href="/classement/coupeliguedeux">Football Pro ligue 2</a>
-                <li><a href="/classement/coupeligueamateur">Football Amateur</a>
-                <li><a href="/classement/coupeliguefeminin">Football Féminin</a>
-                <li><a href="/classement/coupeliguefutsal">Futsal</a>
-            </ul>
-         </li>
-         <li class="divider-vertical"></li>
-         <li class="active"><a href="/backend/statestique">Statistiques</a></li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coupe <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/classement/coupeligueun">Football Pro ligue 1</a>
+                        <li><a href="/classement/coupeliguedeux">Football Pro ligue 2</a>
+                        <li><a href="/classement/coupeligueamateur">Football Amateur</a>
+                        <li><a href="/classement/coupeliguefeminin">Football Féminin</a>
+                        <li><a href="/classement/coupeliguefutsal">Futsal</a>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>

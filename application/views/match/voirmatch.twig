@@ -15,6 +15,8 @@
              <li class="divider-vertical"></li>
              <li><a href="/arbitre">Gestion Arbitre</a></li>
              <li class="divider-vertical"></li>
+             <li><a href="/stade">Gestion Stade</a></li>
+             <li class="divider-vertical"></li>
              <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Championnat <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -36,8 +38,6 @@
                     <li><a href="/classement/coupeliguefutsal">Futsal</a>
                 </ul>
              </li>
-             <li class="divider-vertical"></li>
-             <li><a href="/backend/statestique">Statistiques</a></li>
            </ul>
         </div>
     </div>
@@ -55,8 +55,8 @@
               {%endif%}
             </ul>
             <hr>
-            <div class="span10"  style="border-bottom: 1px solid #cccccc">
-                <div class="span4">
+            <div class="span11"  style="border-bottom: 1px solid #cccccc">
+                <div class="span3">
                     <p><strong>Type : </strong>{{match.type}}</p>
                     <p><strong>saison : </strong>{{saison.saison}}</p>
                     <p><strong>categorie : </strong>{{match.categorie}}</p>
@@ -65,7 +65,9 @@
                     <p><strong>Date et heure match : </strong>{{match.date_match}} | {{match.heur_match}}</p>
                     <p><strong>Stade : </strong>{{match.stade}}</p>
                     <p><strong>Arbitre 1: </strong>{{arbitre1.nom}}</p>
-                    <p><strong>Arbitre 2: </strong>{{arbitre2.nom}}</p>
+              </div>
+                <div class="span3">
+                   <p><strong>Arbitre 2: </strong>{{arbitre2.nom}}</p>
                     <p><strong>Arbitre 3: </strong>{{arbitre3.nom}}</p>
                     <p><strong>Arbitre 4: </strong>{{arbitre4.nom}}</p>
                 </div>
@@ -87,11 +89,25 @@
                         <li class="pull-right"><a href="/match/modifresultat/{{match.id}}" class="btn"><i class="icon-edit"></i> Modifier Résultat</a></li>
                     </ul>
                 </div>
+                <table class="table table-bordered table-striped span4 offset1">
+                    <thead>
+                        <tr>
+                            <td colspan="2"><span class=" pull-right"><strong>Carte Rouge </strong> <h5 class="btn btn-danger">{{match.carterouge}}</h5></span></td>
+                        </tr>
+                    </thead>
+                </table>
+                <table class="table table-bordered table-striped span4" style="margin-left: 1px;">
+                    <thead>
+                        <tr>
+                            <td colspan="2"><span class=""><h5 class="btn btn-warning">{{match.cartejaune}}</h5> <strong>Nombre Carte jaune </strong> </span></td>
+                        </tr>
+                    </thead>
+                </table>
 
                 <table class="table table-bordered table-striped span4 offset1">
                     <thead>
                         <tr>
-                            <td colspan="2"><h5 class="btn btn-danger pull-right">{{match.resultat_equipe_recev}}</h5></td>
+                            <td colspan="2"><h5 class="btn btn-inverse pull-right">{{match.resultat_equipe_recev}}</h5></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -109,7 +125,7 @@
                 <table class="table table-bordered table-striped span4" style="margin-left: 1px;">
                     <thead>
                         <tr>
-                            <td colspan="2"><h5 class="btn btn-danger">{{match.resultat_equipe_visit}}</h5></td>
+                            <td colspan="2"><h5 class="btn btn-inverse">{{match.resultat_equipe_visit}}</h5></td>
                         </tr>
                     </thead>
                     <tbody>
