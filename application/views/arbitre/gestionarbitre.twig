@@ -1,6 +1,6 @@
 {% extends "layout.twig" %}
 
-{% block title %} {{parent()}} - Gestion des Stades{% endblock title %}
+{% block title %} {{parent()}} - Gestion des Arbitres{% endblock title %}
 {% block navbar%}
     <div class="navbar">
         <div class="navbar-inner">
@@ -46,10 +46,10 @@
     <div class="well">
         <div class="row">
             <div class="span11">
-                <h3 class="text-center">Gestion des Stades</h3>
+                <h3 class="text-center">Gestion des Arbitres</h3>
                 <hr>
                 <div class="btn-toolbar">
-                    <a href="/stade/ajout" class="btn pull-right"><i class="icon-plus-sign"></i> <strong>Ajouter un stade</strong></a>
+                    <a href="/arbitre/ajout" class="btn pull-right"><i class="icon-plus-sign"></i> <strong>Ajouter un arbitre</strong></a>
                 </div>
                 <table class="table table-bordered table-hover">
                     <tr>
@@ -57,14 +57,13 @@
                         <th>Description</th>
                         <th>Action</th>
                     </tr>
-                    {% for stade in stades %}
+                    {% for arbitre in arbitres %}
                         <tr>
-                            <td>{{stad.nom}}</td>
-                            <td>{{stade.ville}}</td>
-                            <td>{{stade.capacite}}</td>
+                            <td>{{arbitre.nom}}</td>
+                            <td>{{arbitre.description}}</td>
                             <td>
-                                <a href="/stade/modifier/{{stade.id}}" title="Modifier" class="btn"><i class="icon-edit"></i></a> 
-                                <a href="/stade/supprimer/{{stade.id}}" title="Supprimer" class="btn deleteadmin"><i class="icon-trash"></i></a>
+                                <a href="/arbitre/modifier/{{arbitre.id}}" title="Modifier" class="btn"><i class="icon-edit"></i></a> 
+                                <a href="/arbitre/supprimer/{{arbitre.id}}" title="Supprimer" class="btn deleteadmin"><i class="icon-trash"></i></a>
                             </td>
                         </tr>
                     {% endfor %}

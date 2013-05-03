@@ -56,7 +56,7 @@ class Stade extends CI_Controller {
             {
                 $data['stade'] = $this->stade_model->get_stade($id);
                 
-                if(!$data['arbitre'])
+                if(!$data['stade'])
                     redirect('/');
                 
                 $this->twig->render('stade/modifierstade', $data);

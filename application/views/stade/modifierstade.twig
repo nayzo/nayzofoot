@@ -52,19 +52,32 @@
                     <form action='/stade/modifier/{{stade.id}}' method="POST" class="form-horizontal">
                         <fieldset>
                             <div class="control-group">
-                                <label class="control-label" for="nom">Nom <span class="required">*</span></label>
-                                <div class="controls">
-                                    <input type="text" name="nom" class="span3" required="required" value="{{ set_value('nom', stade.nom) }}"/>
-                                    <div class="erreur">
+                            <label class="control-label" for="nom">Nom <span class="required">*</span></label>
+                            <div class="controls">
+                                <input type="text" name="nom" value="{{set_value('nom', stade.nom)}}" placeholder="Nom du stade" class="span3" required="required"/>
+                                <div class="erreur">
                                         {{ form_error('nom') }}         
                                     </div>
                                 </div>
                             </div>
-
+                            
                             <div class="control-group">
-                                <label class="control-label" for="description">Description</label>
-                                <div class="controls">
-                                    <textarea name="description" class="span3">{{ set_value('description', stade.description) }}</textarea>
+                            <label class="control-label" for="ville">Ville <span class="required">*</span></label>
+                            <div class="controls">
+                                <input type="text" name="ville" value="{{set_value('ville', stade.ville)}}" placeholder="Ville" class="span3" required="required"/>
+                                <div class="erreur">
+                                        {{ form_error('ville') }}         
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group">
+                            <label class="control-label" for="capacite">Capacité <span class="required">*</span></label>
+                            <div class="controls">
+                                <input type="text" name="capacite" value="{{set_value('capacite', stade.capacite)}}" placeholder="capacité du stade" class="span3" required="required"/>
+                                <div class="erreur">
+                                        {{ form_error('capacite') }}
+                                    </div>
                                 </div>
                             </div>
 

@@ -17,7 +17,7 @@ class Stade_model extends CI_Model {
     {
         $data = array('nom' => $this->input->post('nom'),
                       'ville' => $this->input->post('ville'),
-                      'capacite' => $this->input->post('taille')
+                      'capacite' => $this->input->post('capacite')
                      );
         $this->db->insert($this->table, $data);
     }
@@ -36,7 +36,7 @@ class Stade_model extends CI_Model {
     {
         $data = array('nom' => $this->input->post('nom'),
                       'ville' => $this->input->post('ville'),
-                      'capacite' => $this->input->post('taille')
+                      'capacite' => $this->input->post('capacite')
                      );
         
         $this->db->update($this->table, $data, array('id' => $id));
